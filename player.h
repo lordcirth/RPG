@@ -4,6 +4,14 @@
 
 struct CreatureStats
 {
+    //Physical
+    int strength;
+    int dexterity;
+    int endurance;
+    //Magical
+    int power;
+    int control;
+    int capacity;
 
 };
 
@@ -14,21 +22,11 @@ class PlayerCharacter
     //stats struct
     CreatureStats stats;
 
-//Physical
-//    int strength;
-//    int dexterity;
-//    int endurance;
-//    //Magical
-//    int power;
-//    int control;
-//    int capacity;
-//
-//    //Stats add to these
-//    int baseHP; //Health
-//    int baseSP; //Stamina
-//    int baseMP; //Mana
+    //Stats add to these
+    int baseHP; //Health
+    int baseSP; //Stamina
+    int baseMP; //Mana
 
-    int[6] stats
 
     public:
     CreatureStats getStats();
