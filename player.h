@@ -43,8 +43,9 @@ public:
     PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats);
     PlayerCharacter();
     void calcAttributes();
+    void healAll();
+    void damage(int hpDmg, int spDmg, int mpDmg);
 
-    //calcAttributes();
 
 };
 

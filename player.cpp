@@ -22,6 +22,22 @@ void PlayerCharacter::calcAttributes()
     maxMP = baseMP + 2*stats.capacity;
 };
 
+
+void PlayerCharacter::healAll()
+{
+    HP = maxHP;
+    SP = maxSP;
+    MP = maxMP;
+}
+
+//Apply damage & costs to player
+void PlayerCharacter::damage(int hpDmg, int spDmg, int mpDmg)
+{
+    HP = HP - hpDmg;
+    SP = SP - spDmg;
+    MP = MP - mpDmg;
+}
+
 //Default Constructor
 PlayerCharacter::PlayerCharacter()
 {
@@ -31,6 +47,7 @@ PlayerCharacter::PlayerCharacter()
 
     PlayerCharacter::setStats({1,1,1,1,1,1});
     calcAttributes();
+    healAll();
 };
 
 //Custom Constructor
@@ -42,6 +59,7 @@ PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats
 
     setStats(bStats);
     calcAttributes();
+    healAll();
 
 };
 
