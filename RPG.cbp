@@ -37,6 +37,8 @@
 		<Unit filename="monsters.h" />
 		<Unit filename="player.cpp" />
 		<Unit filename="player.h" />
+		<Unit filename="skills.cpp" />
+		<Unit filename="skills.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
