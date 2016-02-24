@@ -18,19 +18,16 @@ struct CreatureStats
 class PlayerCharacter
 {
 
-    private:
+private:
     //stats struct
     CreatureStats stats;
-
-
 
     //Stats add to these
     int baseHP; //Health
     int baseSP; //Stamina
     int baseMP; //Mana
 
-
-    public:
+public:
     CreatureStats getStats();
     void setStats(CreatureStats);
 
@@ -43,8 +40,6 @@ class PlayerCharacter
 };
 
 std::string displayStats(CreatureStats stats);
-
-
 
 
 #endif

@@ -6,5 +6,8 @@ class Monster
     int HP; //Health
     int SP; //Stamina
     int MP; //Mana
+
+    public:
+    Monster(int health, int stamina, int mana);
 };
 #endif

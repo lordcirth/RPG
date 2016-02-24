@@ -4,14 +4,14 @@
 using namespace std;
 
 CreatureStats PlayerCharacter::getStats()
-    {
-        return stats;
-    };
+{
+    return stats;
+};
 
 void PlayerCharacter::setStats(CreatureStats newStats)
-    {
-        stats = newStats;
-    };
+{
+    stats = newStats;
+};
 
 //Default Constructor
 PlayerCharacter::PlayerCharacter()
@@ -24,7 +24,7 @@ PlayerCharacter::PlayerCharacter()
 
 };
 
-    //Constructor
+//Custom Constructor
 PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats)
 {
     baseHP = bHP;
@@ -35,15 +35,16 @@ PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats
 
 };
 
-string displayStats(CreatureStats stats) {
+string displayStats(CreatureStats stats)
+{
     string output =
-    "  STR: " + to_string(stats.strength)  +
-    "  DEX: " + to_string(stats.dexterity) +
-    "  END: " + to_string(stats.endurance) +
-    "\n"
+        "  STR: " + to_string(stats.strength)  +
+        "  DEX: " + to_string(stats.dexterity) +
+        "  END: " + to_string(stats.endurance) +
+        "\n"
 
-    "  POW: " + to_string(stats.power)     +
-    "  CNT: " + to_string(stats.control)   +
-    "  CAP: " + to_string(stats.capacity);
+        "  POW: " + to_string(stats.power)     +
+        "  CNT: " + to_string(stats.control)   +
+        "  CAP: " + to_string(stats.capacity);
     return output;
 };
