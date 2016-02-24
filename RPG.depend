@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1456270737 source:/lPool/Shared/RPG/Cpp/RPG/classes.cpp
+	<iostream>
+	"classes.h"
+
+1456271038 source:/lPool/Shared/RPG/Cpp/RPG/classes.h
+	<string>
+
+1456271409 source:/lPool/Shared/RPG/Cpp/RPG/main.cpp
+	<string>
+	<iostream>
+	"classes.h"
+
+1456271038 /lPool/Shared/RPG/Cpp/RPG/classes.h
+	<string>
+
+1456276162 source:/lPool/Shared/RPG/Cpp/RPG/player.cpp
+	<iostream>
+	"player.h"
+
+1456276191 /lPool/Shared/RPG/Cpp/RPG/player.h
+	<string>
+
+1456276191 source:/lPool/Shared/RPG/Cpp/RPG/player.h
+	<string>
+
