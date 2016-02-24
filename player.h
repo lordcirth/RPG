@@ -22,6 +22,8 @@ class PlayerCharacter
     //stats struct
     CreatureStats stats;
 
+
+
     //Stats add to these
     int baseHP; //Health
     int baseSP; //Stamina

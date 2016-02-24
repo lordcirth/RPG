@@ -32,12 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="classes.cpp" />
-		<Unit filename="classes.h">
-			<Option compile="1" />
-			<Option link="1" />
-		</Unit>
 		<Unit filename="main.cpp" />
+		<Unit filename="monsters.cpp" />
+		<Unit filename="monsters.h" />
+		<Unit filename="player.cpp" />
+		<Unit filename="player.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
