@@ -10,14 +10,14 @@ Skill::Skill(Skill *parentNode, bool startsUnlocked, skillEffect cEffects)
 
 void Skill::Use(PlayerCharacter player)
 {
-    if effects.targetsMonster
+    if (effects.targetsMonster)
     {
         //Nothing yet
     }
-    if effects.targetsPlayer
+    if (effects.targetsPlayer)
     {
         int playerDamage = effects.playerDmg;
-
+        //player.HP
     }
 };
 

@@ -13,6 +13,15 @@ void PlayerCharacter::setStats(CreatureStats newStats)
     stats = newStats;
 };
 
+//Calculate & set total attributes
+void PlayerCharacter::calcAttributes()
+{
+    //All subject to change
+    maxHP = baseHP + 2*stats.endurance;
+    maxSP = baseSP + 1*stats.endurance + 1*stats.dexterity;
+    maxMP = baseMP + 2*stats.capacity;
+};
+
 //Default Constructor
 PlayerCharacter::PlayerCharacter()
 {
@@ -21,7 +30,7 @@ PlayerCharacter::PlayerCharacter()
     baseMP = 0;
 
     PlayerCharacter::setStats({1,1,1,1,1,1});
-
+    calcAttributes();
 };
 
 //Custom Constructor
@@ -32,6 +41,7 @@ PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats
     baseMP = bMP;
 
     setStats(bStats);
+    calcAttributes();
 
 };
 

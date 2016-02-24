@@ -27,6 +27,14 @@ private:
     int baseSP; //Stamina
     int baseMP; //Mana
 
+    int maxHP;
+    int maxSP;
+    int maxMP;
+
+    int HP;
+    int SP;
+    int MP;
+
 public:
     CreatureStats getStats();
     void setStats(CreatureStats);
@@ -34,6 +42,7 @@ public:
     //Constructors
     PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats);
     PlayerCharacter();
+    void calcAttributes();
 
     //calcAttributes();
 

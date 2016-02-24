@@ -1,3 +1,4 @@
+#include "player.h"
 #ifndef SKILLS_H
 #define SKILLS_H
 
