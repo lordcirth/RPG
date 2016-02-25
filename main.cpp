@@ -1,23 +1,28 @@
 #include <string>
 #include <iostream>
 #include "player.h"
+#include "skills.h"
 using namespace std;
 
 int main()
 {
-    CreatureStats charStats {1,1,1,1,1,1};
     PlayerCharacter player;
-    {
-        10,0,0,charStats;
-    };
+
     cout << displayStats(player.getStats()) << endl;
+    cout << endl;
+    cout << displayPoints(player.getPointValues()) << endl;
 
-    //Increment character Strength
-//    CreatureStats currentStats = defaultPlayer.getStats();
-//    currentStats.strength++;
-//    defaultPlayer.setStats(currentStats);
+    player.damage(1,0,0);
 
-//    cout << to_string(defaultPlayer.getStats().strength) << endl;
-//    cout << displayStats(defaultPlayer.getStats()) << endl;
+    cout << displayPoints(player.getPointValues()) << endl;
+
+    player.damage(-1,0,0); //Heal
+
+    cout << displayPoints(player.getPointValues()) << endl;
+
+    //Hit.Use();
+
+
+//cout << player.
     return 0;
 };

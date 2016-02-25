@@ -1,5 +1,6 @@
 #include <iostream>
 #include "player.h"
+#include "skills.h"
 
 using namespace std;
 
@@ -17,26 +18,32 @@ void PlayerCharacter::setStats(CreatureStats newStats)
 void PlayerCharacter::calcAttributes()
 {
     //All subject to change
-    maxHP = baseHP + 2*stats.endurance;
-    maxSP = baseSP + 1*stats.endurance + 1*stats.dexterity;
-    maxMP = baseMP + 2*stats.capacity;
+    pointValues.maxHP = baseHP + 2*stats.endurance;
+    pointValues.maxSP = baseSP + 1*stats.endurance + 1*stats.dexterity;
+    pointValues.maxMP = baseMP + 2*stats.capacity;
 };
 
 
 void PlayerCharacter::healAll()
 {
-    HP = maxHP;
-    SP = maxSP;
-    MP = maxMP;
+    pointValues.HP = pointValues.maxHP;
+    pointValues.SP = pointValues.maxSP;
+    pointValues.MP = pointValues.maxMP;
 }
 
 //Apply damage & costs to player
 void PlayerCharacter::damage(int hpDmg, int spDmg, int mpDmg)
 {
-    HP = HP - hpDmg;
-    SP = SP - spDmg;
-    MP = MP - mpDmg;
+    pointValues.HP = pointValues.HP - hpDmg;
+    pointValues.SP = pointValues.SP - spDmg;
+    pointValues.MP = pointValues.MP - mpDmg;
 }
+
+CreaturePoints PlayerCharacter::getPointValues()
+{
+    return pointValues;
+}
+
 
 //Default Constructor
 PlayerCharacter::PlayerCharacter()
@@ -74,5 +81,14 @@ string displayStats(CreatureStats stats)
         "  POW: " + to_string(stats.power)     +
         "  CNT: " + to_string(stats.control)   +
         "  CAP: " + to_string(stats.capacity);
+    return output;
+};
+
+string displayPoints(CreaturePoints points)
+{
+    string output =
+        "  HP: " + to_string(points.HP) + " / " + to_string(points.maxHP) + "\n" +
+        "  SP: " + to_string(points.SP) + " / " + to_string(points.maxSP) + "\n" +
+        "  MP: " + to_string(points.MP) + " / " + to_string(points.maxMP) + "\n";
     return output;
 };

@@ -15,18 +15,8 @@ struct CreatureStats
 
 };
 
-class PlayerCharacter
+struct CreaturePoints
 {
-
-private:
-    //stats struct
-    CreatureStats stats;
-
-    //Stats add to these
-    int baseHP; //Health
-    int baseSP; //Stamina
-    int baseMP; //Mana
-
     int maxHP;
     int maxSP;
     int maxMP;
@@ -34,10 +24,25 @@ private:
     int HP;
     int SP;
     int MP;
+};
+
+class PlayerCharacter
+{
+
+private:
+    //stats struct
+    CreatureStats stats;
+    CreaturePoints pointValues;
+
+    //Stats add to these
+    int baseHP; //Health
+    int baseSP; //Stamina
+    int baseMP; //Mana
 
 public:
     CreatureStats getStats();
     void setStats(CreatureStats);
+    CreaturePoints getPointValues();
 
     //Constructors
     PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats);
@@ -50,6 +55,6 @@ public:
 };
 
 std::string displayStats(CreatureStats stats);
-
+std::string displayPoints(CreaturePoints points);
 
 #endif
