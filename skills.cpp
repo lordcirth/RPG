@@ -8,7 +8,6 @@ Skill::Skill(Skill *parentNode, bool startsUnlocked)
 {
     tree.skillList.emplace_front(*this);
     unlocked = startsUnlocked;
-    //effects = cEffects;
 };
 
 
@@ -28,6 +27,9 @@ Skill::Skill(Skill *parentNode, bool startsUnlocked)
 //    }
 
 
+//============================
+// subclasses of Skill
+//============================
 
 Heal::Heal(Skill *parentNode, bool startsUnlocked, int healHP)
     : Skill(parentNode, startsUnlocked) //Pass through to Skill constructor

@@ -32,6 +32,7 @@ void PlayerCharacter::healAll()
 }
 
 //Apply damage & costs to player
+//Can go negative, but not over maxHP
 void PlayerCharacter::damage(int hpDmg, int spDmg, int mpDmg)
 {
     pointValues.HP = min(pointValues.HP - hpDmg, pointValues.maxHP);
