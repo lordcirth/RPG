@@ -1,8 +1,6 @@
 #include "monsters.h"
-Monster::Monster(int health, int stamina, int mana) {
-    HP = health;
-    SP = stamina;
-    MP = mana;
+Monster::Monster(CreaturePoints points) {
+    pointValues = points;
 };
 
-Monster wolf {5,0,0};
+Monster wolf {{5,0,0,5,0,0}}; // 5/5 HP.

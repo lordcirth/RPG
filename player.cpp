@@ -34,9 +34,9 @@ void PlayerCharacter::healAll()
 //Apply damage & costs to player
 void PlayerCharacter::damage(int hpDmg, int spDmg, int mpDmg)
 {
-    pointValues.HP = pointValues.HP - hpDmg;
-    pointValues.SP = pointValues.SP - spDmg;
-    pointValues.MP = pointValues.MP - mpDmg;
+    pointValues.HP = min(pointValues.HP - hpDmg, pointValues.maxHP);
+    pointValues.SP = min(pointValues.SP - spDmg, pointValues.maxSP);
+    pointValues.MP = min(pointValues.MP - mpDmg, pointValues.maxMP);
 }
 
 CreaturePoints PlayerCharacter::getPointValues()
