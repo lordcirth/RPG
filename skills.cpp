@@ -44,14 +44,12 @@ Heal::Heal(bool startsUnlocked, int healHP)
     : Skill(startsUnlocked) //Pass through to Skill constructor
 {
     HP = healHP;
-
 };
 
 Heal::Heal(Skill parentNode, bool startsUnlocked, int healHP)
     : Skill(parentNode, startsUnlocked) //Pass through to Skill constructor
 {
     HP = healHP;
-
 };
 
 void Heal::Use(PlayerCharacter player)
