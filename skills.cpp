@@ -64,20 +64,17 @@ void Heal::Use(PlayerCharacter player)
 // Provide Skill Tree as Map
 //============================
 
-skillMap createSkillMap()
+skillPtrMap createSkillMap()
 {
-    skillMap skills;
+    skillPtrMap skills;
+    unique_ptr<Skill> doN_ptr = make_unique<Skill>(true);
 
 
-    //Skill doNothing = new Skill(5, true);
-
-    //Skill *ptr = &doNothing;
-    skills["doNothing"] = {false};
-    cout << to_string(skills["doNothing"].unlocked);
+    //skills["doNothing"] = Skill {true};
 
     //Make a Heal called Rest, +2 HP
-    //skills["Heal"] = new Skill(true);
-
+    //Does not work due to "Slicing"
+    //skills["Rest"] = Heal {true, 2};
 
 ////For debugging only!
 //Skill HurtSelf

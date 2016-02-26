@@ -1,4 +1,5 @@
 #include <list>
+#include <memory>
 #include <map>
 #include "player.h"  //Stats and Points structs
 #include "monsters.h"
@@ -25,9 +26,10 @@ public:
     Skill(Skill parentNode, bool startsUnlocked);
 };
 
+typedef map<string,unique_ptr<Skill>> skillPtrMap;
 typedef map<string,Skill> skillMap;
 
-skillMap createSkillMap();
+skillPtrMap createSkillMap();
 
 class Heal : public Skill
 {
