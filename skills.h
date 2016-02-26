@@ -16,6 +16,7 @@ class Skill
     //skillEffect effects;
 
 public:
+    void Use(PlayerCharacter player);
     void Use(PlayerCharacter player, Monster target); //Activate the skill.
 
     Skill(Skill *parentNode, bool startsUnlocked);
@@ -26,7 +27,7 @@ struct skillTree
     std::list<Skill> skillList;
 };
 
-
+skillTree createSkillTree();
 
 class Heal : public Skill
 {
@@ -34,6 +35,6 @@ class Heal : public Skill
     Heal(Skill *parentNode, bool startsUnlocked, int healHP);
 };
 
-//std::list<Skill> skillTree;
+
 
 #endif

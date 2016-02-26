@@ -2,11 +2,11 @@
 #include "skills.h"
 #include "player.h"
 
-skillTree tree{};
+
 
 Skill::Skill(Skill *parentNode, bool startsUnlocked)
 {
-    tree.skillList.emplace_front(*this);
+    //tree.skillList.emplace_front(*this);
     unlocked = startsUnlocked;
 };
 
@@ -30,12 +30,13 @@ Skill::Skill(Skill *parentNode, bool startsUnlocked)
 //============================
 // subclasses of Skill
 //============================
-
 Heal::Heal(Skill *parentNode, bool startsUnlocked, int healHP)
     : Skill(parentNode, startsUnlocked) //Pass through to Skill constructor
 {
     HP = healHP;
 };
+
+skillTree createSkillTree() {
 
 Skill Root
 {
@@ -62,3 +63,4 @@ Skill Root
 ////parent is root, unlocked, hurts self (1 damage)
 //&Root, true, {false, true, 0, 1}
 //};
+};

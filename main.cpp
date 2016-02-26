@@ -7,7 +7,10 @@ using namespace std;
 
 int main()
 {
+
     PlayerCharacter player;
+    skillTree tree = createSkillTree();
+
     cout << "Start: " << endl;
     cout << displayStats(player.getStats()) << endl;
     cout << endl;
@@ -18,6 +21,7 @@ int main()
 
     cout << displayPoints(player.getPointValues()) << endl;
 
+    tree.skillList.
     cout << "Healed: " << endl;
     cout << displayPoints(player.getPointValues()) << endl;
 
