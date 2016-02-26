@@ -4,7 +4,7 @@
 class Monster
 {
     CreaturePoints pointValues;
-    public:
+public:
     Monster(CreaturePoints points);
 };
 #endif

@@ -2,8 +2,6 @@
 #include "skills.h"
 #include "player.h"
 
-
-
 Skill::Skill(Skill *parentNode, bool startsUnlocked)
 {
     //tree.skillList.emplace_front(*this);
@@ -34,33 +32,33 @@ Heal::Heal(Skill *parentNode, bool startsUnlocked, int healHP)
     : Skill(parentNode, startsUnlocked) //Pass through to Skill constructor
 {
     HP = healHP;
+
 };
 
-skillTree createSkillTree() {
-
-Skill Root
+void Heal::Use(PlayerCharacter player)
 {
-//No parent, unlocked, does nothing
-    nullptr, true
-};
-//
-//Skill Hit
-//{
-////parent is root, unlocked, hits enemies for 1 dmg
-//&Root, true, {true, false, 1, 0}
-//};
-//
-//
-//Skill Rest
-//{
-////parent is root, unlocked, heals self (-1 damage)
-//&Root, true, {false, true, 0, -1}
-//};
-//
+    player.damage(-HP,0,0);
+}
+
+
+//============================
+// Provide Skill Tree as Map
+//============================
+
+skillMap createSkillMap()
+{
+    skillMap skills;
+
+    //Make a Heal called Rest, +2 HP
+
+    skills["Heal"] = Heal { nullptr, true, 2 };
+
+
 ////For debugging only!
 //Skill HurtSelf
 //{
 ////parent is root, unlocked, hurts self (1 damage)
 //&Root, true, {false, true, 0, 1}
 //};
+    return skills;
 };

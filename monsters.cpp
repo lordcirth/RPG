@@ -1,5 +1,6 @@
 #include "monsters.h"
-Monster::Monster(CreaturePoints points) {
+Monster::Monster(CreaturePoints points)
+{
     pointValues = points;
 };
 

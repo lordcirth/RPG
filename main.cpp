@@ -9,7 +9,7 @@ int main()
 {
 
     PlayerCharacter player;
-    skillTree tree = createSkillTree();
+    skillMap skills = createSkillMap();
 
     cout << "Start: " << endl;
     cout << displayStats(player.getStats()) << endl;
@@ -21,13 +21,9 @@ int main()
 
     cout << displayPoints(player.getPointValues()) << endl;
 
-    tree.skillList.
+    //skills["Rest"].Use(player);
     cout << "Healed: " << endl;
     cout << displayPoints(player.getPointValues()) << endl;
 
-    //Hit.Use();
-
-
-//cout << player.
     return 0;
 };
