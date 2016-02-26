@@ -1,6 +1,30 @@
-#include "player.h"
 #ifndef MONSTERS_H
 #define MONSTERS_H
+
+struct CreatureStats
+{
+    //Physical
+    int strength;
+    int dexterity;
+    int endurance;
+    //Magical
+    int power;
+    int control;
+    int capacity;
+
+};
+
+struct CreaturePoints
+{
+    int maxHP;
+    int maxSP;
+    int maxMP;
+
+    int HP;
+    int SP;
+    int MP;
+};
+
 
 class Creature
 {

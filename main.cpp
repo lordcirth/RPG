@@ -10,7 +10,7 @@ int main()
 {
 
     PlayerCharacter player;
-    skillPtrMap skills = createSkillMap();
+    //skillPtrMap skills = createSkillMap();
 
     cout << "Start: " << endl;
     cout << displayStats(player.getStats()) << endl;
@@ -26,8 +26,8 @@ int main()
     cout << "Healed: " << endl;
     cout << displayPoints(player.getPointValues()) << endl;
 
-    Skill doNothing {true};
+    //Skill doNothing {true};
     //unique_ptr<Skill> doN_ptr = make_unique<Skill>(true);
 
     return 0;
-};
+}

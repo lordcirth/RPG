@@ -1,13 +1,13 @@
+#ifndef SKILLS_H
+#define SKILLS_H
+
 #include <list>
 #include <memory>
 #include <map>
 #include "player.h"  //Stats and Points structs
-#include "monsters.h"
-#ifndef SKILLS_H
-#define SKILLS_H
+//#include "monsters.h"
 
-//TODO: Create list for Skills
-using namespace std;
+//using namespace std;
 
 class Skill
 {
@@ -20,7 +20,7 @@ class Skill
 public:
     bool unlocked;
     void Use(PlayerCharacter player);
-    void Use(PlayerCharacter player, Monster target);
+    //void Use(PlayerCharacter player, Monster target);
     Skill();
     Skill(bool startsUnlocked);
     Skill(Skill parentNode, bool startsUnlocked);
@@ -37,8 +37,8 @@ public:
 };
 
 
-typedef map<string,unique_ptr<Skill>> skillPtrMap;
-typedef map<string,Skill> skillMap;
+typedef std::map<std::string,std::unique_ptr<Skill>> skillPtrMap;
+typedef std::map<std::string,Skill> skillMap;
 
 skillPtrMap createSkillMap();
 
