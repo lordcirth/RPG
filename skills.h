@@ -12,14 +12,17 @@ class Skill
 {
     //Pointer to parent in skill tree
     Skill *parent;
-    bool unlocked;
+
 
     //skillEffect effects;
 
 public:
+    bool unlocked;
     void Use(PlayerCharacter player);
     void Use(PlayerCharacter player, Monster target);
-    Skill(Skill *parentNode, bool startsUnlocked);
+    Skill();
+    Skill(bool startsUnlocked);
+    Skill(Skill parentNode, bool startsUnlocked);
 };
 
 typedef map<string,Skill> skillMap;
@@ -31,7 +34,8 @@ class Heal : public Skill
     int HP;
 
 public:
-    Heal(Skill *parentNode, bool startsUnlocked, int healHP);
+    Heal(bool startsUnlocked, int healHP);
+    Heal(Skill parentNode, bool startsUnlocked, int healHP);
     void Use(PlayerCharacter player);
 };
 
