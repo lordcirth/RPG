@@ -67,8 +67,9 @@ void Heal::Use(PlayerCharacter player)
 skillPtrMap createSkillMap()
 {
     skillPtrMap skills;
-    unique_ptr<Skill> doN_ptr = make_unique<Skill>(true);
-
+    //shared_ptr<Skill> doN_ptr (new Skill);
+    //skills["doNothing"] = shared_ptr<Skill>(new Skill(true));
+    //skills["Rest"] = shared_ptr<Heal>(true, 2);
 
     //skills["doNothing"] = Skill {true};
 

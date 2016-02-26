@@ -26,11 +26,6 @@ public:
     Skill(Skill parentNode, bool startsUnlocked);
 };
 
-typedef map<string,unique_ptr<Skill>> skillPtrMap;
-typedef map<string,Skill> skillMap;
-
-skillPtrMap createSkillMap();
-
 class Heal : public Skill
 {
     int HP;
@@ -41,6 +36,11 @@ public:
     void Use(PlayerCharacter player);
 };
 
+
+typedef map<string,unique_ptr<Skill>> skillPtrMap;
+typedef map<string,Skill> skillMap;
+
+skillPtrMap createSkillMap();
 
 
 #endif
