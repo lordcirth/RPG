@@ -4,57 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <tt>
-Build started on: <u>26-02-2016 at 18:21.17</u><br />
-Build ended on: <u>26-02-2016 at 18:21.18</u><p />
+Build started on: <u>26-02-2016 at 18:55.30</u><br />
+Build ended on: <u>26-02-2016 at 18:55.31</u><p />
 <b>-------------- Build: Debug in RPG (compiler: GNU GCC Compiler)---------------</b><br />
 g++ -Wall -fexceptions -g -std=c++11  -c /lPool/Shared/RPG/Cpp/RPG/main.cpp -o obj/Debug/main.o<br />
-In file included from /lPool/Shared/RPG/Cpp/RPG/main.cpp:4:0:<br />
-<font color="#0000ff">/lPool/Shared/RPG/Cpp/RPG/player.h:7:2: warning: #warning Starting player.h [-Wcpp]</font><br />
- #warning Starting player.h<br />
-  ^<br />
-<font color="#0000ff">/lPool/Shared/RPG/Cpp/RPG/player.h:38:6: warning: #warning Declaring calcAttributes [-Wcpp]</font><br />
-     #warning Declaring calcAttributes<br />
-      ^<br />
 g++ -Wall -fexceptions -g -std=c++11  -c /lPool/Shared/RPG/Cpp/RPG/monsters.cpp -o obj/Debug/monsters.o<br />
 g++ -Wall -fexceptions -g -std=c++11  -c /lPool/Shared/RPG/Cpp/RPG/player.cpp -o obj/Debug/player.o<br />
-<font color="#0000ff">/lPool/Shared/RPG/Cpp/RPG/player.cpp:18:2: warning: #warning Declaring calcAttributes [-Wcpp]</font><br />
- #warning Declaring calcAttributes<br />
-  ^<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/player.cpp:20:38: error: no ‘void PlayerCharacter::calcAttributes()’ member function declared in class ‘PlayerCharacter’</font><br />
- void PlayerCharacter::calcAttributes()<br />
-                                      ^<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/player.cpp:29:31: error: no ‘void PlayerCharacter::healAll()’ member function declared in class ‘PlayerCharacter’</font><br />
- void PlayerCharacter::healAll()<br />
-                               ^<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/player.cpp:38:61: error: no ‘void PlayerCharacter::damage(int, int, int)’ member function declared in class ‘PlayerCharacter’</font><br />
- void PlayerCharacter::damage(int hpDmg, int spDmg, int mpDmg)<br />
-                                                             ^<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/player.cpp:45:1: error: ‘CreaturePoints’ does not name a type</font><br />
- CreaturePoints PlayerCharacter::getPointValues()<br />
- ^<br />
-/lPool/Shared/RPG/Cpp/RPG/player.cpp: In constructor ‘PlayerCharacter::PlayerCharacter()’:<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/player.cpp:59:20: error: ‘calcAttributes’ was not declared in this scope</font><br />
-     calcAttributes();<br />
-                    ^<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/player.cpp:60:13: error: ‘healAll’ was not declared in this scope</font><br />
-     healAll();<br />
-             ^<br />
-/lPool/Shared/RPG/Cpp/RPG/player.cpp: In constructor ‘PlayerCharacter::PlayerCharacter(int, int, int, CreatureStats)’:<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/player.cpp:71:20: error: ‘calcAttributes’ was not declared in this scope</font><br />
-     calcAttributes();<br />
-                    ^<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/player.cpp:72:13: error: ‘healAll’ was not declared in this scope</font><br />
-     healAll();<br />
-             ^<br />
-/lPool/Shared/RPG/Cpp/RPG/player.cpp: At global scope:<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/player.cpp:90:22: error: ‘CreaturePoints’ was not declared in this scope</font><br />
- string displayPoints(CreaturePoints points)<br />
-                      ^<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/player.cpp:91:1: error: expected ‘,’ or ‘;’ before ‘{’ token</font><br />
- {<br />
- ^<br />
-<font color="#a00000">Process terminated with status 1 (0 minute(s), 0 second(s))</font><br />
-<font color="#a00000">10 error(s), 3 warning(s) (0 minute(s), 0 second(s))</font><br />
+g++ -Wall -fexceptions -g -std=c++11  -c /lPool/Shared/RPG/Cpp/RPG/skills.cpp -o obj/Debug/skills.o<br />
+g++  -o bin/Debug/RPG obj/Debug/main.o obj/Debug/monsters.o obj/Debug/player.o obj/Debug/skills.o<br />
+Output file is bin/Debug/RPG with size 153.84 KB<br />
+<font color="#0000ff">Process terminated with status 0 (0 minute(s), 1 second(s))</font><br />
+<font color="#0000ff">0 error(s), 0 warning(s) (0 minute(s), 1 second(s))</font><br />
 </tt>
 </body>
 </html>

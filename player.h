@@ -4,20 +4,6 @@
 #include <string>
 #include "monsters.h"
 
-#warning Starting player.h
-
-//class Creature
-//{
-//    CreaturePoints pointValues;
-//public:
-//    void healAll();
-//    void damage(int hpDmg, int spDmg, int mpDmg);
-//    Creature();
-//    Creature(CreaturePoints points);
-//
-//};
-
-
 class PlayerCharacter
 {
 
@@ -35,7 +21,6 @@ public:
     CreatureStats getStats();
     void setStats(CreatureStats);
     CreaturePoints getPointValues();
-    #warning Declaring calcAttributes
     void calcAttributes();
     void healAll();
     void damage(int hpDmg, int spDmg, int mpDmg);

@@ -15,7 +15,6 @@ void PlayerCharacter::setStats(CreatureStats newStats)
     stats = newStats;
 }
 
-#warning Declaring calcAttributes
 //Calculate & set total attributes
 void PlayerCharacter::calcAttributes()
 {
