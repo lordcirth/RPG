@@ -34,7 +34,7 @@ public:
     CreatureStats getStats();
     void setStats(CreatureStats);
     CreaturePoints getPointValues();
-    CreaturePoints setPointValues(CreaturePoints);
+    void setPointValues(CreaturePoints);
     void calcAttributes();
 
     void healAll();

@@ -1,5 +1,6 @@
 #include "skills.h"
 #include <memory>
+#include <iostream>
 
 #include "player.h"
 
@@ -42,25 +43,11 @@ Heal::Heal(Skill parentNode, bool startsUnlocked, int healHP)
     HP = healHP;
 }
 
-void Heal::Use(PlayerCharacter player)
+void Heal::Use(PlayerCharacter *ptr)
 {
-    player.damage(-HP,0,0);
+    PlayerCharacter play = *ptr;
+    play.damage(-HP,0,0);
 }
-
-
-//============================
-// Provide Skill Tree as Map
-//============================
-//
-//skillPtrMap createSkillMap()
-//{
-//    skillPtrMap skills;
-//
-//    skills["Rest"] = std::make_unique<Heal>(true, 2);
-//    Skill restObj = *skills["Rest"];
-//    //restObj.Use
-//    //skills["doNothing"] = Skill {true};
-
 
 //=============================
 // Provide Skill Tree as Struct
@@ -69,10 +56,19 @@ void Heal::Use(PlayerCharacter player)
 skillList createSkillStruct()
 {
     skillList skills;
-
+    PlayerCharacter pl;
+    PlayerCharacter *ptr = &pl;
+    std::cout << displayPoints(pl.getPointValues()) << std::endl;
+    pl.damage(4,0,0);
+    std::cout << displayPoints(pl.getPointValues()) << std::endl;
 
     Heal rest {2};
-    //skills.heals["Rest"] = Heal(2);
+    std::cout << typeid(rest).name() << std::endl;
+    rest.Use(ptr);
+    //pl.damage(-2,0,0);
+    std::cout << displayPoints(pl.getPointValues()) << std::endl;
+
+    //skills.heals["Rest"] = rest;
 
     return skills;
 }

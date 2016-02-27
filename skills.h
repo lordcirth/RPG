@@ -16,7 +16,7 @@ class Skill
 
 public:
     bool unlocked;
-    void Use(PlayerCharacter player);
+    void Use(PlayerCharacter *player);
     void Use(PlayerCharacter player, Monster target);
     Skill();
     Skill(bool startsUnlocked);
@@ -31,6 +31,7 @@ public:
     Heal(int healHP);
     Heal(bool startsUnlocked, int healHP);
     Heal(Skill parentNode, bool startsUnlocked, int healHP);
+    void Use(PlayerCharacter *player);
     void Use(PlayerCharacter player);
 };
 

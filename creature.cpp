@@ -1,5 +1,6 @@
 #include "creature.h"
 #include <algorithm> //min
+#include <iostream>
 
 
 using namespace std;
@@ -20,7 +21,7 @@ CreaturePoints Creature::getPointValues()
 }
 
 
-CreaturePoints Creature::setPointValues(CreaturePoints points)
+void Creature::setPointValues(CreaturePoints points)
 {
     pointValues = points;
 }
@@ -53,6 +54,7 @@ void Creature::healAll()
 
 void Creature::damage(int hpDmg, int spDmg, int mpDmg)
 {
+    cout << "Damage: " << hpDmg << endl;
     pointValues.HP = min(pointValues.HP - hpDmg, pointValues.maxHP);
     pointValues.SP = min(pointValues.SP - spDmg, pointValues.maxSP);
     pointValues.MP = min(pointValues.MP - mpDmg, pointValues.maxMP);
