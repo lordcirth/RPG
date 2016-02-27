@@ -14,13 +14,10 @@ class Skill
     //Pointer to parent in skill tree
     Skill *parent;
 
-
-    //skillEffect effects;
-
 public:
     bool unlocked;
     void Use(PlayerCharacter player);
-    //void Use(PlayerCharacter player, Monster target);
+    void Use(PlayerCharacter player, Monster target);
     Skill();
     Skill(bool startsUnlocked);
     Skill(Skill parentNode, bool startsUnlocked);
@@ -31,16 +28,24 @@ class Heal : public Skill
     int HP;
 
 public:
+    Heal(int healHP);
     Heal(bool startsUnlocked, int healHP);
     Heal(Skill parentNode, bool startsUnlocked, int healHP);
     void Use(PlayerCharacter player);
 };
 
+typedef std::map<std::string,Heal> healPtrMap;
 
-typedef std::map<std::string,std::unique_ptr<Skill>> skillPtrMap;
-typedef std::map<std::string,Skill> skillMap;
+struct skillList
+{
+    healPtrMap heals;
+};
 
-skillPtrMap createSkillMap();
+//typedef std::map<std::string,std::unique_ptr<Skill>> skillPtrMap;
+
+skillList createSkillStruct();
+
+//skillPtrMap createSkillMap();
 
 
 #endif

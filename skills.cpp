@@ -1,4 +1,6 @@
 #include "skills.h"
+#include <memory>
+
 #include "player.h"
 
 Skill::Skill()
@@ -22,6 +24,12 @@ Skill::Skill(bool startsUnlocked)
 //============================
 // subclasses of Skill
 //============================
+Heal::Heal(int healHP)
+    : Skill(false) //Pass through to Skill constructor
+{
+    HP = healHP;
+}
+
 Heal::Heal(bool startsUnlocked, int healHP)
     : Skill(startsUnlocked) //Pass through to Skill constructor
 {
@@ -43,25 +51,28 @@ void Heal::Use(PlayerCharacter player)
 //============================
 // Provide Skill Tree as Map
 //============================
-
-skillPtrMap createSkillMap()
-{
-    skillPtrMap skills;
-    //shared_ptr<Skill> doN_ptr (new Skill);
-    //skills["doNothing"] = shared_ptr<Skill>(new Skill(true));
-    //skills["Rest"] = shared_ptr<Heal>(true, 2);
-
-    //skills["doNothing"] = Skill {true};
-
-    //Make a Heal called Rest, +2 HP
-    //Does not work due to "Slicing"
-    //skills["Rest"] = Heal {true, 2};
-
-////For debugging only!
-//Skill HurtSelf
+//
+//skillPtrMap createSkillMap()
 //{
-////parent is root, unlocked, hurts self (1 damage)
-//&Root, true, {false, true, 0, 1}
-//};
+//    skillPtrMap skills;
+//
+//    skills["Rest"] = std::make_unique<Heal>(true, 2);
+//    Skill restObj = *skills["Rest"];
+//    //restObj.Use
+//    //skills["doNothing"] = Skill {true};
+
+
+//=============================
+// Provide Skill Tree as Struct
+//=============================
+
+skillList createSkillStruct()
+{
+    skillList skills;
+
+
+    Heal rest {2};
+    //skills.heals["Rest"] = Heal(2);
+
     return skills;
 }

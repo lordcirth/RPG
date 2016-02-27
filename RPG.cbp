@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="creature.cpp" />
+		<Unit filename="creature.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="monsters.cpp" />
 		<Unit filename="monsters.h" />

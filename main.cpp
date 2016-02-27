@@ -20,12 +20,11 @@ int main()
     cout << "Damaged: " << endl;
     player.damage(5,0,0);
 
-    Monster wolf {{5,0,0,5,0,0}}; // 5/5 HP.
-    wolf.damage(2,0,0);
+//    Monster wolf {{5,0,0,5,0,0}}; // 5/5 HP.
+//    wolf.damage(2,0,0);
 
     cout << displayPoints(player.getPointValues()) << endl;
-    //skills["doNothing"].Use(player);
-    //skills["Rest"].Use(player);
+
     cout << "Healed: " << endl;
     cout << displayPoints(player.getPointValues()) << endl;
 
