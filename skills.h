@@ -32,7 +32,7 @@ public:
     Heal(bool startsUnlocked, int healHP);
     Heal(Skill parentNode, bool startsUnlocked, int healHP);
     void Use(PlayerCharacter *player);
-    void Use(PlayerCharacter player);
+    PlayerCharacter Use(PlayerCharacter player);
 };
 
 typedef std::map<std::string,Heal> healPtrMap;

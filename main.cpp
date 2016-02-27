@@ -18,7 +18,7 @@ int main()
 //    cout << displayPoints(player.getPointValues()) << endl;
 
 //    cout << "Damaged: " << endl;
-    player.damage(5,0,0);
+//    player.damage(5,0,0);
 
 //    Monster wolf {{5,0,0,5,0,0}}; // 5/5 HP.
 //    wolf.damage(2,0,0);

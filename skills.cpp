@@ -45,8 +45,14 @@ Heal::Heal(Skill parentNode, bool startsUnlocked, int healHP)
 
 void Heal::Use(PlayerCharacter *ptr)
 {
-    PlayerCharacter play = *ptr;
+    //PlayerCharacter play = ptr;
+    *ptr->damage(-HP,0,0);
+}
+
+PlayerCharacter Heal::Use(PlayerCharacter play)
+{
     play.damage(-HP,0,0);
+    return play;
 }
 
 //=============================
@@ -64,7 +70,8 @@ skillList createSkillStruct()
 
     Heal rest {2};
     std::cout << typeid(rest).name() << std::endl;
-    rest.Use(ptr);
+    //rest.Use(ptr);
+    pl = rest.Use(pl);
     //pl.damage(-2,0,0);
     std::cout << displayPoints(pl.getPointValues()) << std::endl;
 
