@@ -4,26 +4,19 @@
 #include <string>
 #include "monsters.h"
 
-class PlayerCharacter
+class PlayerCharacter : public Creature
 {
 
 private:
-    //stats struct
-    CreatureStats stats;
-    CreaturePoints pointValues;
-
     //Stats add to these
     int baseHP; //Health
     int baseSP; //Stamina
     int baseMP; //Mana
 
 public:
-    CreatureStats getStats();
-    void setStats(CreatureStats);
-    CreaturePoints getPointValues();
+
     void calcAttributes();
-    void healAll();
-    void damage(int hpDmg, int spDmg, int mpDmg);
+
     //Constructors
     PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats);
     PlayerCharacter();

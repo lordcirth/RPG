@@ -5,68 +5,44 @@
 
 using namespace std;
 
-CreatureStats PlayerCharacter::getStats()
-{
-    return stats;
-}
-
-void PlayerCharacter::setStats(CreatureStats newStats)
-{
-    stats = newStats;
-}
 
 //Calculate & set total attributes
 void PlayerCharacter::calcAttributes()
 {
     //All subject to change
-    pointValues.maxHP = baseHP + 2*stats.endurance;
-    pointValues.maxSP = baseSP + 1*stats.endurance + 1*stats.dexterity;
-    pointValues.maxMP = baseMP + 2*stats.capacity;
+    CreaturePoints points = getPointValues();
+    CreatureStats stats = getStats();
+
+    points.maxHP = baseHP + 2*stats.endurance;
+    points.maxSP = baseSP + 1*stats.endurance + 1*stats.dexterity;
+    points.maxMP = baseMP + 2*stats.capacity;
+
+    setPointValues(points);
 }
 
-
-void PlayerCharacter::healAll()
-{
-    pointValues.HP = pointValues.maxHP;
-    pointValues.SP = pointValues.maxSP;
-    pointValues.MP = pointValues.maxMP;
-}
-
-//Apply damage & costs to player
-//Can go negative, but not over maxHP
-void PlayerCharacter::damage(int hpDmg, int spDmg, int mpDmg)
-{
-    pointValues.HP = min(pointValues.HP - hpDmg, pointValues.maxHP);
-    pointValues.SP = min(pointValues.SP - spDmg, pointValues.maxSP);
-    pointValues.MP = min(pointValues.MP - mpDmg, pointValues.maxMP);
-}
-
-CreaturePoints PlayerCharacter::getPointValues()
-{
-    return pointValues;
-}
 
 
 //Default Constructor
 PlayerCharacter::PlayerCharacter()
+    : Creature(CreatureStats {1,1,1,1,1,1})
 {
     baseHP = 10;
     baseSP = 0;
     baseMP = 0;
 
-    PlayerCharacter::setStats({1,1,1,1,1,1});
+    setStats({1,1,1,1,1,1});
     calcAttributes();
     healAll();
 }
 
 //Custom Constructor
 PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats)
+    : Creature(bStats)
 {
     baseHP = bHP;
     baseSP = bSP;
     baseMP = bMP;
 
-    setStats(bStats);
     calcAttributes();
     healAll();
 
