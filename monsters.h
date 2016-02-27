@@ -28,10 +28,18 @@ struct CreaturePoints
 
 class Creature
 {
+private:
+    CreatureStats stats;
     CreaturePoints pointValues;
+
 public:
+    CreatureStats getStats();
+    void setStats(CreatureStats);
+    CreaturePoints getPointValues();
+
     void healAll();
     void damage(int hpDmg, int spDmg, int mpDmg);
+
     Creature();
     Creature(CreaturePoints points);
 

@@ -19,23 +19,6 @@ Skill::Skill(bool startsUnlocked)
     unlocked = startsUnlocked;
 }
 
-
-//Virtual function
-//void Skill::Use(PlayerCharacter player)
-//{
-//};
-
-// if (effects.targetsMonster)
-//    {
-//        //Nothing yet
-//    }
-//    if (effects.targetsPlayer)
-//    {
-//        int playerDamage = effects.playerDmg;
-//        player.damage(playerDamage,0,0);
-//    }
-
-
 //============================
 // subclasses of Skill
 //============================
