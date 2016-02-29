@@ -10,12 +10,7 @@ using namespace std;
 
 int main()
 {
-    cout << "Debug: " << endl;
     PlayerCharacter player;
-    //skillList skills = createSkillStruct();
-
-    //skills.heals["Rest"].Use(player);
-
 
     cout << "Start: " << endl;
     cout << displayStats(player.getStats()) << endl;
@@ -26,7 +21,7 @@ int main()
     cout << "Damaged: " << endl;
     cout << displayPoints(player.getPointValues()) << endl;
 
-    //skills.heals["Rest"].Use(player);
+    player.skills.heals["Rest"].Use(player);
     cout << "Resting: " << endl;
     cout << displayPoints(player.getPointValues()) << endl;
 
@@ -34,6 +29,6 @@ int main()
 
     Monster testWolf {{5,0,0,5,0,0},5};
     Fight test {player, testWolf};
-    test.start();
+    //test.start();
     return 0;
 }

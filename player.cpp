@@ -26,7 +26,6 @@ void PlayerCharacter::calcAttributes()
 PlayerCharacter::PlayerCharacter()
     : Creature(CreatureStats {1,1,1,1,1,1})
 {
-    cout << "beginning player ctor" << endl;
     baseHP = 10;
     baseSP = 0;
     baseMP = 0;
@@ -35,7 +34,6 @@ PlayerCharacter::PlayerCharacter()
     calcAttributes();
     healAll();
 
-    cout << "getting skills" << endl;
     skillList skills = createSkillStruct();
 }
 

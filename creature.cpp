@@ -32,7 +32,6 @@ void Creature::setPointValues(CreaturePoints points)
 //Constructors
 Creature::Creature()
 {
-
 }
 Creature::Creature(CreatureStats startingStats)
 {
@@ -60,7 +59,6 @@ void Creature::healAll()
 
 void Creature::damage(int hpDmg, int spDmg, int mpDmg)
 {
-    //cout << "Damage: " << hpDmg << endl;
     pointValues.HP = min(pointValues.HP - hpDmg, pointValues.maxHP);
     pointValues.SP = min(pointValues.SP - spDmg, pointValues.maxSP);
     pointValues.MP = min(pointValues.MP - mpDmg, pointValues.maxMP);

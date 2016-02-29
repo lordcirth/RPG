@@ -38,8 +38,6 @@ Heal::Heal(int healHP)
     HP = healHP;
 }
 
-
-
 Heal::Heal(const Skill &parentNode, int healHP, int healSP, int healMP)
     : Skill(parentNode) //Pass through to Skill constructor
 {
@@ -47,12 +45,6 @@ Heal::Heal(const Skill &parentNode, int healHP, int healSP, int healMP)
     SP = healSP;
     MP = healMP;
 }
-
-//void Heal::Use(PlayerCharacter *ptr)
-//{
-//    //PlayerCharacter play = ptr;
-//    //*ptr->damage(-HP,0,0);
-//}
 
 void Heal::Use(Creature &caster)
 {
@@ -67,19 +59,9 @@ skillList createSkillStruct()
 {
     skillList skills;
 
-    PlayerCharacter pl;
-    //PlayerCharacter *ptr = &pl;
-//    std::cout << displayPoints(pl.getPointValues()) << std::endl;
-//    pl.damage(4,0,0);
-//    std::cout << displayPoints(pl.getPointValues()) << std::endl;
     std::string restName = "Rest";
     Heal rest {true, 1,1,1};
     skills.heals.emplace(restName,rest);
-    //std::cout << typeid(rest).name() << std::endl;
-
-//    skills.heals["Rest"].Use(pl);
-
-    //std::cout << displayPoints(pl.getPointValues()) << std::endl;
 
     return skills;
 }
