@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="creature.cpp" />
 		<Unit filename="creature.h" />
+		<Unit filename="fight.cpp" />
+		<Unit filename="fight.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="monsters.cpp" />
 		<Unit filename="monsters.h" />

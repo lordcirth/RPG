@@ -14,33 +14,38 @@ Skill::Skill(bool startsUnlocked)
 {
     //tree.skillList.emplace_front(*this);
     unlocked = startsUnlocked;
+    parent = this;
 }
 
-    Skill::Skill(Skill parentNode, bool startsUnlocked)
+    Skill::Skill(const Skill &parentNode)
 {
-    //tree.skillList.emplace_front(*this);
-    unlocked = startsUnlocked;
+
 }
 
 //============================
 // subclasses of Skill
 //============================
+
+//Testing only!
+Heal::Heal()
+    : Skill(false) //Pass through to Skill constructor
+{
+}
+
 Heal::Heal(int healHP)
     : Skill(false) //Pass through to Skill constructor
 {
     HP = healHP;
 }
 
-Heal::Heal(bool startsUnlocked, int healHP)
-    : Skill(startsUnlocked) //Pass through to Skill constructor
-{
-    HP = healHP;
-}
 
-Heal::Heal(Skill parentNode, bool startsUnlocked, int healHP)
-    : Skill(parentNode, startsUnlocked) //Pass through to Skill constructor
+
+Heal::Heal(const Skill &parentNode, int healHP, int healSP, int healMP)
+    : Skill(parentNode) //Pass through to Skill constructor
 {
     HP = healHP;
+    SP = healSP;
+    MP = healMP;
 }
 
 //void Heal::Use(PlayerCharacter *ptr)
@@ -49,10 +54,9 @@ Heal::Heal(Skill parentNode, bool startsUnlocked, int healHP)
 //    //*ptr->damage(-HP,0,0);
 //}
 
-PlayerCharacter Heal::Use(PlayerCharacter play)
+void Heal::Use(Creature &caster)
 {
-    play.damage(-HP,0,0);
-    return play;
+    caster.damage(-HP,-SP,-MP);
 }
 
 //=============================
@@ -62,20 +66,20 @@ PlayerCharacter Heal::Use(PlayerCharacter play)
 skillList createSkillStruct()
 {
     skillList skills;
+
     PlayerCharacter pl;
     //PlayerCharacter *ptr = &pl;
-    std::cout << displayPoints(pl.getPointValues()) << std::endl;
-    pl.damage(4,0,0);
-    std::cout << displayPoints(pl.getPointValues()) << std::endl;
+//    std::cout << displayPoints(pl.getPointValues()) << std::endl;
+//    pl.damage(4,0,0);
+//    std::cout << displayPoints(pl.getPointValues()) << std::endl;
+    std::string restName = "Rest";
+    Heal rest {true, 1,1,1};
+    skills.heals.emplace(restName,rest);
+    //std::cout << typeid(rest).name() << std::endl;
 
-    Heal rest {2};
-    std::cout << typeid(rest).name() << std::endl;
-    //rest.Use(ptr);
-    pl = rest.Use(pl);
-    //pl.damage(-2,0,0);
-    std::cout << displayPoints(pl.getPointValues()) << std::endl;
+//    skills.heals["Rest"].Use(pl);
 
-    //skills.heals["Rest"] = rest;
+    //std::cout << displayPoints(pl.getPointValues()) << std::endl;
 
     return skills;
 }

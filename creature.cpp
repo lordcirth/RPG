@@ -13,6 +13,7 @@ CreatureStats Creature::getStats()
 void Creature::setStats(CreatureStats newStats)
 {
     stats = newStats;
+    //calcAttributes(); //New maxHP, etc
 }
 
 CreaturePoints Creature::getPointValues()
@@ -28,19 +29,24 @@ void Creature::setPointValues(CreaturePoints points)
 
 
 
+//Constructors
+Creature::Creature()
+{
+
+}
 Creature::Creature(CreatureStats startingStats)
 {
     stats = startingStats;
     pointValues = {0,0,0,0,0,0};
-
 }
 
 Creature::Creature(CreaturePoints points)
 {
     stats = {0,0,0,0,0,0};
     pointValues = points;
-
 }
+
+
 
 
 void Creature::healAll()
@@ -54,8 +60,20 @@ void Creature::healAll()
 
 void Creature::damage(int hpDmg, int spDmg, int mpDmg)
 {
-    cout << "Damage: " << hpDmg << endl;
+    //cout << "Damage: " << hpDmg << endl;
     pointValues.HP = min(pointValues.HP - hpDmg, pointValues.maxHP);
     pointValues.SP = min(pointValues.SP - spDmg, pointValues.maxSP);
     pointValues.MP = min(pointValues.MP - mpDmg, pointValues.maxMP);
+}
+
+bool Creature::isDead()
+{
+    if (pointValues.HP < 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

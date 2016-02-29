@@ -1,9 +1,10 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
 #include <string>
 #include "monsters.h"
+#include "skills.h"
 
+//typedef std::map<std::string,Heal> healPtrMap;
 class PlayerCharacter : public Creature
 {
 
@@ -13,10 +14,25 @@ private:
     int baseSP; //Stamina
     int baseMP; //Mana
 
+    int level = 1;
+    int XP = 0;
+
+    int freeStatPoints = 0;
+    int freeSkillPoints = 0;
+
+
+    //XP Scaling
+    int xpLevelMultiplier = 1;
+    int baseXpPerLevel = 10;
+
+
+    void levelUp();
+
 public:
+    skillList skills = createSkillStruct();
 
     void calcAttributes();
-
+    void giveXP(int earnedXP);
     //Constructors
     PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats);
     PlayerCharacter();
@@ -27,5 +43,3 @@ public:
 
 std::string displayStats(CreatureStats stats);
 std::string displayPoints(CreaturePoints points);
-
-#endif

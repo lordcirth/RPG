@@ -1,4 +1,4 @@
-
+#pragma once
 struct CreatureStats
 {
     //Physical
@@ -8,7 +8,7 @@ struct CreatureStats
     //Magical
     int power;
     int control;
-    int capacity;
+    int stability;
 
 };
 
@@ -35,7 +35,7 @@ public:
     void setStats(CreatureStats);
     CreaturePoints getPointValues();
     void setPointValues(CreaturePoints);
-    void calcAttributes();
+    bool isDead();
 
     void healAll();
     void damage(int hpDmg, int spDmg, int mpDmg);

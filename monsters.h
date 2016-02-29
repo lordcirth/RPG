@@ -1,10 +1,26 @@
-#ifndef MONSTERS_H
-#define MONSTERS_H
+#pragma once
+
 #include "creature.h"
 class Monster : public Creature
 {
-
+private:
+    int killXP;
+    int attackDamage;
 public:
-    Monster(CreaturePoints points);
+    Monster(); //Only for other classes
+    Monster(CreaturePoints points, int XP);
+    Monster(CreaturePoints points, int dmg, int XP);
+    void attack(Creature target);
 };
-#endif
+
+
+//=============================
+// Define specific Monsters
+//=============================
+
+class Wolf : public Monster
+{
+public:
+    Wolf();
+    Wolf(int startingHP);
+};

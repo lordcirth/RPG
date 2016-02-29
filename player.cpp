@@ -15,7 +15,7 @@ void PlayerCharacter::calcAttributes()
 
     points.maxHP = baseHP + 2*stats.endurance;
     points.maxSP = baseSP + 1*stats.endurance + 1*stats.dexterity;
-    points.maxMP = baseMP + 2*stats.capacity;
+    points.maxMP = baseMP + 2*stats.stability + 1* stats.control;
 
     setPointValues(points);
 }
@@ -26,6 +26,7 @@ void PlayerCharacter::calcAttributes()
 PlayerCharacter::PlayerCharacter()
     : Creature(CreatureStats {1,1,1,1,1,1})
 {
+    cout << "beginning player ctor" << endl;
     baseHP = 10;
     baseSP = 0;
     baseMP = 0;
@@ -33,6 +34,9 @@ PlayerCharacter::PlayerCharacter()
     setStats({1,1,1,1,1,1});
     calcAttributes();
     healAll();
+
+    cout << "getting skills" << endl;
+    skillList skills = createSkillStruct();
 }
 
 //Custom Constructor
@@ -46,6 +50,7 @@ PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats
     calcAttributes();
     healAll();
 
+    skillList skills = createSkillStruct();
 }
 
 string displayStats(CreatureStats stats)
@@ -58,7 +63,7 @@ string displayStats(CreatureStats stats)
 
         "  POW: " + to_string(stats.power)     +
         "  CNT: " + to_string(stats.control)   +
-        "  CAP: " + to_string(stats.capacity);
+        "  CAP: " + to_string(stats.stability);
     return output;
 }
 
@@ -69,4 +74,22 @@ string displayPoints(CreaturePoints points)
         "  SP: " + to_string(points.SP) + " / " + to_string(points.maxSP) + "\n" +
         "  MP: " + to_string(points.MP) + " / " + to_string(points.maxMP) + "\n";
     return output;
+}
+
+void PlayerCharacter::levelUp()
+{
+    level++;
+    freeStatPoints++;
+    freeSkillPoints++;
+}
+
+void PlayerCharacter::giveXP(int earnedXP)
+{
+    XP += earnedXP;
+    //XP is full
+    if (XP > xpLevelMultiplier*baseXpPerLevel)
+    {
+        XP -= xpLevelMultiplier*baseXpPerLevel;
+        levelUp();
+    }
 }

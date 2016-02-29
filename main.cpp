@@ -3,36 +3,37 @@
 #include <memory> //unique_ptr
 #include "player.h"
 #include "skills.h"
+#include "fight.h"
+
 using namespace std;
 
 
 int main()
 {
-
+    cout << "Debug: " << endl;
     PlayerCharacter player;
-    //skillPtrMap skills = createSkillMap();
+    //skillList skills = createSkillStruct();
 
-//    cout << "Start: " << endl;
-//    cout << displayStats(player.getStats()) << endl;
-//    cout << endl;
-//    cout << displayPoints(player.getPointValues()) << endl;
+    //skills.heals["Rest"].Use(player);
 
-//    cout << "Damaged: " << endl;
-//    player.damage(5,0,0);
 
-//    Monster wolf {{5,0,0,5,0,0}}; // 5/5 HP.
-//    wolf.damage(2,0,0);
+    cout << "Start: " << endl;
+    cout << displayStats(player.getStats()) << endl;
+    cout << endl;
+    cout << displayPoints(player.getPointValues()) << endl;
 
-    skillList skills = createSkillStruct();
-    //Heal rest = skills.heals["Rest"];
+    player.damage(5,2,2);
+    cout << "Damaged: " << endl;
+    cout << displayPoints(player.getPointValues()) << endl;
 
-//    cout << displayPoints(player.getPointValues()) << endl;
-//
-//    cout << "Healed: " << endl;
-//    cout << displayPoints(player.getPointValues()) << endl;
+    //skills.heals["Rest"].Use(player);
+    cout << "Resting: " << endl;
+    cout << displayPoints(player.getPointValues()) << endl;
 
-    //Skill doNothing {true};
-    //unique_ptr<Skill> doN_ptr = make_unique<Skill>(true);
 
+
+    Monster testWolf {{5,0,0,5,0,0},5};
+    Fight test {player, testWolf};
+    test.start();
     return 0;
 }
