@@ -7,10 +7,13 @@ private:
     int killXP;
     int attackDamage;
 public:
+    int getXP();
+    void attack(Creature &target);
+
     Monster(); //Only for other classes
     Monster(CreaturePoints points, int XP);
     Monster(CreaturePoints points, int dmg, int XP);
-    void attack(Creature target);
+
 };
 
 

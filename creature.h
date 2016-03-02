@@ -35,10 +35,11 @@ public:
     void setStats(CreatureStats);
     CreaturePoints getPointValues();
     void setPointValues(CreaturePoints);
-    bool isDead();
 
     void healAll();
     void damage(int hpDmg, int spDmg, int mpDmg);
+
+    bool isDead();
 
     Creature();
     Creature(CreatureStats startingStats);

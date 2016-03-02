@@ -17,7 +17,7 @@ Skill::Skill(bool startsUnlocked)
     parent = this;
 }
 
-    Skill::Skill(const Skill &parentNode)
+Skill::Skill(const Skill &parentNode)
 {
 
 }
@@ -51,6 +51,26 @@ void Heal::Use(Creature &caster)
     caster.damage(-HP,-SP,-MP);
 }
 
+Melee::Melee()
+    : Skill(false)
+{
+}
+
+Melee::Melee(int strDmg, int dexDmg)
+{
+    strDmgFactor = strDmg;
+    dexDmgFactor = dexDmg;
+}
+
+void Melee::Use(Creature &caster, Creature &target)
+{
+    int dmg = strDmgFactor * caster.getStats().strength;
+    target.damage(dmg,0,0);
+}
+
+
+
+
 //=============================
 // Provide Skill Tree as Struct
 //=============================
@@ -59,9 +79,11 @@ skillList createSkillStruct()
 {
     skillList skills;
 
-    std::string restName = "Rest";
-    Heal rest {true, 1,1,1};
-    skills.heals.emplace(restName,rest);
+    Heal Rest {true, 1,1,1};
+    skills.heals.emplace("Rest",Rest);
+
+    Melee Hit {2,1};
+    skills.melees.emplace("Hit",Hit);
 
     return skills;
 }

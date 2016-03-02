@@ -28,7 +28,7 @@ class Heal : public Skill
     int MP = 0;
 
 public:
-    Heal(); //Testing only!
+    Heal();
     Heal(int healHP);
     Heal(bool startsUnlocked, int healHP);
     Heal(Skill parentNode, bool startsUnlocked, int healHP);
@@ -36,11 +36,26 @@ public:
     void Use(Creature &caster);
 };
 
+class Melee : public Skill
+{
+private:
+    int baseDmg = 0;
+    int strDmgFactor;
+    int dexDmgFactor;
+
+public:
+    void Use(Creature &caster, Creature &target);
+    Melee();
+    Melee(int strDmgFactor, int dexDmgFactor);
+};
+
 typedef std::map<std::string,Heal> healPtrMap;
+typedef std::map<std::string,Melee> meleePtrMap;
 
 struct skillList
 {
     healPtrMap heals;
+    meleePtrMap melees;
 };
 
 skillList createSkillStruct();

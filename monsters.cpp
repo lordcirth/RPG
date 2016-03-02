@@ -1,4 +1,15 @@
 #include "monsters.h"
+#include <iostream>
+
+int Monster::getXP()
+{
+    return killXP;
+}
+
+void Monster::attack(Creature &target)
+{
+    target.damage(attackDamage,0,0);
+}
 
 //Default, only for other classes
 Monster::Monster()
@@ -21,18 +32,19 @@ Monster::Monster(CreaturePoints points, int dmg, int XP)
     attackDamage = dmg;
 }
 
-void Monster::attack(Creature target)
-{
-    target.damage(attackDamage,0,0);
-}
-
 Wolf::Wolf()
-    : Monster({15,0,0,15,0,0},5)
+    : Monster(
+{
+    15,0,0,15,0,0
+},5)
 {
 }
 
 
 Wolf::Wolf(int startingHP)
-    : Monster({15,0,0,startingHP,0,0},5)
+    : Monster(
+{
+    15,0,0,startingHP,0,0
+},5)
 {
 }
