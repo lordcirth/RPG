@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 struct CreatureStats
 {
     //Physical
@@ -29,12 +30,14 @@ class Creature
 private:
     CreatureStats stats;
     CreaturePoints pointValues;
+    std::string name = "";
 
 public:
     CreatureStats getStats();
     void setStats(CreatureStats);
     CreaturePoints getPointValues();
     void setPointValues(CreaturePoints);
+    std::string getName();
 
     void healAll();
     void damage(int hpDmg, int spDmg, int mpDmg);
@@ -44,6 +47,7 @@ public:
     Creature();
     Creature(CreatureStats startingStats);
     Creature(CreaturePoints points);
+    Creature(CreatureStats startingStats, std::string cName);
 
 };
 

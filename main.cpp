@@ -10,13 +10,18 @@ using namespace std;
 
 int main()
 {
-    PlayerCharacter player;
+    PlayerCharacter player("Player");
     Monster testWolf {{5,0,0,5,0,0},2,5};
-    //std::cout << testWolf.attackDamage; //2
-    //player.damage(2,0,0);
-    //testWolf.attack(player);
+
     Fight test {player, testWolf};
     fightResults testResults = test.start();
+
+
+    return 0;
+}
+
+
+
 
 //    cout << "Start: " << endl;
 //    cout << displayStats(player.getStats()) << endl;
@@ -31,6 +36,3 @@ int main()
 //    player.skills.heals["Rest"].Use(player);
 //    cout << "Resting: " << endl;
 //    cout << displayPoints(player.getPointValues()) << endl;
-
-    return 0;
-}

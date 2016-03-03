@@ -35,6 +35,8 @@ public:
     void giveXP(int earnedXP);
     //Constructors
     PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats);
+    PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats, std::string playerName);
+    PlayerCharacter(std::string playerName);
     PlayerCharacter();
 
 

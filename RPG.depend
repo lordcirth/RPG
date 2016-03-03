@@ -6,7 +6,7 @@
 1456271038 source:/lPool/Shared/RPG/Cpp/RPG/classes.h
 	<string>
 
-1456779313 source:/lPool/Shared/RPG/Cpp/RPG/main.cpp
+1456947148 source:/lPool/Shared/RPG/Cpp/RPG/main.cpp
 	<string>
 	<iostream>
 	<memory>
@@ -17,13 +17,13 @@
 1456271038 /lPool/Shared/RPG/Cpp/RPG/classes.h
 	<string>
 
-1456772276 source:/lPool/Shared/RPG/Cpp/RPG/player.cpp
+1456946307 source:/lPool/Shared/RPG/Cpp/RPG/player.cpp
 	"player.h"
 	<iostream>
 	"monsters.h"
 	"skills.h"
 
-1456720609 /lPool/Shared/RPG/Cpp/RPG/player.h
+1456946205 /lPool/Shared/RPG/Cpp/RPG/player.h
 	<string>
 	"monsters.h"
 	"skills.h"
@@ -50,20 +50,30 @@
 	<map>
 	"creature.h"
 
-1456776241 /lPool/Shared/RPG/Cpp/RPG/creature.h
+1456946058 /lPool/Shared/RPG/Cpp/RPG/creature.h
+	<string>
 
-1456776180 source:/lPool/Shared/RPG/Cpp/RPG/creature.cpp
+1456946358 source:/lPool/Shared/RPG/Cpp/RPG/creature.cpp
 	"creature.h"
 	<algorithm>
 	<iostream>
 
-1456779445 source:/lPool/Shared/RPG/Cpp/RPG/fight.cpp
+1456977794 source:/lPool/Shared/RPG/Cpp/RPG/fight.cpp
 	"fight.h"
 	"monsters.h"
+	"interface.h"
 	<iostream>
 	<sstream>
 
 1456855635 /lPool/Shared/RPG/Cpp/RPG/fight.h
 	"player.h"
 	"monsters.h"
+
+1456977822 source:/lPool/Shared/RPG/Cpp/RPG/interface.cpp
+	"interface.h"
+	<string>
+	"ncurses.h"
+
+1456975291 /lPool/Shared/RPG/Cpp/RPG/interface.h
+	"fight.h"
 

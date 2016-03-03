@@ -37,9 +37,36 @@ PlayerCharacter::PlayerCharacter()
     skillList skills = createSkillStruct();
 }
 
+PlayerCharacter::PlayerCharacter(std::string playerName)
+    : Creature(CreatureStats {1,1,1,1,1,1}, playerName)
+{
+    baseHP = 10;
+    baseSP = 0;
+    baseMP = 0;
+
+    setStats({1,1,1,1,1,1});
+    calcAttributes();
+    healAll();
+
+    skillList skills = createSkillStruct();
+}
+
 //Custom Constructor
 PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats)
     : Creature(bStats)
+{
+    baseHP = bHP;
+    baseSP = bSP;
+    baseMP = bMP;
+
+    calcAttributes();
+    healAll();
+
+    skillList skills = createSkillStruct();
+}
+
+PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats, std::string playerName)
+    : Creature(bStats, playerName)
 {
     baseHP = bHP;
     baseSP = bSP;

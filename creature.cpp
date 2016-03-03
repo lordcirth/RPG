@@ -35,6 +35,11 @@ void Creature::healAll()
     setPointValues(points);
 }
 
+std::string Creature::getName()
+{
+    return name;
+}
+
 void Creature::damage(int hpDmg, int spDmg, int mpDmg)
 {
     pointValues.HP = min(pointValues.HP - hpDmg, pointValues.maxHP);
@@ -60,7 +65,9 @@ Creature::Creature()
 }
 Creature::Creature(CreatureStats startingStats)
 {
+    name = "Unnamed Creature";
     stats = startingStats;
+    //Calculated from stats by subclass
     pointValues = {0,0,0,0,0,0};
 }
 
@@ -68,4 +75,11 @@ Creature::Creature(CreaturePoints points)
 {
     stats = {0,0,0,0,0,0};
     pointValues = points;
+}
+
+Creature::Creature(CreatureStats startingStats, std::string cName)
+{
+    name = cName;
+    stats = startingStats;
+    pointValues = {0,0,0,0,0,0};
 }

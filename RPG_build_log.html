@@ -4,25 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <tt>
-Build started on: <u>01-03-2016 at 13:20.24</u><br />
-Build ended on: <u>01-03-2016 at 13:20.26</u><p />
+Build started on: <u>02-03-2016 at 23:06.37</u><br />
+Build ended on: <u>02-03-2016 at 23:06.38</u><p />
 <b>-------------- Build: Debug in RPG (compiler: GNU GCC Compiler)---------------</b><br />
 g++ -Wall -fexceptions -g -std=c++14  -c /lPool/Shared/RPG/Cpp/RPG/fight.cpp -o obj/Debug/fight.o<br />
 /lPool/Shared/RPG/Cpp/RPG/fight.cpp: In member function ‘fightResults Fight::start()’:<br />
-<font color="#0000ff">/lPool/Shared/RPG/Cpp/RPG/fight.cpp:37:1: warning: control reaches end of non-void function [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-g++ -Wall -fexceptions -g -std=c++14  -c /lPool/Shared/RPG/Cpp/RPG/main.cpp -o obj/Debug/main.o<br />
-/lPool/Shared/RPG/Cpp/RPG/main.cpp: In function ‘int main()’:<br />
-<font color="#0000ff">/lPool/Shared/RPG/Cpp/RPG/main.cpp:19:18: warning: variable ‘testResults’ set but not used [-Wunused-but-set-variable]</font><br />
-     fightResults testResults = test.start();<br />
-                  ^<br />
-g++ -Wall -fexceptions -g -std=c++14  -c /lPool/Shared/RPG/Cpp/RPG/monsters.cpp -o obj/Debug/monsters.o<br />
-g++ -Wall -fexceptions -g -std=c++14  -c /lPool/Shared/RPG/Cpp/RPG/skills.cpp -o obj/Debug/skills.o<br />
-g++  -o bin/Debug/RPG obj/Debug/creature.o obj/Debug/fight.o obj/Debug/main.o obj/Debug/monsters.o obj/Debug/player.o obj/Debug/skills.o<br />
-Output file is bin/Debug/RPG with size 592.47 KB<br />
-<font color="#0000ff">Process terminated with status 0 (0 minute(s), 2 second(s))</font><br />
-<font color="#0000ff">0 error(s), 2 warning(s) (0 minute(s), 2 second(s))</font><br />
+<font color="#0000ff">/lPool/Shared/RPG/Cpp/RPG/fight.cpp:17:10: warning: variable ‘ch’ set but not used [-Wunused-but-set-variable]</font><br />
+     char ch;<br />
+          ^<br />
+g++ -Wall -fexceptions -g -std=c++14  -c /lPool/Shared/RPG/Cpp/RPG/interface.cpp -o obj/Debug/interface.o<br />
+/lPool/Shared/RPG/Cpp/RPG/interface.cpp: In function ‘void updatePoints(Creature, Creature)’:<br />
+<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/interface.cpp:42:25: error: ‘enemy’ was not declared in this scope</font><br />
+     displayPoints(0,68, enemy);<br />
+                         ^<br />
+<font color="#a00000">Process terminated with status 1 (0 minute(s), 0 second(s))</font><br />
+<font color="#a00000">1 error(s), 1 warning(s) (0 minute(s), 0 second(s))</font><br />
 </tt>
 </body>
 </html>

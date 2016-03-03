@@ -1,7 +1,9 @@
 #include "fight.h"
 #include "monsters.h"
+#include "interface.h"
 #include <iostream>
 #include <sstream>
+
 using namespace std;
 
 Fight::Fight(PlayerCharacter &pl, Monster &e)
@@ -12,26 +14,32 @@ Fight::Fight(PlayerCharacter &pl, Monster &e)
 
 fightResults Fight::start()
 {
-    string input = "";
+    char ch;
+    initInterface();
+
     while ( !player.isDead() && !enemy.isDead())
     {
-        cout << "Player: "<< endl;
-        cout << displayPoints(player.getPointValues()) << endl;
-        cout << "Monster: "<< endl;
-        cout << displayPoints(enemy.getPointValues()) << endl;
+        displayPoints(0,0, player);
+        displayPoints(0,68, enemy);
+
+        ch = getPlayerKey();
         player.skills.melees["Hit"].Use(player,enemy);
         enemy.attack(player);
-        getline(cin,input);
+        //getline(cin,input);
     }
+
+    fightResults results = {false, 0, 0};
+
+    cleanUpInterface();
     if (player.isDead())
     {
         cout << "You lose!";
-        return fightResults {false, 0, 0};
+        results = {false, 0, 0};
     }
     else if (enemy.isDead())
     {
         cout << "You win!";
-        return fightResults {true, 0, enemy.getXP()};
+        results = {true, 0, enemy.getXP()};
     }
-
+    return results;
 }
