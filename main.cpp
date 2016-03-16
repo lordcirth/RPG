@@ -4,6 +4,7 @@
 #include "player.h"
 #include "skills.h"
 #include "fight.h"
+#include "interface.h"
 
 using namespace std;
 
@@ -11,16 +12,15 @@ using namespace std;
 int main()
 {
     PlayerCharacter player("Player");
-    Monster testWolf {{5,0,0,5,0,0},2,5};
+    Wolf testWolf {};
 
-    Fight test {player, testWolf};
-    fightResults testResults = test.start();
+    initSkillMenu(player);
 
+    //Fight test {player, testWolf};
+    //fightResults testResults = test.start();
 
     return 0;
 }
-
-
 
 
 //    cout << "Start: " << endl;

@@ -6,8 +6,7 @@
 
 Skill::Skill()
 {
-    //tree.skillList.emplace_front(*this);
-    //unlocked = startsUnlocked;
+
 }
 
 Skill::Skill(bool startsUnlocked)
@@ -17,9 +16,9 @@ Skill::Skill(bool startsUnlocked)
     parent = this;
 }
 
-Skill::Skill(const Skill &parentNode)
+Skill::Skill(const Skill *parentNode, std::string name)
 {
-
+    parent = parentNode;
 }
 
 //============================

@@ -20,12 +20,11 @@ fightResults Fight::start()
     while ( !player.isDead() && !enemy.isDead())
     {
         displayPoints(0,0, player);
-        displayPoints(0,68, enemy);
+        displayPoints(0,66, enemy);
 
         ch = getPlayerKey();
         player.skills.melees["Hit"].Use(player,enemy);
         enemy.attack(player);
-        //getline(cin,input);
     }
 
     fightResults results = {false, 0, 0};

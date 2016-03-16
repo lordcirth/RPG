@@ -35,6 +35,11 @@ void Creature::healAll()
     setPointValues(points);
 }
 
+void Creature::setName(std::string newName)
+{
+    name = newName;
+}
+
 std::string Creature::getName()
 {
     return name;
@@ -42,9 +47,12 @@ std::string Creature::getName()
 
 void Creature::damage(int hpDmg, int spDmg, int mpDmg)
 {
-    pointValues.HP = min(pointValues.HP - hpDmg, pointValues.maxHP);
-    pointValues.SP = min(pointValues.SP - spDmg, pointValues.maxSP);
-    pointValues.MP = min(pointValues.MP - mpDmg, pointValues.maxMP);
+    CreaturePoints c = pointValues;
+    //Limit to between 0 and max
+    c.HP = max(0, min(c.HP - hpDmg, c.maxHP));
+    c.SP = max(0, min(c.SP - spDmg, c.maxSP));
+    c.MP = max(0, min(c.MP - mpDmg, c.maxMP));
+    pointValues = c;
 }
 
 bool Creature::isDead()

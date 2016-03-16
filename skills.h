@@ -8,15 +8,16 @@
 class Skill
 {
     //Pointer to parent in skill tree
-    Skill *parent;
+    const Skill *parent;
     bool unlocked;
+    std::string name;
 public:
 
     void Use(Creature &caster);
     void Use(Creature &caster, Creature &target);
     Skill();
     Skill(bool startsUnlocked);
-    Skill(const Skill &parentNode);
+    Skill(const Skill *parentNode, std::string name);
 };
 
 class Heal : public Skill
@@ -39,11 +40,12 @@ public:
 class Melee : public Skill
 {
 private:
-    int baseDmg = 0;
+
     int strDmgFactor;
     int dexDmgFactor;
 
 public:
+    int baseDmg = 0;
     void Use(Creature &caster, Creature &target);
     Melee();
     Melee(int strDmgFactor, int dexDmgFactor);

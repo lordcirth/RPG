@@ -1,6 +1,6 @@
 #pragma once
-
 #include "creature.h"
+
 class Monster : public Creature
 {
 private:
@@ -26,4 +26,5 @@ class Wolf : public Monster
 public:
     Wolf();
     Wolf(int startingHP);
+    Wolf(std::string name);
 };

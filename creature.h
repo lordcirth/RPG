@@ -37,6 +37,7 @@ public:
     void setStats(CreatureStats);
     CreaturePoints getPointValues();
     void setPointValues(CreaturePoints);
+    void setName(std::string);
     std::string getName();
 
     void healAll();

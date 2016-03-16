@@ -33,18 +33,21 @@ Monster::Monster(CreaturePoints points, int dmg, int XP)
 }
 
 Wolf::Wolf()
-    : Monster(
+    : Monster({15,0,0,15,0,0},2,5)
 {
-    15,0,0,15,0,0
-},5)
-{
+    setName("Wolf");
 }
 
 
-Wolf::Wolf(int startingHP)
-    : Monster(
+Wolf::Wolf(std::string mName)
+    : Monster({15,0,0,15,0,0},2,5)
 {
-    15,0,0,startingHP,0,0
-},5)
-{
+    setName(mName);
 }
+
+//Wolf::Wolf(int startingHP)
+//    : Monster({15,0,0,startingHP,0,0},2,5)
+//{
+//
+//}
+//
