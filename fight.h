@@ -3,15 +3,13 @@
 #include "player.h"
 #include "monsters.h"
 
-struct fightResults
-{
+struct fightResults {
     bool won;
     int gold = 0;
     int XP;
 };
 
-class Fight
-{
+class Fight {
 private:
     PlayerCharacter player;
     Monster enemy;

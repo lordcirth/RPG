@@ -5,8 +5,7 @@
 #include "skills.h"
 
 //typedef std::map<std::string,Heal> healPtrMap;
-class PlayerCharacter : public Creature
-{
+class PlayerCharacter : public Creature {
 
 private:
     //Stats add to these

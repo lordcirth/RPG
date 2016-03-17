@@ -1,8 +1,7 @@
 #pragma once
 #include "creature.h"
 
-class Monster : public Creature
-{
+class Monster : public Creature {
 private:
     int killXP;
     int attackDamage;
@@ -21,8 +20,7 @@ public:
 // Define specific Monsters
 //=============================
 
-class Wolf : public Monster
-{
+class Wolf : public Monster {
 public:
     Wolf();
     Wolf(int startingHP);

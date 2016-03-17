@@ -5,8 +5,7 @@
 #include <map>
 #include "creature.h" //Stats and Points structs
 
-class Skill
-{
+class Skill {
     //Pointer to parent in skill tree
     const Skill *parent;
     bool unlocked;
@@ -21,8 +20,7 @@ public:
     Skill(Skill &parentNode, std::string name);
 };
 
-class Heal : public Skill
-{
+class Heal : public Skill {
     //Sane default 0
     //ctors overwrite
     int HP = 0;
@@ -36,8 +34,7 @@ public:
     void Use(Creature &caster);
 };
 
-class Melee : public Skill
-{
+class Melee : public Skill {
 private:
 
     //If 0, not used
