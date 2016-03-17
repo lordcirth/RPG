@@ -40,6 +40,8 @@ class Melee : public Skill
 {
 private:
 
+    //If 0, not used
+    //Else, each multiplied by stat and added (subject to change)
     int strDmgFactor;
     int dexDmgFactor;
 

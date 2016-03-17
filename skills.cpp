@@ -74,7 +74,15 @@ Melee::Melee(bool startsUnlocked, std::string skillName, int bDmg, int strDmg, i
 
 void Melee::Use(Creature &caster, Creature &target)
 {
-    int dmg = strDmgFactor * caster.getStats().strength;
+    int dmg = 0;
+    if (strDmgFactor != 0)
+    {
+        dmg += strDmgFactor * caster.getStats().strength;
+    };
+    if (dexDmgFactor != 0)
+    {
+        dmg += dexDmgFactor * caster.getStats().dexterity;
+    };
     target.damage(dmg,0,0);
 }
 
@@ -103,7 +111,7 @@ skillPtrList createSkillPtrList()
 //    std::cout << Rest.getName();
     skillPtrs.emplace_front(&Rest);
 
-    Melee Hit {};
+    Melee Hit {true, "Hit", 0,1,0};
 
     //Sample usage
     //std::cout << skillPtrs.front()->getName();

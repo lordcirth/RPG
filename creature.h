@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
-struct CreatureStats
-{
+struct CreatureStats {
     //Physical
     int strength;
     int dexterity;
@@ -13,8 +12,7 @@ struct CreatureStats
 
 };
 
-struct CreaturePoints
-{
+struct CreaturePoints {
     int maxHP;
     int maxSP;
     int maxMP;
@@ -25,8 +23,7 @@ struct CreaturePoints
 };
 
 
-class Creature
-{
+class Creature {
 private:
     CreatureStats stats;
     CreaturePoints pointValues;

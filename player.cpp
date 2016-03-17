@@ -7,8 +7,7 @@ using namespace std;
 
 
 //Calculate & set total attributes
-void PlayerCharacter::calcAttributes()
-{
+void PlayerCharacter::calcAttributes() {
     //All subject to change
     CreaturePoints points = getPointValues();
     CreatureStats stats = getStats();
@@ -24,8 +23,7 @@ void PlayerCharacter::calcAttributes()
 
 //Default Constructor
 PlayerCharacter::PlayerCharacter()
-    : Creature(CreatureStats {1,1,1,1,1,1}, "Player")
-{
+    : Creature(CreatureStats {1,1,1,1,1,1}, "Player") {
     baseHP = 10;
     baseSP = 0;
     baseMP = 0;
@@ -37,8 +35,7 @@ PlayerCharacter::PlayerCharacter()
 }
 
 PlayerCharacter::PlayerCharacter(std::string playerName)
-    : Creature(CreatureStats {1,1,1,1,1,1}, playerName)
-{
+    : Creature(CreatureStats {1,1,1,1,1,1}, playerName) {
     baseHP = 10;
     baseSP = 0;
     baseMP = 0;
@@ -51,8 +48,7 @@ PlayerCharacter::PlayerCharacter(std::string playerName)
 }
 
 PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats, std::string playerName)
-    : Creature(bStats, playerName)
-{
+    : Creature(bStats, playerName) {
     baseHP = bHP;
     baseSP = bSP;
     baseMP = bMP;
@@ -63,8 +59,7 @@ PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats
 //    skillList skills = createSkillStruct();
 }
 
-string displayStats(CreatureStats stats)
-{
+string displayStats(CreatureStats stats) {
     string output =
         "  STR: " + to_string(stats.strength)  +
         "  DEX: " + to_string(stats.dexterity) +
@@ -77,8 +72,7 @@ string displayStats(CreatureStats stats)
     return output;
 }
 
-string displayPoints(CreaturePoints points)
-{
+string displayPoints(CreaturePoints points) {
     string output =
         "  HP: " + to_string(points.HP) + " / " + to_string(points.maxHP) + "\n" +
         "  SP: " + to_string(points.SP) + " / " + to_string(points.maxSP) + "\n" +
@@ -86,19 +80,16 @@ string displayPoints(CreaturePoints points)
     return output;
 }
 
-void PlayerCharacter::levelUp()
-{
+void PlayerCharacter::levelUp() {
     level++;
     freeStatPoints++;
     freeSkillPoints++;
 }
 
-void PlayerCharacter::giveXP(int earnedXP)
-{
+void PlayerCharacter::giveXP(int earnedXP) {
     XP += earnedXP;
     //XP is full
-    if (XP > xpLevelMultiplier*baseXpPerLevel)
-    {
+    if (XP > xpLevelMultiplier*baseXpPerLevel) {
         XP -= xpLevelMultiplier*baseXpPerLevel;
         levelUp();
     }

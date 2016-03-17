@@ -6,26 +6,22 @@
 
 using namespace std;
 
-void initInterface()
-{
+void initInterface() {
     initscr();
     cbreak();
     noecho();
 }
 
-void cleanUpInterface()
-{
+void cleanUpInterface() {
     endwin();
 }
 
-char getPlayerKey()
-{
+char getPlayerKey() {
     char ch = getch();
     return ch;
 }
 
-void displayPoints(int row, int col, Creature c)
-{
+void displayPoints(int row, int col, Creature c) {
     CreaturePoints points = c.getPointValues();
     string name = c.getName();
 
@@ -37,20 +33,17 @@ void displayPoints(int row, int col, Creature c)
     //std::cout << "SP: " + to_string(points.SP) << "  ";
 }
 
-void updatePoints(Creature player, Creature enemy)
-{
+void updatePoints(Creature player, Creature enemy) {
     displayPoints(0,0, player);
     displayPoints(0,68, enemy);
 }
 
-void initSkillMenu(PlayerCharacter &player)
-{
+void initSkillMenu(PlayerCharacter &player) {
     //skillList skills = player.skills;
     skillPtrList skillPtrs = player.skillPtrs;
     list<Skill*>::iterator it;
 
-    for (it = skillPtrs.begin(); it != skillPtrs.end(); ++it)
-    {
+    for (it = skillPtrs.begin(); it != skillPtrs.end(); ++it) {
         std::cout << (*it)->getName();
     }
 }

@@ -5,29 +5,24 @@
 
 using namespace std;
 
-CreatureStats Creature::getStats()
-{
+CreatureStats Creature::getStats() {
     return stats;
 }
 
-void Creature::setStats(CreatureStats newStats)
-{
+void Creature::setStats(CreatureStats newStats) {
     stats = newStats;
     //calcAttributes(); //New maxHP, etc
 }
 
-CreaturePoints Creature::getPointValues()
-{
+CreaturePoints Creature::getPointValues() {
     return pointValues;
 }
 
-void Creature::setPointValues(CreaturePoints points)
-{
+void Creature::setPointValues(CreaturePoints points) {
     pointValues = points;
 }
 
-void Creature::healAll()
-{
+void Creature::healAll() {
     CreaturePoints points = getPointValues();
     points.HP = points.maxHP;
     points.SP = points.maxSP;
@@ -35,18 +30,15 @@ void Creature::healAll()
     setPointValues(points);
 }
 
-void Creature::setName(std::string newName)
-{
+void Creature::setName(std::string newName) {
     name = newName;
 }
 
-std::string Creature::getName()
-{
+std::string Creature::getName() {
     return name;
 }
 
-void Creature::damage(int hpDmg, int spDmg, int mpDmg)
-{
+void Creature::damage(int hpDmg, int spDmg, int mpDmg) {
     CreaturePoints c = pointValues;
     //Limit to between 0 and max
     c.HP = max(0, min(c.HP - hpDmg, c.maxHP));
@@ -55,38 +47,30 @@ void Creature::damage(int hpDmg, int spDmg, int mpDmg)
     pointValues = c;
 }
 
-bool Creature::isDead()
-{
-    if (pointValues.HP <= 0)
-    {
+bool Creature::isDead() {
+    if (pointValues.HP <= 0) {
         return true;
-    }
-    else
-    {
+    } else {
         return false;
     }
 }
 
 //Constructors
-Creature::Creature()
-{
+Creature::Creature() {
 }
-Creature::Creature(CreatureStats startingStats)
-{
+Creature::Creature(CreatureStats startingStats) {
     name = "Unnamed Creature";
     stats = startingStats;
     //Calculated from stats by subclass
     pointValues = {0,0,0,0,0,0};
 }
 
-Creature::Creature(CreaturePoints points)
-{
+Creature::Creature(CreaturePoints points) {
     stats = {0,0,0,0,0,0};
     pointValues = points;
 }
 
-Creature::Creature(CreatureStats startingStats, std::string cName)
-{
+Creature::Creature(CreatureStats startingStats, std::string cName) {
     name = cName;
     stats = startingStats;
     pointValues = {0,0,0,0,0,0};
