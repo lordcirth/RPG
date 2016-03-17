@@ -14,32 +14,32 @@ Skill::Skill()
 
 }
 
-Skill::Skill(bool startsUnlocked, std::string name)
+Skill::Skill(bool startsUnlocked, std::string skillName)
 {
-    //tree.skillList.emplace_front(*this);
     unlocked = startsUnlocked;
     parent = this;
+    name = skillName;
 }
 
 Skill::Skill(Skill &parentNode, std::string name)
 {
     parent = &parentNode;
+    unlocked = false;
 }
 
 //============================
 // subclasses of Skill
 //============================
 
-//Testing only!
-//Heal::Heal()
-//    : Skill(false) //Pass through to Skill constructor
-//{
-//}
+//Do not call! Only for std::map
+Heal::Heal()
+{
+}
 
 Heal::Heal(Skill &parentNode, std::string name, int healHP, int healSP, int healMP)
     : Skill(parentNode, name) //Pass through to Skill constructor
 {
-    std::cout << parentNode.getName();
+    //std::cout << parentNode.getName();
     HP = healHP;
     SP = healSP;
     MP = healMP;
@@ -58,16 +58,13 @@ void Heal::Use(Creature &caster)
     caster.damage(-HP,-SP,-MP);
 }
 
-//Melee::Melee()
-//    : Skill(false)
-//{
-//}
-
+//Do not call! Only for std::map
 Melee::Melee()
 {
 }
 
-Melee::Melee(int strDmg, int dexDmg)
+
+Melee::Melee(int bDmg, int strDmg, int dexDmg)
 {
     strDmgFactor = strDmg;
     dexDmgFactor = dexDmg;
@@ -81,18 +78,18 @@ void Melee::Use(Creature &caster, Creature &target)
 
 
 //=============================
-// Provide Skill Tree as Struct
+// Provide Skill Tree
 //=============================
 
 skillList createSkillStruct()
 {
     skillList skills;
 
-    //Heal Rest {nullptr, 1,1,1};
-    //skills.heals.emplace("Rest",Rest);
+//    Heal Rest {nullptr, 1,1,1};
+//    skills.heals.emplace("Rest",Rest);
 
-    Melee Hit {2,1};
-    skills.melees.emplace("Hit",Hit);
+//    Melee Hit {2,1};
+//    skills.melees.emplace("Hit",Hit);
 
     return skills;
 }
@@ -100,8 +97,11 @@ skillList createSkillStruct()
 skillPtrList createSkillPtrList()
 {
     skillPtrList skillPtrs;
-//    Heal Rest {true, 1,1,1};
-//    skillPtrs.emplace_front(&Rest);
+    Heal Rest {true, "Heal", 1,1,1};
+//    std::cout << Rest.getName();
+    skillPtrs.emplace_front(&Rest);
 
+    //Sample usage
+    //std::cout << skillPtrs.front()->getName();
     return skillPtrs;
 }

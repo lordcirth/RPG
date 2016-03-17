@@ -47,7 +47,7 @@ public:
     int baseDmg = 0;
     void Use(Creature &caster, Creature &target);
     Melee();
-    Melee(int strDmgFactor, int dexDmgFactor);
+    Melee(int baseDmg, int strDmgFactor, int dexDmgFactor);
 };
 
 typedef std::map<std::string,Heal> healPtrMap;
@@ -60,7 +60,6 @@ struct skillList
 };
 
 skillList createSkillStruct();
-
 
 typedef std::list<Skill*> skillPtrList;
 skillPtrList createSkillPtrList();
