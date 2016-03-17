@@ -23,7 +23,7 @@ public:
 
 class Heal : public Skill
 {
-    //Default 0
+    //Sane default 0
     //ctors overwrite
     int HP = 0;
     int SP = 0;
@@ -47,7 +47,7 @@ public:
     int baseDmg = 0;
     void Use(Creature &caster, Creature &target);
     Melee();
-    Melee(int baseDmg, int strDmgFactor, int dexDmgFactor);
+    Melee(bool startsUnlocked, std::string skillName, int baseDmg, int strDmg, int dexDmg);
 };
 
 typedef std::map<std::string,Heal> healPtrMap;

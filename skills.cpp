@@ -45,8 +45,8 @@ Heal::Heal(Skill &parentNode, std::string name, int healHP, int healSP, int heal
     MP = healMP;
 }
 
-Heal::Heal(bool startsUnlocked, std::string name, int healHP, int healSP, int healMP)
-    : Skill(startsUnlocked, name) //Pass through to Skill constructor
+Heal::Heal(bool startsUnlocked, std::string skillName, int healHP, int healSP, int healMP)
+    : Skill(startsUnlocked, skillName) //Pass through to Skill constructor
 {
     HP = healHP;
     SP = healSP;
@@ -64,10 +64,12 @@ Melee::Melee()
 }
 
 
-Melee::Melee(int bDmg, int strDmg, int dexDmg)
+Melee::Melee(bool startsUnlocked, std::string skillName, int bDmg, int strDmg, int dexDmg)
+    : Skill(startsUnlocked, skillName)
 {
     strDmgFactor = strDmg;
     dexDmgFactor = dexDmg;
+
 }
 
 void Melee::Use(Creature &caster, Creature &target)
@@ -100,6 +102,8 @@ skillPtrList createSkillPtrList()
     Heal Rest {true, "Heal", 1,1,1};
 //    std::cout << Rest.getName();
     skillPtrs.emplace_front(&Rest);
+
+    Melee Hit {};
 
     //Sample usage
     //std::cout << skillPtrs.front()->getName();
