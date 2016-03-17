@@ -16,8 +16,8 @@ public:
     void Use(Creature &caster);
     void Use(Creature &caster, Creature &target);
     Skill();
-    Skill(bool startsUnlocked);
-    Skill(const Skill *parentNode, std::string name);
+    Skill(bool startsUnlocked, std::string name);
+    Skill(const Skill &parentNode, std::string name);
 };
 
 class Heal : public Skill
@@ -30,10 +30,11 @@ class Heal : public Skill
 
 public:
     Heal();
-    Heal(int healHP);
-    Heal(bool startsUnlocked, int healHP);
+    Heal(int healHP, std::string name);
+    //Heal(bool startsUnlocked, int healHP);
     Heal(Skill parentNode, bool startsUnlocked, int healHP);
-    Heal(const Skill &parentNode, int healHP, int healSP, int healMP);
+    Heal(bool startsUnlocked, std::string name, int healHP, int healSP, int healMP);
+    Heal(const Skill &parentNode, std::string name, int healHP, int healSP, int healMP);
     void Use(Creature &caster);
 };
 
@@ -61,3 +62,7 @@ struct skillList
 };
 
 skillList createSkillStruct();
+
+
+typedef std::list<Skill*> skillPtrList;
+skillPtrList createSkillPtrList();

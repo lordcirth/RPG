@@ -14,7 +14,9 @@ int main()
     PlayerCharacter player("Player");
     Wolf testWolf {};
 
-    initSkillMenu(player);
+    //initSkillMenu(player);
+
+    skillPtrList skillPtrs = createSkillPtrList();
 
     //Fight test {player, testWolf};
     //fightResults testResults = test.start();
