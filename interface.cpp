@@ -45,11 +45,12 @@ void updatePoints(Creature player, Creature enemy)
 
 void initSkillMenu(PlayerCharacter &player)
 {
-    skillList skills = player.skills;
-    map<std::string,Melee>::iterator it;
+    //skillList skills = player.skills;
+    skillPtrList skillPtrs = player.skillPtrs;
+    list<Skill*>::iterator it;
 
-    for (it = skills.melees.begin(); it != skills.melees.end(); ++it)
+    for (it = skillPtrs.begin(); it != skillPtrs.end(); ++it)
     {
-        std::cout << (*it).second.baseDmg;
+        std::cout << (*it)->getName();
     }
 }

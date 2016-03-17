@@ -53,13 +53,5 @@ public:
 typedef std::map<std::string,Heal> healPtrMap;
 typedef std::map<std::string,Melee> meleePtrMap;
 
-struct skillList
-{
-    healPtrMap heals;
-    meleePtrMap melees;
-};
-
-skillList createSkillStruct();
-
 typedef std::list<Skill*> skillPtrList;
 skillPtrList createSkillPtrList();

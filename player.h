@@ -29,7 +29,8 @@ private:
     void levelUp();
 
 public:
-    skillList skills = createSkillStruct();
+    //skillList skills = createSkillStruct();
+    skillPtrList skillPtrs = createSkillPtrList();
 
     void calcAttributes();
     void giveXP(int earnedXP);

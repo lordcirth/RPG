@@ -24,7 +24,7 @@ void PlayerCharacter::calcAttributes()
 
 //Default Constructor
 PlayerCharacter::PlayerCharacter()
-    : Creature(CreatureStats {1,1,1,1,1,1})
+    : Creature(CreatureStats {1,1,1,1,1,1}, "Player")
 {
     baseHP = 10;
     baseSP = 0;
@@ -34,7 +34,6 @@ PlayerCharacter::PlayerCharacter()
     calcAttributes();
     healAll();
 
-    skillList skills = createSkillStruct();
 }
 
 PlayerCharacter::PlayerCharacter(std::string playerName)
@@ -48,21 +47,7 @@ PlayerCharacter::PlayerCharacter(std::string playerName)
     calcAttributes();
     healAll();
 
-    skillList skills = createSkillStruct();
-}
-
-//Custom Constructor
-PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats)
-    : Creature(bStats)
-{
-    baseHP = bHP;
-    baseSP = bSP;
-    baseMP = bMP;
-
-    calcAttributes();
-    healAll();
-
-    skillList skills = createSkillStruct();
+    //skillList skills = createSkillStruct();
 }
 
 PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats, std::string playerName)
@@ -75,7 +60,7 @@ PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats
     calcAttributes();
     healAll();
 
-    skillList skills = createSkillStruct();
+//    skillList skills = createSkillStruct();
 }
 
 string displayStats(CreatureStats stats)

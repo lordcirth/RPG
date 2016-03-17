@@ -23,7 +23,7 @@ fightResults Fight::start()
         displayPoints(0,66, enemy);
 
         ch = getPlayerKey();
-        player.skills.melees["Hit"].Use(player,enemy);
+        //player.skills.melees["Hit"].Use(player,enemy);
         enemy.attack(player);
     }
 

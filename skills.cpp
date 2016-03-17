@@ -81,18 +81,18 @@ void Melee::Use(Creature &caster, Creature &target)
 // Provide Skill Tree
 //=============================
 
-skillList createSkillStruct()
-{
-    skillList skills;
-
-//    Heal Rest {nullptr, 1,1,1};
-//    skills.heals.emplace("Rest",Rest);
-
-//    Melee Hit {2,1};
-//    skills.melees.emplace("Hit",Hit);
-
-    return skills;
-}
+//skillList createSkillStruct()
+//{
+//    skillList skills;
+//
+////    Heal Rest {nullptr, 1,1,1};
+////    skills.heals.emplace("Rest",Rest);
+//
+////    Melee Hit {2,1};
+////    skills.melees.emplace("Hit",Hit);
+//
+//    return skills;
+//}
 
 skillPtrList createSkillPtrList()
 {

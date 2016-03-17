@@ -1,6 +1,6 @@
 #include <string>
 #include <iostream>
-#include <memory> //unique_ptr
+//#include <memory> //unique_ptr
 #include "player.h"
 #include "skills.h"
 #include "fight.h"
@@ -17,7 +17,7 @@ int main()
     //initSkillMenu(player);
 
     skillPtrList skillPtrs = createSkillPtrList();
-
+    initSkillMenu(player);
     //Fight test {player, testWolf};
     //fightResults testResults = test.start();
 
