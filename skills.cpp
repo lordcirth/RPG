@@ -4,6 +4,11 @@
 
 #include "player.h"
 
+std::string Skill::getName()
+{
+    return name;
+}
+
 Skill::Skill()
 {
 
@@ -16,7 +21,7 @@ Skill::Skill(bool startsUnlocked, std::string name)
     parent = this;
 }
 
-Skill::Skill(const Skill &parentNode, std::string name)
+Skill::Skill(Skill &parentNode, std::string name)
 {
     parent = &parentNode;
 }
@@ -31,15 +36,10 @@ Skill::Skill(const Skill &parentNode, std::string name)
 //{
 //}
 
-Heal::Heal(int healHP, std::string name)
-    : Skill(false, name) //Pass through to Skill constructor
-{
-    HP = healHP;
-}
-
-Heal::Heal(const Skill &parentNode, std::string name, int healHP, int healSP, int healMP)
+Heal::Heal(Skill &parentNode, std::string name, int healHP, int healSP, int healMP)
     : Skill(parentNode, name) //Pass through to Skill constructor
 {
+    std::cout << parentNode.getName();
     HP = healHP;
     SP = healSP;
     MP = healMP;

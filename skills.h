@@ -15,9 +15,10 @@ public:
 
     void Use(Creature &caster);
     void Use(Creature &caster, Creature &target);
+    std::string getName();
     Skill();
     Skill(bool startsUnlocked, std::string name);
-    Skill(const Skill &parentNode, std::string name);
+    Skill(Skill &parentNode, std::string name);
 };
 
 class Heal : public Skill
@@ -30,11 +31,8 @@ class Heal : public Skill
 
 public:
     Heal();
-    Heal(int healHP, std::string name);
-    //Heal(bool startsUnlocked, int healHP);
-    Heal(Skill parentNode, bool startsUnlocked, int healHP);
     Heal(bool startsUnlocked, std::string name, int healHP, int healSP, int healMP);
-    Heal(const Skill &parentNode, std::string name, int healHP, int healSP, int healMP);
+    Heal(Skill &parentNode, std::string name, int healHP, int healSP, int healMP);
     void Use(Creature &caster);
 };
 
