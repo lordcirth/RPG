@@ -1,5 +1,9 @@
 #pragma once
+#include <list>
 #include <string>
+//#include "buffs.h"
+class Buff;
+
 struct CreatureStats {
     //Physical
     int strength;
@@ -28,7 +32,7 @@ private:
     CreatureStats stats;
     CreaturePoints pointValues;
     std::string name = "";
-
+    std::list<Buff*> buffs;
 public:
     CreatureStats getStats();
     void setStats(CreatureStats);
@@ -39,6 +43,7 @@ public:
 
     void healAll();
     void damage(int hpDmg, int spDmg, int mpDmg);
+    //void addBuff(Buff *newBuff);
 
     bool isDead();
 

@@ -4,6 +4,11 @@
 #include <memory>
 #include <map>
 #include "creature.h" //Stats and Points structs
+#include "buffs.h"
+
+//============================
+// Skill & subclasses
+//============================
 
 class Skill {
     //Pointer to parent in skill tree

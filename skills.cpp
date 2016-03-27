@@ -4,6 +4,10 @@
 
 #include "player.h"
 
+//============================
+// Skill & subclasses
+//============================
+
 std::string Skill::getName() {
     return name;
 }
@@ -22,10 +26,6 @@ Skill::Skill(Skill &parentNode, std::string name) {
     parent = &parentNode;
     unlocked = false;
 }
-
-//============================
-// subclasses of Skill
-//============================
 
 //Do not call! Only for std::map
 Heal::Heal() {

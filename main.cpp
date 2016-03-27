@@ -23,7 +23,6 @@ int main() {
     return 0;
 }
 
-
 //    cout << "Start: " << endl;
 //    cout << displayStats(player.getStats()) << endl;
 //    cout << "Player: "<< endl;

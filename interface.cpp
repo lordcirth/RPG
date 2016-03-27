@@ -25,7 +25,7 @@ void displayPoints(int row, int col, Creature c) {
     CreaturePoints points = c.getPointValues();
     string name = c.getName();
 
-    mvprintw(row, col, "%s: \n", name.c_str());  //Null-terminated string
+    mvprintw(row, col, "%s: \n", name.c_str());  //Name as Null-terminated string
     mvprintw(++row, col, "HP: %d / %d \n", points.HP, points.maxHP);
     mvprintw(++row, col, "SP: %d / %d \n", points.SP, points.maxSP);
     mvprintw(++row, col, "MP: %d / %d \n", points.MP, points.maxMP);
@@ -46,4 +46,12 @@ void initSkillMenu(PlayerCharacter &player) {
     for (it = skillPtrs.begin(); it != skillPtrs.end(); ++it) {
         std::cout << (*it)->getName();
     }
+}
+
+//Demo menu.h
+void showMenu() {
+//ITEM *item1;
+//item1 = new_item("first", "second");
+//ITEM item2 = new_item("third", "fourth");
+//MENU menu1 = new_menu();
 }

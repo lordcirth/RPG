@@ -6,7 +6,7 @@
 1456271038 source:/lPool/Shared/RPG/Cpp/RPG/classes.h
 	<string>
 
-1458181549 source:/lPool/Shared/RPG/Cpp/RPG/main.cpp
+1458420937 source:/lPool/Shared/RPG/Cpp/RPG/main.cpp
 	<string>
 	<iostream>
 	"player.h"
@@ -17,13 +17,13 @@
 1456271038 /lPool/Shared/RPG/Cpp/RPG/classes.h
 	<string>
 
-1458181815 source:/lPool/Shared/RPG/Cpp/RPG/player.cpp
+1458253388 source:/lPool/Shared/RPG/Cpp/RPG/player.cpp
 	"player.h"
 	<iostream>
 	"monsters.h"
 	"skills.h"
 
-1458181690 /lPool/Shared/RPG/Cpp/RPG/player.h
+1458253486 /lPool/Shared/RPG/Cpp/RPG/player.h
 	<string>
 	"monsters.h"
 	"skills.h"
@@ -31,51 +31,59 @@
 1456286085 source:/lPool/Shared/RPG/Cpp/RPG/player.h
 	<string>
 
-1457468077 source:/lPool/Shared/RPG/Cpp/RPG/monsters.cpp
+1458253450 source:/lPool/Shared/RPG/Cpp/RPG/monsters.cpp
 	"monsters.h"
 	<iostream>
 
-1458183413 source:/lPool/Shared/RPG/Cpp/RPG/skills.cpp
+1459106771 source:/lPool/Shared/RPG/Cpp/RPG/skills.cpp
 	"skills.h"
 	<memory>
 	<iostream>
 	"player.h"
 
-1457030926 /lPool/Shared/RPG/Cpp/RPG/monsters.h
+1458253486 /lPool/Shared/RPG/Cpp/RPG/monsters.h
 	"creature.h"
 
-1458183291 /lPool/Shared/RPG/Cpp/RPG/skills.h
+1459106749 /lPool/Shared/RPG/Cpp/RPG/skills.h
 	<list>
 	<memory>
 	<map>
 	"creature.h"
+	"buffs.h"
 
-1457466416 /lPool/Shared/RPG/Cpp/RPG/creature.h
+1459118665 /lPool/Shared/RPG/Cpp/RPG/creature.h
+	<list>
 	<string>
 
-1457726091 source:/lPool/Shared/RPG/Cpp/RPG/creature.cpp
+1458253388 source:/lPool/Shared/RPG/Cpp/RPG/creature.cpp
 	"creature.h"
 	<algorithm>
 	<iostream>
 
-1458181697 source:/lPool/Shared/RPG/Cpp/RPG/fight.cpp
+1458253388 source:/lPool/Shared/RPG/Cpp/RPG/fight.cpp
 	"fight.h"
 	"monsters.h"
 	"interface.h"
 	<iostream>
 	<sstream>
 
-1456855635 /lPool/Shared/RPG/Cpp/RPG/fight.h
+1458253486 /lPool/Shared/RPG/Cpp/RPG/fight.h
 	"player.h"
 	"monsters.h"
 
-1458181504 source:/lPool/Shared/RPG/Cpp/RPG/interface.cpp
+1459100699 source:/lPool/Shared/RPG/Cpp/RPG/interface.cpp
 	"interface.h"
 	"ncurses.h"
 	<string>
 	<iostream>
 	"menu.h"
 
-1457749098 /lPool/Shared/RPG/Cpp/RPG/interface.h
+1458421771 /lPool/Shared/RPG/Cpp/RPG/interface.h
 	"fight.h"
+
+1459118198 /lPool/Shared/RPG/Cpp/RPG/buffs.h
+	"creature.h"
+
+1459116509 source:/lPool/Shared/RPG/Cpp/RPG/buffs.cpp
+	"buffs.h"
 
