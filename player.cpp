@@ -28,6 +28,8 @@ PlayerCharacter::PlayerCharacter()
     baseSP = 0;
     baseMP = 0;
 
+    skillPtrs = createSkillPtrList();
+
     setStats({1,1,1,1,1,1});
     calcAttributes();
     healAll();

@@ -29,7 +29,7 @@ private:
 
 public:
     //skillList skills = createSkillStruct();
-    skillPtrList skillPtrs = createSkillPtrList();
+    skillPtrList skillPtrs;
 
     void calcAttributes();
     void giveXP(int earnedXP);

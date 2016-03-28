@@ -35,6 +35,8 @@
 		<Linker>
 			<Add library="/usr/lib64/libncurses.so" />
 		</Linker>
+		<Unit filename="buffs.cpp" />
+		<Unit filename="buffs.h" />
 		<Unit filename="creature.cpp" />
 		<Unit filename="creature.h" />
 		<Unit filename="fight.cpp" />

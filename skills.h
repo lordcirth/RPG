@@ -28,9 +28,9 @@ public:
 class Heal : public Skill {
     //Sane default 0
     //ctors overwrite
-    int HP = 0;
-    int SP = 0;
-    int MP = 0;
+    int HP;
+    int SP;
+    int MP;
 
 public:
     Heal();
@@ -40,7 +40,8 @@ public:
 };
 
 class Melee : public Skill {
-private:
+
+    int baseDmg;
 
     //If 0, not used
     //Else, each multiplied by stat and added (subject to change)
@@ -48,14 +49,31 @@ private:
     int dexDmgFactor;
 
 public:
-    int baseDmg = 0;
+
     void Use(Creature &caster, Creature &target);
     Melee();
     Melee(bool startsUnlocked, std::string skillName, int baseDmg, int strDmg, int dexDmg);
 };
 
-typedef std::map<std::string,Heal> healPtrMap;
-typedef std::map<std::string,Melee> meleePtrMap;
+//Flame touch, ice, necro?, etc
+class magicTouch : public Skill {
+    //Direct damage
+    int baseDmg;
+    int pwrDmgFactor;
+    int ctlDmgFactor;
+
+    Buff debuff;
+
+//    int baseDuration;
+//    int stabilityDurationFactor;
+
+public:
+    magicTouch();
+    magicTouch(Skill &parentNode, std::string name, int bDmg, int powerDmg, int controlDmg, Buff buff);
+};
+
+//typedef std::map<std::string,Heal> healPtrMap;
+//typedef std::map<std::string,Melee> meleePtrMap;
 
 typedef std::list<Skill*> skillPtrList;
 skillPtrList createSkillPtrList();

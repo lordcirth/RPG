@@ -1,8 +1,8 @@
 #pragma once
 #include <list>
 #include <string>
-//#include "buffs.h"
-class Buff;
+
+class Buff;  //Forward declaration
 
 struct CreatureStats {
     //Physical
@@ -32,7 +32,9 @@ private:
     CreatureStats stats;
     CreaturePoints pointValues;
     std::string name = "";
+    //Has to be pointers or subclasses get "sliced"
     std::list<Buff*> buffs;
+
 public:
     CreatureStats getStats();
     void setStats(CreatureStats);
@@ -43,7 +45,7 @@ public:
 
     void healAll();
     void damage(int hpDmg, int spDmg, int mpDmg);
-    //void addBuff(Buff *newBuff);
+    void addBuff(Buff &newBuff);
 
     bool isDead();
 
