@@ -73,7 +73,7 @@ void Melee::Use(Creature &caster, Creature &target) {
 
 magicTouch::magicTouch() {}
 
-magicTouch::magicTouch(Skill &parentNode, std::string name, int bDmg, int powerDmg, int controlDmg, Buff buff)
+magicTouch::magicTouch(Skill &parentNode, std::string name, int bDmg, int powerDmg, int controlDmg, Buff &buff)
     : Skill(parentNode, name) {
     baseDmg = bDmg;
     pwrDmgFactor = powerDmg;
@@ -102,9 +102,12 @@ skillPtrList createSkillPtrList() {
     //usleep(10000000); //Pause 10s so I can use htop
 
 //Tier 1: First unlockables
-    buff_FlameTouch
-    magicTouch FlameTouch {Rest, "Flame Touch", 2, 0, 0, buff_FlameTouch buff};
+    DoT buff_FlameTouch {"Flame Touch burn", true, 3, 1,0,0};
+    magicTouch FlameTouch {Rest, "Flame Touch", 2, 0, 0, buff_FlameTouch};
 
+    Wolf skillTestWolf;
+    skillPtrs.front()->Use(skillTestWolf);
+    //skillPtrs.front()->Use(skillTestWolf);
     return skillPtrs;
     //Sample usage
     //std::cout << skillPtrs.front()->getName();

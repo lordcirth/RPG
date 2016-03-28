@@ -11,13 +11,13 @@ using namespace std;
 
 int main() {
     PlayerCharacter player("Player");
-    Wolf testWolf {};
+    Wolf testWolf;
 
     //initSkillMenu(player);
 
     //skillPtrList skillPtrs = createSkillPtrList();
     initSkillMenu(player);
-    //Fight test {player, testWolf};
+    Fight test {player, testWolf};
     //fightResults testResults = test.start();
 
     return 0;

@@ -33,10 +33,11 @@ class Heal : public Skill {
     int MP;
 
 public:
+    void Use(Creature &caster);
     Heal();
     Heal(bool startsUnlocked, std::string name, int healHP, int healSP, int healMP);
     Heal(Skill &parentNode, std::string name, int healHP, int healSP, int healMP);
-    void Use(Creature &caster);
+
 };
 
 class Melee : public Skill {
@@ -69,7 +70,7 @@ class magicTouch : public Skill {
 
 public:
     magicTouch();
-    magicTouch(Skill &parentNode, std::string name, int bDmg, int powerDmg, int controlDmg, Buff buff);
+    magicTouch(Skill &parentNode, std::string name, int bDmg, int powerDmg, int controlDmg, Buff &buff);
 };
 
 //typedef std::map<std::string,Heal> healPtrMap;

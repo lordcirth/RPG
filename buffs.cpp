@@ -35,6 +35,7 @@ void DoT::tick(Creature &c) {
 //============================
 // Specific buffs
 //============================
+//Moved to skills.cpp
 //
 //buff_FlameTouch::buff_FlameTouch()
 //    : DoT ("Flame Touch burn", true, 3, 1,0,0) {
