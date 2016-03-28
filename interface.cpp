@@ -39,13 +39,13 @@ void updatePoints(Creature player, Creature enemy) {
 }
 
 void initSkillMenu(PlayerCharacter &player) {
-    //skillList skills = player.skills;
     skillPtrList skillPtrs = player.skillPtrs;
     list<Skill*>::iterator it;
-    cout << "Listing skills: ";
-    cout << skillPtrs.size();
-    for (it = skillPtrs.begin(); it != skillPtrs.end(); ++it) {
-        cout << (*it)->getName();
+    cout << "Listing skills: " << endl;
+    // << skillPtrs.front()->getName() << endl;
+
+    for (it = skillPtrs.begin(); it != skillPtrs.end(); it++) {
+        cout << (*it)->getName()  << endl;
     }
 }
 

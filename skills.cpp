@@ -9,12 +9,11 @@
 //============================
 
 std::string Skill::getName() {
-    if (name.empty()) {
-        std::cout << "empty!";
-    } else {
-        std::cout << "not empty!";
-    }
-    return name;
+    //Runs at 100% CPU!  infinite spaces?
+    //std::cout << name << std::endl;
+    //std::cout << name.at(2);
+    //return name;
+    return "Rest";
 
 }
 
@@ -110,6 +109,9 @@ skillPtrList createSkillPtrList() {
 //Tier 0: Unlocked by default
     Heal Rest {true, "Rest", 1,1,1}; //Root of Mage tree
     skillPtrs.push_back(&Rest);
+
+    //std::cout << Rest.getName() << std::endl; //Works "Rest"
+    //std::cout << skillPtrs.front()->getName() << std::endl; //Works "Rest"
 
     Melee Hit {true, "Hit", 0,1,0}; //Root of Warrior tree
     skillPtrs.push_back(&Hit);
