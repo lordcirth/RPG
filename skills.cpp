@@ -9,7 +9,13 @@
 //============================
 
 std::string Skill::getName() {
+    if (name.empty()) {
+        std::cout << "empty!";
+    } else {
+        std::cout << "not empty!";
+    }
     return name;
+
 }
 
 Skill::Skill() {
@@ -22,9 +28,19 @@ Skill::Skill(bool startsUnlocked, std::string skillName) {
     name = skillName;
 }
 
-Skill::Skill(Skill &parentNode, std::string name) {
+Skill::Skill(Skill &parentNode, std::string skillName) {
     parent = &parentNode;
     unlocked = false;
+    name = skillName;
+}
+
+void Skill::Use(Creature &caster) {
+    std::cout << "whyyy";
+}
+
+
+void Skill::Use(Creature &caster, Creature &target) {
+    std::cout << "whyyy2";
 }
 
 //Do not call! Only for std::map
@@ -48,6 +64,7 @@ Heal::Heal(bool startsUnlocked, std::string skillName, int healHP, int healSP, i
 
 void Heal::Use(Creature &caster) {
     caster.damage(-HP,-SP,-MP);
+    std::cout << "Healing";
 }
 
 //Do not call! Only for std::map, list, etc
@@ -91,10 +108,10 @@ skillPtrList createSkillPtrList() {
     skillPtrList skillPtrs;
 
 //Tier 0: Unlocked by default
-    Heal Rest {true, "Rest", 1,1,1};
+    Heal Rest {true, "Rest", 1,1,1}; //Root of Mage tree
     skillPtrs.push_back(&Rest);
 
-    Melee Hit {true, "Hit", 0,1,0};
+    Melee Hit {true, "Hit", 0,1,0}; //Root of Warrior tree
     skillPtrs.push_back(&Hit);
 
 
@@ -105,9 +122,12 @@ skillPtrList createSkillPtrList() {
     DoT buff_FlameTouch {"Flame Touch burn", true, 3, 1,0,0};
     magicTouch FlameTouch {Rest, "Flame Touch", 2, 0, 0, buff_FlameTouch};
 
-    Wolf skillTestWolf;
-    skillPtrs.front()->Use(skillTestWolf);
-    //skillPtrs.front()->Use(skillTestWolf);
+//    Wolf skillTestWolf;
+//    skillTestWolf.damage(5,0,0);
+//    std::cout << skillTestWolf.getPointValues().HP;
+//    skillPtrs.front()->Use(skillTestWolf);
+//    std::cout << skillTestWolf.getPointValues().HP;
+
     return skillPtrs;
     //Sample usage
     //std::cout << skillPtrs.front()->getName();

@@ -42,14 +42,16 @@ void initSkillMenu(PlayerCharacter &player) {
     //skillList skills = player.skills;
     skillPtrList skillPtrs = player.skillPtrs;
     list<Skill*>::iterator it;
-
+    cout << "Listing skills: ";
+    cout << skillPtrs.size();
     for (it = skillPtrs.begin(); it != skillPtrs.end(); ++it) {
-        std::cout << (*it)->getName();
+        cout << (*it)->getName();
     }
 }
 
 //Demo menu.h
 void showMenu() {
+
 //ITEM *item1;
 //item1 = new_item("first", "second");
 //ITEM item2 = new_item("third", "fourth");

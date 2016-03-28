@@ -10,15 +10,16 @@ using namespace std;
 
 
 int main() {
+    //cout << "trying to create player";
     PlayerCharacter player("Player");
+    //cout << "player created";
     Wolf testWolf;
-
     //initSkillMenu(player);
 
     //skillPtrList skillPtrs = createSkillPtrList();
     initSkillMenu(player);
     Fight test {player, testWolf};
-    //fightResults testResults = test.start();
+    fightResults testResults = test.start();
 
     return 0;
 }

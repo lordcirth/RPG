@@ -17,8 +17,8 @@ class Skill {
     std::string name;
 public:
 
-    void Use(Creature &caster);
-    void Use(Creature &caster, Creature &target);
+    virtual void Use(Creature &caster);
+    virtual void Use(Creature &caster, Creature &target);
     std::string getName();
     Skill();
     Skill(bool startsUnlocked, std::string name);

@@ -38,9 +38,12 @@ PlayerCharacter::PlayerCharacter()
 
 PlayerCharacter::PlayerCharacter(std::string playerName)
     : Creature(CreatureStats {1,1,1,1,1,1}, playerName) {
+    //cout << "starting player ctor";
     baseHP = 10;
     baseSP = 0;
     baseMP = 0;
+
+    skillPtrs = createSkillPtrList();
 
     setStats({1,1,1,1,1,1});
     calcAttributes();

@@ -71,6 +71,7 @@ Creature::Creature(CreaturePoints points) {
 }
 
 Creature::Creature(CreatureStats startingStats, std::string cName) {
+    //cout << "starting Creature ctor";
     name = cName;
     stats = startingStats;
     pointValues = {0,0,0,0,0,0};

@@ -14,7 +14,7 @@ Fight::Fight(PlayerCharacter &pl, Monster &e) {
 fightResults Fight::start() {
     char ch;
     initInterface();
-
+    initSkillMenu(player);
     while ( !player.isDead() && !enemy.isDead()) {
         displayPoints(0,0, player);
         displayPoints(0,66, enemy);
