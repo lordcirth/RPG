@@ -21,8 +21,6 @@ bool Skill::isUnlocked() {
 }
 
 Skill::Skill() {
-
-
 }
 
 Skill::Skill(bool startsUnlocked, std::string skillName) {
@@ -139,6 +137,19 @@ skillPtrList createSkillPtrList() {
     //std::cout << skillPtrs.front()->getName();
 }
 
+void populateSkillPtrList (skillPtrList &skillPtrs) {
+
+    Heal Rest {true, "Rest", 1,1,1}; //Root of Mage tree
+    skillPtrs.push_back(&Rest);
+
+    std::cout << "pop:" << skillPtrs.front()->getName() << std::endl;
+}
+
+skillSharedPtrList createSafeSkillList() {
+    skillSharedPtrList safeSkillList;
+    std::shared_ptr<Skill> Rest ( new Heal {true, "Rest", 1,1,1});
+    safeSkillList.push_back(Rest);
+}
 
 //Old way:
 

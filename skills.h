@@ -80,3 +80,7 @@ public:
 
 typedef std::list<Skill*> skillPtrList;
 skillPtrList createSkillPtrList();
+void populateSkillPtrList (skillPtrList& skillPtrs);
+
+typedef std::list<std::shared_ptr<Skill>> skillSharedPtrList;
+skillSharedPtrList createSafeSkillList();

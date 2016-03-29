@@ -39,8 +39,6 @@ public:
     PlayerCharacter(std::string playerName);
     PlayerCharacter();
 
-
-
 };
 
 std::string displayStats(CreatureStats stats);

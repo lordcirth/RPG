@@ -60,7 +60,6 @@ cout << "Number of skills: " + to_string(skillPtrs.size());
         //cout << skillPtrs.front()->getName().c_str() << endl;
     };
     //MENU *menu = new_menu((ITEM **)skillItems);
-
 }
 
 //Demo menu.h
