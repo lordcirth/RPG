@@ -8,13 +8,13 @@ using namespace std;
 
 Fight::Fight(PlayerCharacter &pl, Monster &e) {
     player = pl;
-    enemy= e;
+    enemy = e;
 }
 
 fightResults Fight::start() {
     char ch;
     initInterface();
-    initSkillMenu(player);
+    //initSkillMenu(player);
     while ( !player.isDead() && !enemy.isDead()) {
         displayPoints(0,0, player);
         displayPoints(0,66, enemy);

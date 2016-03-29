@@ -79,13 +79,13 @@ string displayStats(CreatureStats stats) {
     return output;
 }
 
-string displayPoints(CreaturePoints points) {
-    string output =
-        "  HP: " + to_string(points.HP) + " / " + to_string(points.maxHP) + "\n" +
-        "  SP: " + to_string(points.SP) + " / " + to_string(points.maxSP) + "\n" +
-        "  MP: " + to_string(points.MP) + " / " + to_string(points.maxMP) + "\n";
-    return output;
-}
+//string displayPoints(CreaturePoints points) {
+//    string output =
+//        "  HP: " + to_string(points.HP) + " / " + to_string(points.maxHP) + "\n" +
+//        "  SP: " + to_string(points.SP) + " / " + to_string(points.maxSP) + "\n" +
+//        "  MP: " + to_string(points.MP) + " / " + to_string(points.maxMP) + "\n";
+//    return output;
+//}
 
 void PlayerCharacter::levelUp() {
     level++;

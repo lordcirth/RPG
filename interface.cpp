@@ -7,7 +7,7 @@
 using namespace std;
 
 void initInterface() {
-    //initscr();
+    initscr();
     cbreak();
     noecho();
 }
@@ -17,8 +17,7 @@ void cleanUpInterface() {
 }
 
 char getPlayerKey() {
-    char ch = getch();
-    return ch;
+    return getch();
 }
 
 void displayPoints(int row, int col, Creature c) {

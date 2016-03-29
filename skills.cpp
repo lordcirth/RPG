@@ -105,7 +105,7 @@ magicTouch::magicTouch(Skill &parentNode, std::string name, int bDmg, int powerD
 // Provide Skill Tree
 //=============================
 
-//Must only ever be called once!
+
 skillPtrList createSkillPtrList() {
     skillPtrList skillPtrs;
 
@@ -139,21 +139,21 @@ skillPtrList createSkillPtrList() {
     //Sample usage
     //std::cout << skillPtrs.front()->getName();
 }
+//
+//void populateSkillPtrList (skillPtrList &skillPtrs) {
+//
+//    Heal Rest {true, "Rest", 1,1,1}; //Root of Mage tree
+//    skillPtrs.push_back(&Rest);
+//
+//    std::cout << "pop:" << skillPtrs.front()->getName() << std::endl;
+//}
 
-void populateSkillPtrList (skillPtrList &skillPtrs) {
-
-    Heal Rest {true, "Rest", 1,1,1}; //Root of Mage tree
-    skillPtrs.push_back(&Rest);
-
-    std::cout << "pop:" << skillPtrs.front()->getName() << std::endl;
-}
-
-skillSharedPtrList createSafeSkillList() {
-    skillSharedPtrList safeSkillList;
-    std::shared_ptr<Skill> Rest ( new Heal {true, "Rest", 1,1,1});
-    safeSkillList.push_back(Rest);
-    std::cout << safeSkillList.front()->getName() << std::endl;
-}
+//skillSharedPtrList createSafeSkillList() {
+//    skillSharedPtrList safeSkillList;
+//    std::shared_ptr<Skill> Rest ( new Heal {true, "Rest", 1,1,1});
+//    safeSkillList.push_back(Rest);
+//    std::cout << safeSkillList.front()->getName() << std::endl;
+//}
 
 //Old way:
 

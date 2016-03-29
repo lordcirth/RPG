@@ -41,4 +41,4 @@ public:
 };
 
 std::string displayStats(CreatureStats stats);
-std::string displayPoints(CreaturePoints points);
+//std::string displayPoints(CreaturePoints points);
