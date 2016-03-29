@@ -61,7 +61,20 @@ cout << "Number of skills: " + to_string(skillPtrs.size());
     //MENU *menu = new_menu((ITEM **)skillItems);
 }
 
+void printSkill(int row, int col, char key, const char *name) {
+    mvprintw(row,col, "%c: %s", key, name);
+}
+
 //Demo menu.h
 void showMenu(PlayerCharacter &player) {
-    mvprintw(10,0, "r: %s", player.skillPtrs.front()->getName());
+    int startRow = 16;
+    int startCol  = 1;
+
+    int hOffset  = 10;
+    int vOffset  = 1;
+
+    int row = startRow;
+    int col = startCol;
+
+    printSkill(startRow, startCol, 'r', "Rest");
 }

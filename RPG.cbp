@@ -34,6 +34,7 @@
 		</Compiler>
 		<Linker>
 			<Add library="/usr/lib64/libncurses.so" />
+			<Add library="/usr/lib64/libmenu.so" />
 		</Linker>
 		<Unit filename="buffs.cpp" />
 		<Unit filename="buffs.h" />
