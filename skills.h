@@ -11,6 +11,7 @@
 //============================
 
 class Skill {
+
     //Pointer to parent in skill tree
     const Skill *parent;
     bool unlocked;
@@ -25,6 +26,8 @@ public:
     Skill();
     Skill(bool startsUnlocked, std::string name);
     Skill(Skill &parentNode, std::string name);
+
+    // ~Skill();
 };
 
 class Heal : public Skill {

@@ -16,7 +16,7 @@ int main() {
 //    //Skill Rest = *player.skillPtrs.front();
 //    player.damage(5,2,2);
 //    cout << "before: " << player.getPointValues().HP << endl;
-//    cout << player.skillPtrs.front()->getName() << endl;
+    cout << player.skillPtrs.front()->getName() << endl;
 //    cout << "after: " << player.getPointValues().HP << endl;
     //Wolf testWolf;
     //initSkillMenu(player);

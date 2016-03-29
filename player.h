@@ -19,17 +19,16 @@ private:
     int freeStatPoints = 0;
     int freeSkillPoints = 0;
 
-
     //XP Scaling
     int xpLevelMultiplier = 1;
     int baseXpPerLevel = 10;
-
 
     void levelUp();
 
 public:
 
     skillPtrList skillPtrs;
+    skillSharedPtrList safeSkillList;
 
     void calcAttributes();
     void giveXP(int earnedXP);

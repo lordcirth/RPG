@@ -35,6 +35,8 @@ Skill::Skill(Skill &parentNode, std::string skillName) {
     name = skillName;
 }
 
+//Skill::~Skill()
+
 void Skill::Use(Creature &caster) {
     std::cout << "whyyy";
 }
@@ -108,16 +110,17 @@ skillPtrList createSkillPtrList() {
     skillPtrList skillPtrs;
 
 //Tier 0: Unlocked by default
-    Heal Rest {true, "Rest", 1,1,1}; //Root of Mage tree
+    static Heal Rest {true, "Rest", 1,1,1}; //Root of Mage tree
     skillPtrs.push_back(&Rest);
 
 
     //std::cout << Rest.getName() << std::endl; //Works "Rest"
-    std::cout << "skills: " << skillPtrs.front()->getName() << std::endl; //Works "Rest"
+    std::cout << "skills: " << skillPtrs.front()->getName(); //Works "Rest"
 
-    Melee Hit {true, "Hit", 0,1,0}; //Root of Warrior tree
+    static Melee Hit {true, "Hit", 0,1,0}; //Root of Warrior tree
     skillPtrs.push_back(&Hit);
-    std::cout << skillPtrs.back()->getName() << std::endl;
+    std::cout << skillPtrs.back()->getName();
+    std::cout << std::endl;
 
     //std::cout <<  "Skills declared";
     //usleep(10000000); //Pause 10s so I can use htop
@@ -149,6 +152,7 @@ skillSharedPtrList createSafeSkillList() {
     skillSharedPtrList safeSkillList;
     std::shared_ptr<Skill> Rest ( new Heal {true, "Rest", 1,1,1});
     safeSkillList.push_back(Rest);
+    std::cout << safeSkillList.front()->getName() << std::endl;
 }
 
 //Old way:

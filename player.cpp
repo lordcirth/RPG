@@ -45,6 +45,7 @@ PlayerCharacter::PlayerCharacter(std::string playerName)
 
     //populateSkillPtrList(skillPtrs);
     //std::cout << "Player ctor:" << skillPtrs.front()->getName() << std::endl;
+    skillPtrs = createSkillPtrList();
 
     setStats({1,1,1,1,1,1});
     calcAttributes();
