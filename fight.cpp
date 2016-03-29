@@ -19,20 +19,22 @@ fightResults Fight::start() {
         displayPoints(0,0, player);
         displayPoints(0,66, enemy);
 
+        showMenu(player);
         ch = getPlayerKey();
         //player.skillPtrs.front();
         //player.skills.melees["Hit"].Use(player,enemy);
         enemy.attack(player);
     }
 
+
     fightResults results = {false, 0, 0};
 
     cleanUpInterface();
     if (player.isDead()) {
-        cout << "You lose!";
+        //cout << "You lose!";
         results = {false, 0, 0};
     } else if (enemy.isDead()) {
-        cout << "You win!";
+        //cout << "You win!";
         results = {true, 0, enemy.getXP()};
     }
     return results;

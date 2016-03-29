@@ -28,7 +28,7 @@ private:
     void levelUp();
 
 public:
-    //skillList skills = createSkillStruct();
+
     skillPtrList skillPtrs;
 
     void calcAttributes();

@@ -5,21 +5,26 @@
 #include "skills.h"
 #include "fight.h"
 #include "interface.h"
+//#include "buffs.h"
 
 using namespace std;
 
 
 int main() {
-    //cout << "trying to create player";
     PlayerCharacter player("Player");
-    //cout << "player created";
-    Wolf testWolf;
+//    cout << player.getName() << endl;
+//    //Skill Rest = *player.skillPtrs.front();
+//    player.damage(5,2,2);
+//    cout << "before: " << player.getPointValues().HP << endl;
+//    cout << player.skillPtrs.front()->getName() << endl;
+//    cout << "after: " << player.getPointValues().HP << endl;
+    //Wolf testWolf;
     //initSkillMenu(player);
 
     //skillPtrList skillPtrs = createSkillPtrList();
     //initSkillMenu(player);
-    Fight test {player, testWolf};
-    fightResults testResults = test.start();
+    //Fight test {player, testWolf};
+    //fightResults testResults = test.start();
 
     return 0;
 }

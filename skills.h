@@ -20,6 +20,8 @@ public:
     virtual void Use(Creature &caster);
     virtual void Use(Creature &caster, Creature &target);
     std::string getName();
+    bool isUnlocked();
+
     Skill();
     Skill(bool startsUnlocked, std::string name);
     Skill(Skill &parentNode, std::string name);

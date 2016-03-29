@@ -9,15 +9,19 @@
 //============================
 
 std::string Skill::getName() {
-    //Runs at 100% CPU!  infinite spaces?
-    //std::cout << name << std::endl;
-    //std::cout << name.at(2);
-    //return name;
-    return "Rest";
+    //name = "Hi";
+    return name;
+}
 
+//std::string Skill::getNameC() {
+//    return "Rest";
+//}
+bool Skill::isUnlocked() {
+    return unlocked;
 }
 
 Skill::Skill() {
+
 
 }
 
@@ -36,7 +40,6 @@ Skill::Skill(Skill &parentNode, std::string skillName) {
 void Skill::Use(Creature &caster) {
     std::cout << "whyyy";
 }
-
 
 void Skill::Use(Creature &caster, Creature &target) {
     std::cout << "whyyy2";
@@ -110,12 +113,13 @@ skillPtrList createSkillPtrList() {
     Heal Rest {true, "Rest", 1,1,1}; //Root of Mage tree
     skillPtrs.push_back(&Rest);
 
+
     //std::cout << Rest.getName() << std::endl; //Works "Rest"
-    //std::cout << skillPtrs.front()->getName() << std::endl; //Works "Rest"
+    std::cout << "skills: " << skillPtrs.front()->getName() << std::endl; //Works "Rest"
 
     Melee Hit {true, "Hit", 0,1,0}; //Root of Warrior tree
     skillPtrs.push_back(&Hit);
-
+    std::cout << skillPtrs.back()->getName() << std::endl;
 
     //std::cout <<  "Skills declared";
     //usleep(10000000); //Pause 10s so I can use htop

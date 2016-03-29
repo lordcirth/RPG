@@ -44,6 +44,7 @@ PlayerCharacter::PlayerCharacter(std::string playerName)
     baseMP = 0;
 
     skillPtrs = createSkillPtrList();
+    std::cout << "Player ctor:" << skillPtrs.front()->getName() << std::endl;
 
     setStats({1,1,1,1,1,1});
     calcAttributes();

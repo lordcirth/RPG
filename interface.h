@@ -6,4 +6,4 @@ char getPlayerKey();
 void displayPoints(int row, int col, Creature c);
 void updatePoints(Creature player, Creature enemy);
 void initSkillMenu(PlayerCharacter &player);
-void showMenu();
+void showMenu(PlayerCharacter &player);

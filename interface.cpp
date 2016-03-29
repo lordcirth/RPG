@@ -7,7 +7,7 @@
 using namespace std;
 
 void initInterface() {
-    initscr();
+    //initscr();
     cbreak();
     noecho();
 }
@@ -40,23 +40,30 @@ void updatePoints(Creature player, Creature enemy) {
 
 void initSkillMenu(PlayerCharacter &player) {
     skillPtrList skillPtrs = player.skillPtrs;
-    list<Skill*>::iterator it;
+
 
     //C-style strings?
     const char *testStr = skillPtrs.front()->getName().c_str();
-    ITEM *testItem;
-    testItem = new_item(testStr, testStr);
+//    ITEM *testItem;   //Works!
+//    testItem = new_item(testStr, testStr);
 
+// ITEM *restItem = new_item(testStr,testStr);
+cout << "Number of skills: " + to_string(skillPtrs.size());
+//ITEM *skillItems[skillPtrs.size()];
+//MENU *menu = new_menu(&restItem);
+
+    list<Skill*>::const_iterator it;
+    //int i = 0;
     for (it = skillPtrs.begin(); it != skillPtrs.end(); it++) {
-        //mvprintw(3,3, "%s", (*it)->getName());
-    }
+
+        //skillItems[i] = new_item(skillPtrs.front()->getName().c_str(),skillPtrs.front()->getName().c_str());
+        //cout << skillPtrs.front()->getName().c_str() << endl;
+    };
+    //MENU *menu = new_menu((ITEM **)skillItems);
+
 }
 
 //Demo menu.h
-void showMenu() {
-
-//ITEM *item1;
-//item1 = new_item("first", "second");
-//ITEM item2 = new_item("third", "fourth");
-//MENU menu1 = new_menu();
+void showMenu(PlayerCharacter &player) {
+    mvprintw(10,0, "r: %s", player.skillPtrs.front()->getName());
 }
