@@ -32,11 +32,11 @@ void Skill::unlock() {
 //
 //}
 
-Skill::Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string skillName) {
+Skill::Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string skillName) : shortcut(key) {
     unlocked = startsUnlocked;
     passive = isPassive;
     parent = parentNode;
-    shortcut = key;
+    //shortcut = key;
     name = skillName;
 }
 //
@@ -60,8 +60,8 @@ void Skill::Use(Creature &caster, Creature &target) {
 Heal::Heal() {
 }
 
-Heal::Heal(bool startsUnlocked, Skill *parentNode, std::string name, int healHP, int healSP, int healMP)
-    : Skill(startsUnlocked, parentNode, name) { //Pass through to Skill constructor
+Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, int healHP, int healSP, int healMP)
+    : Skill(startsUnlocked, false, parentNode, key, name) { //Pass through to Skill constructor
     //std::cout << parentNode.getName();
     HP = healHP;
     SP = healSP;
@@ -84,8 +84,8 @@ void Heal::Use(Creature &caster) {
 Melee::Melee() {
 }
 
-Melee::Melee(bool startsUnlocked, Skill *parentNode, std::string skillName, int bDmg, int strDmg, int dexDmg)
-    : Skill(startsUnlocked, parentNode, skillName) {
+Melee::Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, int bDmg, int strDmg, int dexDmg)
+    : Skill(startsUnlocked, false, parentNode, key, skillName) {
     baseDmg = bDmg;
     strDmgFactor = strDmg;
     dexDmgFactor = dexDmg;
@@ -103,8 +103,8 @@ void Melee::Use(Creature &caster, Creature &target) {
 
 magicTouch::magicTouch() {}
 
-magicTouch::magicTouch(bool startsUnlocked, Skill *parentNode, std::string name, int bDmg, int powerDmg, int controlDmg, Buff &buff)
-    : Skill(startsUnlocked, parentNode, name) {
+magicTouch::magicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, int bDmg, int powerDmg, int controlDmg, Buff &buff)
+    : Skill(startsUnlocked, false, parentNode, key, name) {
     baseDmg = bDmg;
     pwrDmgFactor = powerDmg;
     ctlDmgFactor = controlDmg;
@@ -123,14 +123,14 @@ skillPtrList createSkillPtrList() {
     static Skill Root; //Empty parent node of everything
     Root.unlock();
 //Tier 0: Unlocked by default
-    static Heal Rest {true, &Root, "Rest", 1,1,1}; //Root of Mage tree
+    static Heal Rest {true, &Root, 'r', "Rest", 1,1,1}; //Root of Mage tree
     skillPtrs.push_back(&Rest);
 
 
     //std::cout << Rest.getName() << std::endl; //Works "Rest"
     std::cout << "skills: " << skillPtrs.front()->getName(); //Works "Rest"
 
-    static Melee Hit {true, &Root, "Hit", 0,1,0}; //Root of Warrior tree
+    static Melee Hit {true, &Root, 'h', "Hit", 0,1,0}; //Root of Warrior tree
     skillPtrs.push_back(&Hit);
     std::cout << skillPtrs.back()->getName();
     std::cout << std::endl;
@@ -140,7 +140,7 @@ skillPtrList createSkillPtrList() {
 
 //Tier 1: First unlockables
     DoT buff_FlameTouch {"Flame Touch burn", true, 3, 1,0,0};
-    magicTouch FlameTouch {false, &Rest, "Flame Touch", 2, 0, 0, buff_FlameTouch};
+    magicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", 2, 0, 0, buff_FlameTouch};
 
 //    Wolf skillTestWolf;
 //    skillTestWolf.damage(5,0,0);

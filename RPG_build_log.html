@@ -4,90 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <tt>
-Build started on: <u>29-03-2016 at 20:47.20</u><br />
-Build ended on: <u>29-03-2016 at 20:47.20</u><p />
+Build started on: <u>29-03-2016 at 21:02.54</u><br />
+Build ended on: <u>29-03-2016 at 21:02.55</u><p />
 <b>-------------- Build: Debug in RPG (compiler: GNU GCC Compiler)---------------</b><br />
 g++ -Wall -fexceptions -g -std=c++14  -c /lPool/Shared/RPG/Cpp/RPG/skills.cpp -o obj/Debug/skills.o<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/skills.cpp:31:1: error: redefinition of ‘Skill::Skill()’</font><br />
- Skill::Skill() {<br />
- ^<br />
-In file included from /lPool/Shared/RPG/Cpp/RPG/skills.cpp:1:0:<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:30:5: note: ‘Skill::Skill()’ previously defined here<br />
-     Skill() : shortcut('@') {};<br />
-     ^<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/skills.cpp:35:1: error: prototype for ‘Skill::Skill(bool, bool, Skill*, char, std::string)’ does not match any in class ‘Skill’</font><br />
- Skill::Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string skillName) {<br />
- ^<br />
-In file included from /lPool/Shared/RPG/Cpp/RPG/skills.cpp:1:0:<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: error: candidates are: Skill::Skill(Skill&amp;&amp;)</font><br />
- class Skill {<br />
-       ^<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: error:                 Skill::Skill(const Skill&amp;)</font><br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/skills.h:31:5: error:                 Skill::Skill(bool, bool, Skill*, std::string)</font><br />
-     Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, std::string name);<br />
-     ^<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/skills.h:30:5: error:                 Skill::Skill()</font><br />
-     Skill() : shortcut('@') {};<br />
-     ^<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.cpp: In constructor ‘Heal::Heal(bool, Skill*, std::string, int, int, int)’:<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/skills.cpp:64:45: error: no matching function for call to ‘Skill::Skill(bool&amp;, Skill*&amp;, std::string&amp;)’</font><br />
-     : Skill(startsUnlocked, parentNode, name) { //Pass through to Skill constructor<br />
-                                             ^<br />
-In file included from /lPool/Shared/RPG/Cpp/RPG/skills.cpp:1:0:<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:31:5: note: candidate: Skill::Skill(bool, bool, Skill*, std::string)<br />
-     Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, std::string name);<br />
-     ^<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:31:5: note:   candidate expects 4 arguments, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:30:5: note: candidate: Skill::Skill()<br />
-     Skill() : shortcut('@') {};<br />
-     ^<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:30:5: note:   candidate expects 0 arguments, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note: candidate: Skill::Skill(const Skill&amp;)<br />
- class Skill {<br />
-       ^<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note:   candidate expects 1 argument, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note: candidate: Skill::Skill(Skill&amp;&amp;)<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note:   candidate expects 1 argument, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.cpp: In constructor ‘Melee::Melee(bool, Skill*, std::string, int, int, int)’:<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/skills.cpp:88:50: error: no matching function for call to ‘Skill::Skill(bool&amp;, Skill*&amp;, std::string&amp;)’</font><br />
-     : Skill(startsUnlocked, parentNode, skillName) {<br />
-                                                  ^<br />
-In file included from /lPool/Shared/RPG/Cpp/RPG/skills.cpp:1:0:<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:31:5: note: candidate: Skill::Skill(bool, bool, Skill*, std::string)<br />
-     Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, std::string name);<br />
-     ^<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:31:5: note:   candidate expects 4 arguments, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:30:5: note: candidate: Skill::Skill()<br />
-     Skill() : shortcut('@') {};<br />
-     ^<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:30:5: note:   candidate expects 0 arguments, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note: candidate: Skill::Skill(const Skill&amp;)<br />
- class Skill {<br />
-       ^<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note:   candidate expects 1 argument, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note: candidate: Skill::Skill(Skill&amp;&amp;)<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note:   candidate expects 1 argument, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.cpp: In constructor ‘magicTouch::magicTouch(bool, Skill*, std::string, int, int, int, Buff&amp;)’:<br />
-<font color="#ff0000">/lPool/Shared/RPG/Cpp/RPG/skills.cpp:107:45: error: no matching function for call to ‘Skill::Skill(bool&amp;, Skill*&amp;, std::string&amp;)’</font><br />
-     : Skill(startsUnlocked, parentNode, name) {<br />
-                                             ^<br />
-In file included from /lPool/Shared/RPG/Cpp/RPG/skills.cpp:1:0:<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:31:5: note: candidate: Skill::Skill(bool, bool, Skill*, std::string)<br />
-     Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, std::string name);<br />
-     ^<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:31:5: note:   candidate expects 4 arguments, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:30:5: note: candidate: Skill::Skill()<br />
-     Skill() : shortcut('@') {};<br />
-     ^<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:30:5: note:   candidate expects 0 arguments, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note: candidate: Skill::Skill(const Skill&amp;)<br />
- class Skill {<br />
-       ^<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note:   candidate expects 1 argument, 3 provided<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note: candidate: Skill::Skill(Skill&amp;&amp;)<br />
-/lPool/Shared/RPG/Cpp/RPG/skills.h:13:7: note:   candidate expects 1 argument, 3 provided<br />
-<font color="#a00000">Process terminated with status 1 (0 minute(s), 0 second(s))</font><br />
-<font color="#a00000">9 error(s), 0 warning(s) (0 minute(s), 0 second(s))</font><br />
+g++  -o bin/Debug/RPG obj/Debug/buffs.o obj/Debug/creature.o obj/Debug/fight.o obj/Debug/interface.o obj/Debug/main.o obj/Debug/monsters.o obj/Debug/player.o obj/Debug/skills.o   /usr/lib64/libncurses.so /usr/lib64/libmenu.so<br />
+Output file is bin/Debug/RPG with size 680.86 KB<br />
+<font color="#0000ff">Process terminated with status 0 (0 minute(s), 0 second(s))</font><br />
+<font color="#0000ff">0 error(s), 0 warning(s) (0 minute(s), 0 second(s))</font><br />
 </tt>
 </body>
 </html>
