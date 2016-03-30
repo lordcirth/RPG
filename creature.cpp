@@ -38,6 +38,11 @@ std::string Creature::getName() {
     return name;
 }
 
+
+const  char * Creature::getName_c() {
+    return name.c_str();
+}
+
 void Creature::damage(int hpDmg, int spDmg, int mpDmg) {
     CreaturePoints c = pointValues;
     //Limit to between 0 and max
@@ -54,6 +59,7 @@ bool Creature::isDead() {
         return false;
     }
 }
+
 
 //Constructors
 Creature::Creature() {

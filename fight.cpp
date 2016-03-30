@@ -1,6 +1,8 @@
 #include "fight.h"
+#include "player.h"
 #include "monsters.h"
 #include "interface.h"
+#include "skills.h"
 #include <iostream>
 #include <sstream>
 
@@ -13,16 +15,25 @@ Fight::Fight(PlayerCharacter &pl, Monster &e) {
 
 fightResults Fight::start() {
     char ch;
+    Skill *playerChosenSkill;
     initInterface();
     //initSkillMenu(player);
     while ( !player.isDead() && !enemy.isDead()) {
         displayPoints(0,0, player);
         displayPoints(0,66, enemy);
 
+
+        //Player turn
         showMenu(player);
-        ch = getPlayerKey();
-        //player.skillPtrs.front();
-        //player.skills.melees["Hit"].Use(player,enemy);
+        do {
+            ch = getPlayerKey();
+            playerChosenSkill = getSkillByHotkey(player.skillPtrs, ch);
+        } while (playerChosenSkill == nullptr);
+        playerChosenSkill->Use(player);
+        printSkillUse(playerChosenSkill->getName());
+
+
+        //Enemy turn
         enemy.attack(player);
     }
 

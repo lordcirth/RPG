@@ -42,10 +42,12 @@ public:
     void setPointValues(CreaturePoints);
     void setName(std::string);
     std::string getName();
+    const char * getName_c();
 
     void healAll();
     void damage(int hpDmg, int spDmg, int mpDmg);
-    void addBuff(Buff &newBuff);
+    //void addBuff(Buff &newBuff);
+    //void runBuffs();
 
     bool isDead();
 

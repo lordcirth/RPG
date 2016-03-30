@@ -28,7 +28,7 @@ private:
 public:
 
     skillPtrList skillPtrs;
-    skillSharedPtrList safeSkillList;
+//    skillSharedPtrList safeSkillList;
 
     void calcAttributes();
     void giveXP(int earnedXP);

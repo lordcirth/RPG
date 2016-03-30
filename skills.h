@@ -27,7 +27,7 @@ public:
     bool canUnlock();
     void unlock();
 
-    Skill() : shortcut('@') {};
+    Skill() : shortcut('@') {}; //Required by compiler.  If we ever see '@' as a hotkey, something broke!
     Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string name);
     //Skill(, std::string name);
 
@@ -88,6 +88,8 @@ public:
 typedef std::list<Skill*> skillPtrList;
 skillPtrList createSkillPtrList();
 void populateSkillPtrList (skillPtrList& skillPtrs);
+//
+//typedef std::list<std::shared_ptr<Skill>> skillSharedPtrList;
+//skillSharedPtrList createSafeSkillList();
 
-typedef std::list<std::shared_ptr<Skill>> skillSharedPtrList;
-skillSharedPtrList createSafeSkillList();
+Skill * getSkillByHotkey(skillPtrList &skillPtrs, char key);

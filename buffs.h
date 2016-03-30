@@ -13,9 +13,6 @@ class Buff
     bool canDispel;
 
     int duration;  //Starting duration - set by subclass ctors
-    //
-
-
 
 public:
     int turnsLeft;

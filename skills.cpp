@@ -16,6 +16,7 @@ std::string Skill::getName() {
 //std::string Skill::getNameC() {
 //    return "Rest";
 //}
+
 bool Skill::isUnlocked() const {
     return unlocked;
 }
@@ -49,11 +50,11 @@ Skill::Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, char key, s
 //Skill::~Skill()
 
 void Skill::Use(Creature &caster) {
-    std::cout << "whyyy";
+    std::cout << "Error: Skill::Use(Creature &caster) called!";
 }
 
 void Skill::Use(Creature &caster, Creature &target) {
-    std::cout << "whyyy2";
+    std::cout << "Error: Skill::Use(Creature &caster, Creature &target) called!";
 }
 
 //Do not call! Only for std::map
@@ -77,7 +78,7 @@ Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, i
 
 void Heal::Use(Creature &caster) {
     caster.damage(-HP,-SP,-MP);
-    std::cout << "Healing";
+    //std::cout << "Healing";
 }
 
 //Do not call! Only for std::map, list, etc
@@ -120,65 +121,50 @@ magicTouch::magicTouch(bool startsUnlocked, Skill *parentNode, char key, std::st
 skillPtrList createSkillPtrList() {
     skillPtrList skillPtrs;
 
-    static Skill Root; //Empty parent node of everything
-    Root.unlock();
+    static Skill RootSkill {true, true, nullptr, '#', "RootSkill"}; //Empty parent node of everything, only time using default ctor
+    RootSkill.unlock();
+    //Not added to skill list
+
 //Tier 0: Unlocked by default
-    static Heal Rest {true, &Root, 'r', "Rest", 1,1,1}; //Root of Mage tree
+    static Heal Rest {true, &RootSkill, 'r', "Rest", 1,1,1}; //Root of Mage tree
     skillPtrs.push_back(&Rest);
 
-
     //std::cout << Rest.getName() << std::endl; //Works "Rest"
-    std::cout << "skills: " << skillPtrs.front()->getName(); //Works "Rest"
-
-    static Melee Hit {true, &Root, 'h', "Hit", 0,1,0}; //Root of Warrior tree
+    //std::cout << "skills: " << skillPtrs.front()->getName(); //Works "Rest"
+                                // 1 + 1*STR damage
+    static Melee Hit {true, &RootSkill, 'h', "Hit", 1,1,0}; //Root of Warrior tree
     skillPtrs.push_back(&Hit);
-    std::cout << skillPtrs.back()->getName();
-    std::cout << std::endl;
-
-    //std::cout <<  "Skills declared";
-    //usleep(10000000); //Pause 10s so I can use htop
+//    std::cout << skillPtrs.back()->getName();
+//    std::cout << std::endl;
 
 //Tier 1: First unlockables
     DoT buff_FlameTouch {"Flame Touch burn", true, 3, 1,0,0};
     magicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", 2, 0, 0, buff_FlameTouch};
 
-//    Wolf skillTestWolf;
-//    skillTestWolf.damage(5,0,0);
-//    std::cout << skillTestWolf.getPointValues().HP;
-//    skillPtrs.front()->Use(skillTestWolf);
-//    std::cout << skillTestWolf.getPointValues().HP;
-
     return skillPtrs;
+
     //Sample usage
     //std::cout << skillPtrs.front()->getName();
 }
-//
-//void populateSkillPtrList (skillPtrList &skillPtrs) {
-//
-//    Heal Rest {true, "Rest", 1,1,1}; //Root of Mage tree
-//    skillPtrs.push_back(&Rest);
-//
-//    std::cout << "pop:" << skillPtrs.front()->getName() << std::endl;
-//}
 
-//skillSharedPtrList createSafeSkillList() {
-//    skillSharedPtrList safeSkillList;
-//    std::shared_ptr<Skill> Rest ( new Heal {true, "Rest", 1,1,1});
-//    safeSkillList.push_back(Rest);
-//    std::cout << safeSkillList.front()->getName() << std::endl;
-//}
+Skill * getSkillByHotkey(skillPtrList &skillPtrs, char key) {
+    Skill *chosenSkill = nullptr;
+    std::list<Skill*>::const_iterator it;
+    //bool validSkill = false;
+    for (it = skillPtrs.begin(); it != skillPtrs.end(); it++) {
+        //First deref for iterator -> content, second for pointer -> Skill
+        if (  ((**it).shortcut) == key  ) {
+            chosenSkill = *(it);
+            //validSkill = true;
+            break;
+        }
+    } //chosenSkill = RootSkill;}
 
-//Old way:
 
-//skillList createSkillStruct()
-//{
-//    skillList skills;
-//
-////    Heal Rest {nullptr, 1,1,1};
-////    skills.heals.emplace("Rest",Rest);
-//
-////    Melee Hit {2,1};
-////    skills.melees.emplace("Hit",Hit);
-//
-//    return skills;
-//}
+//for (it = skillPtrs.begin(); it != skillPtrs.end(); it++) {
+//        if (  ((**it).getName()) == "RootSkill"  )
+
+
+
+    return chosenSkill;
+}
