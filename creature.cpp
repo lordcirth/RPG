@@ -43,12 +43,21 @@ const  char * Creature::getName_c() {
     return name.c_str();
 }
 
-void Creature::damage(int hpDmg, int spDmg, int mpDmg) {
+void Creature::damage(Points dmg) {
     CreaturePoints c = pointValues;
     //Limit to between 0 and max
-    c.HP = max(0, min(c.HP - hpDmg, c.maxHP));
-    c.SP = max(0, min(c.SP - spDmg, c.maxSP));
-    c.MP = max(0, min(c.MP - mpDmg, c.maxMP));
+    c.HP = max(0, min(c.HP - dmg.HP, c.maxHP));
+    c.SP = max(0, min(c.SP - dmg.SP, c.maxSP));
+    c.MP = max(0, min(c.MP - dmg.MP, c.maxMP));
+    pointValues = c;
+}
+
+void Creature::heal(Points healing) {
+    CreaturePoints c = pointValues;
+    //Limit to between 0 and max
+    c.HP = max(0, min(c.HP + healing.HP, c.maxHP));
+    c.SP = max(0, min(c.SP + healing.SP, c.maxSP));
+    c.MP = max(0, min(c.MP + healing.MP, c.maxMP));
     pointValues = c;
 }
 

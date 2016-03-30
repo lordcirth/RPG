@@ -43,22 +43,30 @@ void printSkill(int row, int col, char key, const char *name) {
 
 //Demo menu.h
 void showMenu(PlayerCharacter &player) {
-    int startRow = 16;
-    int startCol  = 1;
+    int startVert = 16;
+    int startHor  = 1;
 
-    int hOffset  = 10;
     int vOffset  = 1;
+    int hOffset  = 10;
 
-    int maxRows = 3;
-    int maxCols = 5;
+    int maxVert = 5;
+    int maxHor = 3;
+    int vertSlot = 1;
+    int horSlot = 1;
 
-    int row = startRow;
-    int col = startCol;
+    int vert = startVert;
+    int hor = startHor;
 
     list<Skill*>::const_iterator it;
     for (it = player.skillPtrs.begin(); it != player.skillPtrs.end(); it++) {
-        printSkill(row, col, (**it).shortcut, (*it)->getName().c_str());
-        row += vOffset;
+        printSkill(vert, hor, (**it).shortcut, (*it)->getName().c_str());
+        if (horSlot < maxHor) {
+            hor += hOffset;
+            ++horSlot;
+        } else {
+            ++hor;
+            vert = startVert;
+        }
     }
 }
 

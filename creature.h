@@ -16,6 +16,12 @@ struct CreatureStats {
 
 };
 
+struct Points {
+    int HP;
+    int SP;
+    int MP;
+};
+
 struct CreaturePoints {
     int maxHP;
     int maxSP;
@@ -45,7 +51,8 @@ public:
     const char * getName_c();
 
     void healAll();
-    void damage(int hpDmg, int spDmg, int mpDmg);
+    void damage(Points dmg);
+    void heal(Points healing);
     //void addBuff(Buff &newBuff);
     //void runBuffs();
 

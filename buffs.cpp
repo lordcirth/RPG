@@ -20,13 +20,13 @@ void Buff::checkExpire() {
 
 DoT::DoT() {}
 
-DoT::DoT(std::string buffName, bool dispel, int dur, int tickHP, int tickSP, int tickMP)
+DoT::DoT(std::string buffName, bool dispel, int dur, Points dmg)
     : Buff(buffName, dispel, dur) {
 
 }
 
 void DoT::tick(Creature &c) {
-    c.damage(tickHP,tickSP,tickMP);
+    c.damage(tickDamage);
     turnsLeft -= 1;
     checkExpire();
 }

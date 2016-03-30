@@ -6,6 +6,11 @@
 #include "creature.h" //Stats and Points structs
 #include "buffs.h"
 
+enum skillTargetType {
+    TYPE_SELF,
+    TYPE_ENEMY
+};
+
 //============================
 // Skill & subclasses
 //============================
@@ -17,36 +22,36 @@ class Skill {
     bool unlocked;
     std::string name;
     bool passive = false;
+    skillTargetType targetType;
 
 public:
     const char shortcut;
     virtual void Use(Creature &caster);
     virtual void Use(Creature &caster, Creature &target);
     std::string getName();
+
     bool isUnlocked() const;
     bool canUnlock();
     void unlock();
 
+    skillTargetType getTargetType();
+
     Skill() : shortcut('@') {}; //Required by compiler.  If we ever see '@' as a hotkey, something broke!
-    Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string name);
+    Skill(skillTargetType type, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string name);
     //Skill(, std::string name);
 
     // ~Skill();
 };
 
 class Heal : public Skill {
-    //Sane default 0
-    //ctors overwrite
-    int HP;
-    int SP;
-    int MP;
+
+    //Stored as negative (damage)
+    Points healPoints;
 
 public:
     void Use(Creature &caster);
     Heal();
-    Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, int healHP, int healSP, int healMP);
-    //Heal(std::string name, int healHP, int healSP, int healMP);
-
+    Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points pointsToHeal);
 };
 
 class Melee : public Skill {

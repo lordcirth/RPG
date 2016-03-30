@@ -6,7 +6,7 @@ int Monster::getXP() {
 }
 
 void Monster::attack(Creature &target) {
-    target.damage(attackDamage,0,0);
+    target.damage({attackDamage,0,0});
 }
 
 //Default, only for other classes

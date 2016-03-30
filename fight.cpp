@@ -29,7 +29,12 @@ fightResults Fight::start() {
             ch = getPlayerKey();
             playerChosenSkill = getSkillByHotkey(player.skillPtrs, ch);
         } while (playerChosenSkill == nullptr);
-        playerChosenSkill->Use(player);
+
+        if (playerChosenSkill->getTargetType() == TYPE_SELF) {
+            playerChosenSkill->Use(player);
+        } else if (playerChosenSkill->getTargetType() == TYPE_ENEMY) {
+            playerChosenSkill->Use(player, enemy);
+        }
         printSkillUse(playerChosenSkill->getName());
 
 

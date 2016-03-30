@@ -28,12 +28,18 @@ bool Skill::canUnlock() {
 void Skill::unlock() {
     unlocked = true;
 }
+
+skillTargetType Skill::getTargetType() {
+    return targetType;
+};
+
 //
 //Skill::Skill() {
 //
 //}
 
-Skill::Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string skillName) : shortcut(key) {
+Skill::Skill(skillTargetType type, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string skillName) : shortcut(key) {
+    targetType = type;
     unlocked = startsUnlocked;
     passive = isPassive;
     parent = parentNode;
@@ -50,23 +56,21 @@ Skill::Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, char key, s
 //Skill::~Skill()
 
 void Skill::Use(Creature &caster) {
-    std::cout << "Error: Skill::Use(Creature &caster) called!";
+    std::cerr << "Error: Skill::Use(Creature &caster) called!" << std::endl;
 }
 
 void Skill::Use(Creature &caster, Creature &target) {
-    std::cout << "Error: Skill::Use(Creature &caster, Creature &target) called!";
+    std::cerr << "Error: Skill::Use(Creature &caster, Creature &target) called!" << std::endl;
 }
 
 //Do not call! Only for std::map
 Heal::Heal() {
 }
 
-Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, int healHP, int healSP, int healMP)
-    : Skill(startsUnlocked, false, parentNode, key, name) { //Pass through to Skill constructor
+Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points pointsToHeal)
+    : Skill(TYPE_SELF, startsUnlocked, false, parentNode, key, name) { //Pass through to Skill constructor
     //std::cout << parentNode.getName();
-    HP = healHP;
-    SP = healSP;
-    MP = healMP;
+    healPoints = pointsToHeal;
 }
 //
 //Heal::Heal(bool startsUnlocked, std::string skillName, int healHP, int healSP, int healMP)
@@ -77,7 +81,7 @@ Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, i
 //}
 
 void Heal::Use(Creature &caster) {
-    caster.damage(-HP,-SP,-MP);
+    caster.heal(healPoints);
     //std::cout << "Healing";
 }
 
@@ -86,7 +90,7 @@ Melee::Melee() {
 }
 
 Melee::Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, int bDmg, int strDmg, int dexDmg)
-    : Skill(startsUnlocked, false, parentNode, key, skillName) {
+    : Skill(TYPE_ENEMY, startsUnlocked, false, parentNode, key, skillName) {
     baseDmg = bDmg;
     strDmgFactor = strDmg;
     dexDmgFactor = dexDmg;
@@ -99,13 +103,13 @@ void Melee::Use(Creature &caster, Creature &target) {
     dmg += strDmgFactor * caster.getStats().strength;
     dmg += dexDmgFactor * caster.getStats().dexterity;
 
-    target.damage(dmg,0,0);
+    target.damage({dmg,0,0});
 }
 
 magicTouch::magicTouch() {}
 
 magicTouch::magicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, int bDmg, int powerDmg, int controlDmg, Buff &buff)
-    : Skill(startsUnlocked, false, parentNode, key, name) {
+    : Skill(TYPE_ENEMY, startsUnlocked, false, parentNode, key, name) {
     baseDmg = bDmg;
     pwrDmgFactor = powerDmg;
     ctlDmgFactor = controlDmg;
@@ -121,12 +125,12 @@ magicTouch::magicTouch(bool startsUnlocked, Skill *parentNode, char key, std::st
 skillPtrList createSkillPtrList() {
     skillPtrList skillPtrs;
 
-    static Skill RootSkill {true, true, nullptr, '#', "RootSkill"}; //Empty parent node of everything, only time using default ctor
+    static Skill RootSkill {TYPE_SELF, true, true, nullptr, '#', "RootSkill"}; //Empty parent node of everything, only time using default ctor
     RootSkill.unlock();
     //Not added to skill list
 
 //Tier 0: Unlocked by default
-    static Heal Rest {true, &RootSkill, 'r', "Rest", 1,1,1}; //Root of Mage tree
+    static Heal Rest {true, &RootSkill, 'r', "Rest", {1,1,1}}; //Root of Mage tree
     skillPtrs.push_back(&Rest);
 
     //std::cout << Rest.getName() << std::endl; //Works "Rest"
@@ -138,7 +142,7 @@ skillPtrList createSkillPtrList() {
 //    std::cout << std::endl;
 
 //Tier 1: First unlockables
-    DoT buff_FlameTouch {"Flame Touch burn", true, 3, 1,0,0};
+    DoT buff_FlameTouch {"Flame Touch burn", true, 3, {1,0,0}};
     magicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", 2, 0, 0, buff_FlameTouch};
 
     return skillPtrs;

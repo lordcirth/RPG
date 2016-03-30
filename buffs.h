@@ -30,14 +30,12 @@ class DoT : public Buff   //Also Heal over Time, just use negative tickHP
 {
 
     //Damage per turn
-    int tickHP;
-    int tickSP;
-    int tickMP;
+    Points tickDamage;
     bool stacks;
 
 public:
     DoT();
-    DoT(std::string buffName, bool dispel, int dur, int tickHP, int tickSP, int tickMP);
+    DoT(std::string buffName, bool dispel, int dur, Points dmg);
     void tick(Creature &c);
 };
 
