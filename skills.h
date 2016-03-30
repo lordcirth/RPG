@@ -16,16 +16,20 @@ class Skill {
     const Skill *parent;
     bool unlocked;
     std::string name;
-public:
+    bool passive = false;
 
+public:
+    const char shortcut;
     virtual void Use(Creature &caster);
     virtual void Use(Creature &caster, Creature &target);
     std::string getName();
-    bool isUnlocked();
+    bool isUnlocked() const;
+    bool canUnlock();
+    void unlock();
 
-    Skill();
-    Skill(bool startsUnlocked, std::string name);
-    Skill(Skill &parentNode, std::string name);
+    Skill() : shortcut('@') {};
+    Skill(bool startsUnlocked, bool isPassive, Skill *parentNode, std::string name);
+    //Skill(, std::string name);
 
     // ~Skill();
 };
@@ -40,8 +44,8 @@ class Heal : public Skill {
 public:
     void Use(Creature &caster);
     Heal();
-    Heal(bool startsUnlocked, std::string name, int healHP, int healSP, int healMP);
-    Heal(Skill &parentNode, std::string name, int healHP, int healSP, int healMP);
+    Heal(bool startsUnlocked, Skill *parentNode,  std::string name, int healHP, int healSP, int healMP);
+    //Heal(std::string name, int healHP, int healSP, int healMP);
 
 };
 
@@ -58,7 +62,7 @@ public:
 
     void Use(Creature &caster, Creature &target);
     Melee();
-    Melee(bool startsUnlocked, std::string skillName, int baseDmg, int strDmg, int dexDmg);
+    Melee(bool startsUnlocked, Skill *parentNode, std::string skillName, int baseDmg, int strDmg, int dexDmg);
 };
 
 //Flame touch, ice, necro?, etc
@@ -75,7 +79,7 @@ class magicTouch : public Skill {
 
 public:
     magicTouch();
-    magicTouch(Skill &parentNode, std::string name, int bDmg, int powerDmg, int controlDmg, Buff &buff);
+    magicTouch(bool startsUnlocked, Skill *parentNode, std::string name, int bDmg, int powerDmg, int controlDmg, Buff &buff);
 };
 
 //typedef std::map<std::string,Heal> healPtrMap;
