@@ -23,6 +23,7 @@ class Skill {
     std::string name;
     bool passive = false;
     skillTargetType targetType;
+    Points cost;
 
 public:
     const char shortcut;
@@ -37,7 +38,7 @@ public:
     skillTargetType getTargetType();
 
     Skill() : shortcut('@') {}; //Required by compiler.  If we ever see '@' as a hotkey, something broke!
-    Skill(skillTargetType type, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string name);
+    Skill(skillTargetType type, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string name, Points cost);
     //Skill(, std::string name);
 
     // ~Skill();
@@ -46,36 +47,34 @@ public:
 class Heal : public Skill {
 
     //Stored as negative (damage)
-    Points healPoints;
+    Points baseHealPoints;
 
 public:
     void Use(Creature &caster);
     Heal();
-    Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points pointsToHeal);
+    Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, Points basePointsToHeal);
 };
 
 class Melee : public Skill {
 
-    int baseDmg;
+    int baseDamage;
 
     //If 0, not used
     //Else, each multiplied by stat and added (subject to change)
-    int strDmgFactor;
-    int dexDmgFactor;
+    Stats statDamageFactors;
 
 public:
 
     void Use(Creature &caster, Creature &target);
     Melee();
-    Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, int bDmg, int strDmg, int dexDmg);
+    Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, Points costPoints, int bDmg, Stats damageFactors );
 };
 
 //Flame touch, ice, necro?, etc
-class magicTouch : public Skill {
+class MagicTouch : public Skill {
     //Direct damage
-    int baseDmg;
-    int pwrDmgFactor;
-    int ctlDmgFactor;
+    int baseDamage;
+    Stats statDamageFactors;
 
     Buff debuff;
 
@@ -83,8 +82,8 @@ class magicTouch : public Skill {
 //    int stabilityDurationFactor;
 
 public:
-    magicTouch();
-    magicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, int bDmg, int powerDmg, int controlDmg, Buff &buff);
+    MagicTouch();
+    MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, int bDmg, Stats damageFactors, Buff &buff);
 };
 
 //typedef std::map<std::string,Heal> healPtrMap;
@@ -93,7 +92,7 @@ public:
 typedef std::list<Skill*> skillPtrList;
 skillPtrList createSkillPtrList();
 void populateSkillPtrList (skillPtrList& skillPtrs);
-//
+
 //typedef std::list<std::shared_ptr<Skill>> skillSharedPtrList;
 //skillSharedPtrList createSafeSkillList();
 

@@ -6,13 +6,13 @@ class Buff;  //Forward declaration
 
 struct Stats {
     //Physical
-    int strength;
-    int dexterity;
-    int endurance;
+    int strength    = 0;
+    int dexterity   = 0;
+    int endurance   = 0;
     //Magical
-    int power;
-    int control;
-    int stability;
+    int power       = 0;
+    int control     = 0;
+    int stability   = 0;
 
 };
 
