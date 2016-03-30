@@ -10,7 +10,7 @@ using namespace std;
 void PlayerCharacter::calcAttributes() {
     //All subject to change
     CreaturePoints points = getPointValues();
-    CreatureStats stats = getStats();
+    Stats stats = getStats();
 
     points.maxHP = baseHP + 2*stats.endurance;
     points.maxSP = baseSP + 1*stats.endurance + 1*stats.dexterity;
@@ -23,7 +23,7 @@ void PlayerCharacter::calcAttributes() {
 
 //Default Constructor
 PlayerCharacter::PlayerCharacter()
-    : Creature(CreatureStats {1,1,1,1,1,1}, "Player") {
+    : Creature(Stats {1,1,1,1,1,1}, "Player") {
     baseHP = 10;
     baseSP = 0;
     baseMP = 0;
@@ -37,7 +37,7 @@ PlayerCharacter::PlayerCharacter()
 }
 
 PlayerCharacter::PlayerCharacter(std::string playerName)
-    : Creature(CreatureStats {1,1,1,1,1,1}, playerName) {
+    : Creature(Stats {1,1,1,1,1,1}, playerName) {
     //cout << "starting player ctor";
     baseHP = 10;
     baseSP = 0;
@@ -54,7 +54,7 @@ PlayerCharacter::PlayerCharacter(std::string playerName)
     //skillList skills = createSkillStruct();
 }
 
-PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats, std::string playerName)
+PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, Stats bStats, std::string playerName)
     : Creature(bStats, playerName) {
     baseHP = bHP;
     baseSP = bSP;
@@ -66,7 +66,7 @@ PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats
 //    skillList skills = createSkillStruct();
 }
 
-string displayStats(CreatureStats stats) {
+string displayStats(Stats stats) {
     string output =
         "  STR: " + to_string(stats.strength)  +
         "  DEX: " + to_string(stats.dexterity) +

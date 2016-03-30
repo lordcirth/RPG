@@ -5,11 +5,11 @@
 
 using namespace std;
 
-CreatureStats Creature::getStats() {
+Stats Creature::getStats() {
     return stats;
 }
 
-void Creature::setStats(CreatureStats newStats) {
+void Creature::setStats(Stats newStats) {
     stats = newStats;
     //calcAttributes(); //New maxHP, etc
 }
@@ -73,7 +73,7 @@ bool Creature::isDead() {
 //Constructors
 Creature::Creature() {
 }
-Creature::Creature(CreatureStats startingStats) {
+Creature::Creature(Stats startingStats) {
     name = "Unnamed Creature";
     stats = startingStats;
     //Calculated from stats by subclass
@@ -85,7 +85,7 @@ Creature::Creature(CreaturePoints points) {
     pointValues = points;
 }
 
-Creature::Creature(CreatureStats startingStats, std::string cName) {
+Creature::Creature(Stats startingStats, std::string cName) {
     //cout << "starting Creature ctor";
     name = cName;
     stats = startingStats;

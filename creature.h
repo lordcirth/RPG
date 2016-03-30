@@ -4,7 +4,7 @@
 
 class Buff;  //Forward declaration
 
-struct CreatureStats {
+struct Stats {
     //Physical
     int strength;
     int dexterity;
@@ -35,15 +35,15 @@ struct CreaturePoints {
 
 class Creature {
 private:
-    CreatureStats stats;
+    Stats stats;
     CreaturePoints pointValues;
     std::string name = "";
     //Has to be pointers or subclasses get "sliced"
     std::list<Buff*> buffs;
 
 public:
-    CreatureStats getStats();
-    void setStats(CreatureStats);
+    Stats getStats();
+    void setStats(Stats);
     CreaturePoints getPointValues();
     void setPointValues(CreaturePoints);
     void setName(std::string);
@@ -59,9 +59,9 @@ public:
     bool isDead();
 
     Creature();
-    Creature(CreatureStats startingStats);
+    Creature(Stats startingStats);
     Creature(CreaturePoints points);
-    Creature(CreatureStats startingStats, std::string cName);
+    Creature(Stats startingStats, std::string cName);
 
 };
 

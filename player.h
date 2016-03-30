@@ -33,12 +33,12 @@ public:
     void calcAttributes();
     void giveXP(int earnedXP);
     //Constructors
-    PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats);
-    PlayerCharacter(int bHP, int bSP, int bMP, CreatureStats bStats, std::string playerName);
+    PlayerCharacter(int bHP, int bSP, int bMP, Stats bStats);
+    PlayerCharacter(int bHP, int bSP, int bMP, Stats bStats, std::string playerName);
     PlayerCharacter(std::string playerName);
     PlayerCharacter();
 
 };
 
-std::string displayStats(CreatureStats stats);
+std::string displayStats(Stats stats);
 //std::string displayPoints(CreaturePoints points);
