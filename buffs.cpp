@@ -47,8 +47,9 @@ void DoT::tick(Creature &c) {
 }
 
 void runBuffs(Creature &c) {
-    //Save buffs to remove after running
-    std::list<Buff*> expiredBuffs; //Can't remove during iterator or *BOOM*
+    //Save buffs to remove after running them
+    //Can't remove during iterator or *BOOM*
+    std::list<Buff*> expiredBuffs;
     std::list<Buff*>::const_iterator it;
 
     for (it = c.buffs.begin(); it != c.buffs.end(); it++) {

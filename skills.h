@@ -71,12 +71,12 @@ class MagicTouch : public Skill {
     int baseDamage; //TODO replace baseDamage with Points
     Stats statDamageFactors;
 
-    Buff debuff;
+    Buff *debuff;
 
 public:
     void Use(Creature &caster, Creature &target);
     MagicTouch();
-    MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, int bDmg, Stats damageFactors, Buff &buff);
+    MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, int bDmg, Stats damageFactors, Buff *buff);
 };
 
 //typedef std::map<std::string,Heal> healPtrMap;
