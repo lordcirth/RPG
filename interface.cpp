@@ -70,6 +70,18 @@ void showMenu(PlayerCharacter &player) {
     }
 }
 
-void printSkillUse(std::string skillName) {
-    mvprintw(20,1, "Player used: %s", skillName.c_str());
+void printBuff(std::string buffName) {
+    mvprintw(10,1, "                               ");  //Hacky clear.  TODO fix
+    mvprintw(10,1, "%s", buffName.c_str());
 }
+
+void printSkillUse(std::string skillName) {
+    mvprintw(20,1, "                               ");  //Hacky clear.  TODO fix
+    mvprintw(20,1, "Player used %s.", skillName.c_str());
+}
+
+void printSkillUse(std::string skillName, std::string targetName) {
+    mvprintw(20,1, "                               ");  //Hacky clear.  TODO
+    mvprintw(20,1, "Player used %s on %s.", skillName.c_str(), targetName.c_str());
+}
+

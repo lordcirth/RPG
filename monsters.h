@@ -10,7 +10,6 @@ public:
     void attack(Creature &target);
 
     Monster(); //Only for other classes
-    Monster(CreaturePoints points, int XP);
     Monster(CreaturePoints points, int dmg, int XP);
 
 };
@@ -22,7 +21,6 @@ public:
 
 class Wolf : public Monster {
 public:
-    Wolf();
-    Wolf(int startingHP);
-    Wolf(std::string name);
+    Wolf(); //Use this for generic "wolf"
+    Wolf(std::string name, int startingHP);
 };

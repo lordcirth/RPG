@@ -39,9 +39,11 @@ private:
     CreaturePoints pointValues;
     std::string name = "";
     //Has to be pointers or subclasses get "sliced"
-    std::list<Buff*> buffs;
+
 
 public:
+    std::list<Buff*> buffs;
+
     Stats getStats();
     void setStats(Stats);
     CreaturePoints getPointValues();
@@ -53,8 +55,6 @@ public:
     void healAll();
     void damage(Points dmg);
     void heal(Points healing);
-    //void addBuff(Buff &newBuff);
-    //void runBuffs();
 
     bool isDead();
 

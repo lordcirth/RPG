@@ -11,7 +11,7 @@ class Buff
     std::string name;
     //Whether buff/debuff can be purged/dispelled
     bool canDispel;
-
+    bool stacks;
     int duration;  //Starting duration - set by subclass ctors
 
 public:
@@ -19,32 +19,22 @@ public:
     Buff(); //Not used!
     Buff(std::string buffName, bool dispel, int dur);
 
-    void tick(Creature &c);  //virtual, process buff for this turn
-    void purge(); //virtual, attempt to purge
+    virtual void tick(Creature &c);  //virtual, process buff for this turn
+    void dispel(); //remove buff (dispel or expiry)
     void apply(Creature &tgt); //Handles stacking rules, etc
-    void checkExpire(); //Remove buff if time is up
+    bool isExpired(); //Time to remove buff?
 };
 
 //Damage over Time, poison, fire, etc
-class DoT : public Buff   //Also Heal over Time, just use negative tickHP
+class DoT : public Buff   //Also Heal over Time maybe? Just use negative tickHP
 {
-
     //Damage per turn
     Points tickDamage;
-    bool stacks;
-
 public:
     DoT();
     DoT(std::string buffName, bool dispel, int dur, Points dmg);
     void tick(Creature &c);
 };
 
-//============================
-// Specific buffs
-//============================
-//
-//class buff_FlameTouch : public DoT
-//{
-//public:
-//    buff_FlameTouch();
-//};
+
+void runBuffs(Creature &c);

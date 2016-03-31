@@ -18,28 +18,42 @@ fightResults Fight::start() {
     Skill *playerChosenSkill;
     initInterface();
     //initSkillMenu(player);
-    while ( !player.isDead() && !enemy.isDead()) {
+
+    while ( !player.isDead() && !enemy.isDead()) { //Main fight loop
+    //4 phases:
+
+        //Phase 1: Run player buffs/debuffs
+        runBuffs(player);
+        if (player.isDead()) break;
+
+        //Phase 2: Player turn
         displayPoints(0,0, player);
-        displayPoints(0,66, enemy);
-
-
-        //Player turn
+        displayPoints(0,64, enemy);
         showMenu(player);
+
+        //Get key, loop until valid
         do {
             ch = getPlayerKey();
             playerChosenSkill = getSkillByHotkey(player.skillPtrs, ch);
         } while (playerChosenSkill == nullptr);
 
+        //Self or enemy target skill?
         if (playerChosenSkill->getTargetType() == TYPE_SELF) {
             playerChosenSkill->Use(player);
+            printSkillUse(playerChosenSkill->getName());
+
         } else if (playerChosenSkill->getTargetType() == TYPE_ENEMY) {
             playerChosenSkill->Use(player, enemy);
-        }
-        printSkillUse(playerChosenSkill->getName());
+            printSkillUse(playerChosenSkill->getName(),enemy.getName());
+        };
 
-
-        //Enemy turn
+        if (enemy.isDead()) break;
+        //Phase 3: Run enemy buffs/debuffs
+        runBuffs(enemy);
+        if (enemy.isDead()) break;
+        //Phase 4: Enemy turn
         enemy.attack(player);
+        //if (player.isDead()) break;
     }
 
 

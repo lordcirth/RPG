@@ -61,6 +61,10 @@ void Creature::heal(Points healing) {
     pointValues = c;
 }
 
+//void Creature::addBuff(Buff newBuff) {
+//    buffs.push_back(*newBuff);
+//};
+
 bool Creature::isDead() {
     if (pointValues.HP <= 0) {
         return true;
@@ -73,12 +77,12 @@ bool Creature::isDead() {
 //Constructors
 Creature::Creature() {
 }
-Creature::Creature(Stats startingStats) {
-    name = "Unnamed Creature";
-    stats = startingStats;
-    //Calculated from stats by subclass
-    pointValues = {0,0,0,0,0,0};
-}
+//Creature::Creature(Stats startingStats) {
+//    name = "Unnamed Creature";
+//    stats = startingStats;
+//    //Calculated from stats by subclass
+//    pointValues = {0,0,0,0,0,0};
+//}
 
 Creature::Creature(CreaturePoints points) {
     stats = {0,0,0,0,0,0};
@@ -86,8 +90,7 @@ Creature::Creature(CreaturePoints points) {
 }
 
 Creature::Creature(Stats startingStats, std::string cName) {
-    //cout << "starting Creature ctor";
     name = cName;
     stats = startingStats;
-    pointValues = {0,0,0,0,0,0};
+    pointValues = {0,0,0,0,0,0}; //Initialized by subclass, based on Stats
 }
