@@ -19,6 +19,8 @@ public:
     Buff(); //Not used!
     Buff(std::string buffName, bool dispel, int dur);
 
+    virtual Buff* Clone() = 0; //All subclasses must define this!
+
     virtual void tick(Creature &c);  //virtual, process buff for this turn
     void dispel(); //remove buff (dispel or expiry)
     void apply(Creature &tgt); //Handles stacking rules, etc
@@ -31,6 +33,7 @@ class DoT : public Buff   //Also Heal over Time maybe? Just use negative tickHP
     //Damage per turn
     Points tickDamage;
 public:
+    virtual Buff* Clone();
     DoT();
     DoT(std::string buffName, bool dispel, int dur, Points dmg);
     void tick(Creature &c);

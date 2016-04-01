@@ -66,22 +66,42 @@ void showMenu(PlayerCharacter &player) {
         } else {
             ++hor;
             vert = startVert;
+            horSlot = 1;
         }
     }
 }
 
+
 void printBuff(std::string buffName) {
-    mvprintw(10,1, "                               ");  //Hacky clear.  TODO fix
-    mvprintw(10,1, "%s", buffName.c_str());
+    mvprintw(6,1, "                                               ");  //Hacky clear.  TODO fix
+    mvprintw(6,1, "%s", buffName.c_str());
+}
+
+typedef pair<string,int> buffStackPair;
+
+void printAllBuffs(list<string> buffNames) {
+    buffNames.sort(); //So we can deduplicate, also looks nice
+    list<buffStackPair> printList; //Buffs and stack counts
+
+
+    list<string>::const_iterator it;
+    for (it = buffNames.begin(); it != buffNames.end(); it++) {
+        if ( (*(printList.end())).first == *it ) {  //If last loop's buff = this loop's buff, increment stack count instead
+            (*(printList.end())).second++;
+        } else {
+            printList.push_back({*it, 1});
+        }
+
+    }
 }
 
 void printSkillUse(std::string skillName) {
-    mvprintw(20,1, "                               ");  //Hacky clear.  TODO fix
+    mvprintw(20,1, "                                               ");  //Hacky clear.  TODO fix
     mvprintw(20,1, "Player used %s.", skillName.c_str());
 }
 
 void printSkillUse(std::string skillName, std::string targetName) {
-    mvprintw(20,1, "                               ");  //Hacky clear.  TODO
+    mvprintw(20,1, "                                               ");  //Hacky clear.  TODO fix
     mvprintw(20,1, "Player used %s on %s.", skillName.c_str(), targetName.c_str());
 }
 

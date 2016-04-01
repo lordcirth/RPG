@@ -101,7 +101,7 @@ void MagicTouch::Use(Creature &caster, Creature &target) {
     if (caster.getPointValues().MP >= getCost().MP) {
         caster.damage(getCost());
         target.damage({baseDamage,0,0});
-        debuff->apply(target);
+        debuff->Clone()->apply(target);
     }
 }
 
@@ -139,10 +139,10 @@ skillPtrList createSkillPtrList() {
 
 //Tier 1: First unlockables
     Points cost_FlameTouch {0,0,2};
-    Stats multipliers_Flame_Touch;
-        multipliers_Flame_Touch.power = 1;
+    Stats multipliers_FlameTouch;
+        multipliers_FlameTouch.power = 1;
     static DoT buff_FlameTouch {"Flame Touch burn", true, 3, {1,0,0}};
-    static MagicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", cost_FlameTouch, 2, multipliers_Flame_Touch, &buff_FlameTouch};
+    static MagicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", cost_FlameTouch, 2, multipliers_FlameTouch, &buff_FlameTouch};
     skillPtrs.push_back(&FlameTouch);
 
     return skillPtrs;

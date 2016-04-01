@@ -46,6 +46,10 @@ void DoT::tick(Creature &c) {
     turnsLeft -= 1;
 }
 
+Buff* DoT::Clone() {
+    return new DoT(*this);
+}
+
 void runBuffs(Creature &c) {
     //Save buffs to remove after running them
     //Can't remove during iterator or *BOOM*
