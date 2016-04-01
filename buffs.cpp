@@ -13,6 +13,11 @@ Buff::Buff(std::string buffName, bool dispel, int dur) {
     turnsLeft = duration;
 }
 
+
+std::string Buff::getName() {
+    return name;
+}
+
 void Buff::apply(Creature &tgt) {
 //TODO:  If already there, check stacking
     tgt.buffs.push_back(this);

@@ -18,6 +18,7 @@ public:
     int turnsLeft;
     Buff(); //Not used!
     Buff(std::string buffName, bool dispel, int dur);
+    std::string getName();
 
     virtual Buff* Clone() = 0; //All subclasses must define this!
 

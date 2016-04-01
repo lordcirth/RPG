@@ -28,11 +28,9 @@ void displayPoints(int row, int col, Creature c) {
     mvprintw(++row, col, "HP: %d / %d \n", points.HP, points.maxHP);
     mvprintw(++row, col, "SP: %d / %d \n", points.SP, points.maxSP);
     mvprintw(++row, col, "MP: %d / %d \n", points.MP, points.maxMP);
-    refresh();
-    //std::cout << "SP: " + to_string(points.SP) << "  ";
 }
 
-void updatePoints(Creature player, Creature enemy) {
+void updatePoints(Creature &player, Creature &enemy) {
     displayPoints(0,0, player);
     displayPoints(0,68, enemy);
 }
@@ -46,12 +44,12 @@ void showMenu(PlayerCharacter &player) {
     int startVert = 16;
     int startHor  = 1;
 
-    int vOffset  = 1;
+//    int vOffset  = 1;
     int hOffset  = 10;
 
-    int maxVert = 5;
+//    int maxVert = 5;
     int maxHor = 3;
-    int vertSlot = 1;
+//    int vertSlot = 1;
     int horSlot = 1;
 
     int vert = startVert;
@@ -72,36 +70,81 @@ void showMenu(PlayerCharacter &player) {
 }
 
 
-void printBuff(std::string buffName) {
-    mvprintw(6,1, "                                               ");  //Hacky clear.  TODO fix
-    mvprintw(6,1, "%s", buffName.c_str());
+void printBuff(int vert, int hor, std::string buffName) {
+    mvprintw(vert,hor, "                                               ");  //Hacky clear.  TODO fix
+    mvprintw(vert,hor, "%s", buffName.c_str());
 }
 
 typedef pair<string,int> buffStackPair;
 
-void printAllBuffs(list<string> buffNames) {
+void printBuffList(int startVert, int startHor, list<string> buffNames) {
     buffNames.sort(); //So we can deduplicate, also looks nice
     list<buffStackPair> printList; //Buffs and stack counts
 
-
     list<string>::const_iterator it;
     for (it = buffNames.begin(); it != buffNames.end(); it++) {
+//        cerr << "Debug" << endl;
         if ( (*(printList.end())).first == *it ) {  //If last loop's buff = this loop's buff, increment stack count instead
             (*(printList.end())).second++;
+//            cerr << "Stacked buff" << endl;
         } else {
-            printList.push_back({*it, 1});
+            printList.push_back({*it, 1});          //If it's the first of it's kind, add it.
+//            cerr << "Fresh buff" << endl;
         }
+    }
 
+    int vert = startVert;
+    int hor  = startHor;
+    list<buffStackPair>::const_iterator buffIt;
+    for (buffIt = printList.begin(); buffIt != printList.end(); buffIt++) {
+//        cerr << "printing buff:" << endl;
+        printBuff(vert, hor, (*buffIt).first);
+        ++vert;
+    }
+
+    //TODO: Proper clear!
+    mvprintw(vert,hor, "                                       ");
+    mvprintw(vert,hor, "                                       ");
+    mvprintw(vert,hor, "                                       ");
+}
+
+void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs) {
+    list<string> playerBuffNames;
+    list<string> enemyBuffNames;
+
+    list<Buff*>::const_iterator it;
+    for (it = playerBuffs.begin(); it != playerBuffs.end(); it++) {
+       playerBuffNames.push_back((*it)->getName());
+    }
+
+    for (it = enemyBuffs.begin(); it != enemyBuffs.end(); it++) {
+       enemyBuffNames.push_back((*it)->getName());
+    }
+
+    printBuffList(5,0, playerBuffNames);
+    printBuffList(5,60, enemyBuffNames);
+}
+
+
+//Print string to player's messages.
+void printMessage(string message) { //TODO scrolling!
+    mvprintw(20,1, "                                               "); //TODO fix hacky clear
+    mvprintw(20,1, message.c_str());
+}
+
+void printSkillUse(string skillName) {
+    string message = "Player used " + skillName + ".";
+    printMessage(message);
+}
+
+void printSkillUse(string skillName, string targetName) {
+    string message = "Player used " + skillName + " on " + targetName + ".";
+    printMessage(message);
+}
+
+
+void printSkillFails(Skill *a, skillReturnType error) {
+    if (error == SKILL_FAIL_COST) {
+        printMessage(a->getName() + " requires " + to_string(a->getCost().HP) + "HP, " + to_string(a->getCost().SP) + "SP, " + to_string(a->getCost().MP) + "MP");
     }
 }
-
-void printSkillUse(std::string skillName) {
-    mvprintw(20,1, "                                               ");  //Hacky clear.  TODO fix
-    mvprintw(20,1, "Player used %s.", skillName.c_str());
-}
-
-void printSkillUse(std::string skillName, std::string targetName) {
-    mvprintw(20,1, "                                               ");  //Hacky clear.  TODO fix
-    mvprintw(20,1, "Player used %s on %s.", skillName.c_str(), targetName.c_str());
-}
-

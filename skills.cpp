@@ -8,6 +8,27 @@
 // Skill & subclasses
 //============================
 
+bool Skill::checkCost(Creature &caster) {
+    CreaturePoints points = caster.getPointValues();
+
+    if (points.HP < cost.HP) { return false; }
+    else if (points.SP < cost.SP) { return false; }
+    else if (points.MP < cost.MP) { return false; }
+    else {return true;}
+}
+
+skillReturnType Skill::canCast(Creature &caster) {
+    if (checkCost(caster) == false) {
+        return SKILL_FAIL_COST;
+    }
+    else if (isUnlocked() == false) {
+        return SKILL_NOT_UNLOCKED;
+    }
+    else {
+        return SKILL_SUCCESS;
+    }
+}
+
 std::string Skill::getName() {
     return name;
 }
@@ -32,6 +53,7 @@ skillTargetType Skill::getTargetType() {
     return targetType;
 };
 
+
 //
 //Skill::Skill() {
 //
@@ -47,12 +69,14 @@ Skill::Skill(skillTargetType type, bool startsUnlocked, bool isPassive, Skill *p
     cost = costPoints;
 }
 
-void Skill::Use(Creature &caster) {
+skillReturnType Skill::Use(Creature &caster) {
     std::cerr << "Error: Skill::Use(Creature &caster) called!" << std::endl;
+    return SKILL_BASE_CLASS_ERROR;
 }
 
-void Skill::Use(Creature &caster, Creature &target) {
+skillReturnType Skill::Use(Creature &caster, Creature &target) {
     std::cerr << "Error: Skill::Use(Creature &caster, Creature &target) called!" << std::endl;
+    return SKILL_BASE_CLASS_ERROR;
 }
 
 Points Skill::getCost() {
@@ -69,9 +93,13 @@ Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, P
 
 }
 
-void Heal::Use(Creature &caster) {
-    caster.heal(baseHealPoints);
-    //std::cout << "Healing";
+skillReturnType Heal::Use(Creature &caster) {
+    skillReturnType r = canCast(caster);
+    if (r == SKILL_SUCCESS) {
+        caster.damage(getCost());
+        caster.heal(baseHealPoints);
+    }
+    return r;
 }
 
 //Melee
@@ -86,23 +114,35 @@ Melee::Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skill
 
 }
 
-void Melee::Use(Creature &caster, Creature &target) {
-    int dmg = baseDamage;
-    Stats s = statDamageFactors;
-    dmg += s.strength * caster.getStats().strength;
-    dmg += s.dexterity * caster.getStats().dexterity;
+skillReturnType Melee::Use(Creature &caster, Creature &target) {
+skillReturnType r = canCast(caster);
+    if (r == SKILL_SUCCESS) {
+        caster.damage(getCost());
 
-    target.damage({dmg,0,0});
+        int dmg = baseDamage;
+        Stats s = statDamageFactors;
+        dmg += s.strength * caster.getStats().strength;
+        dmg += s.dexterity * caster.getStats().dexterity;
+
+        target.damage({dmg,0,0});
+    }
+    return r;
+
+
 }
 
 //MagicTouch
 
-void MagicTouch::Use(Creature &caster, Creature &target) {
-    if (caster.getPointValues().MP >= getCost().MP) {
+skillReturnType MagicTouch::Use(Creature &caster, Creature &target) {
+    skillReturnType r = canCast(caster);
+
+    if (r == SKILL_SUCCESS) {
         caster.damage(getCost());
+
         target.damage({baseDamage,0,0});
         debuff->Clone()->apply(target);
     }
+    return r;
 }
 
 MagicTouch::MagicTouch() {}
@@ -144,6 +184,8 @@ skillPtrList createSkillPtrList() {
     static DoT buff_FlameTouch {"Flame Touch burn", true, 3, {1,0,0}};
     static MagicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", cost_FlameTouch, 2, multipliers_FlameTouch, &buff_FlameTouch};
     skillPtrs.push_back(&FlameTouch);
+
+    FlameTouch.unlock();
 
     return skillPtrs;
 

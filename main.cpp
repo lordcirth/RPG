@@ -19,6 +19,7 @@ int main() {
 
     Fight test {player, testWolf};
     fightResults testResults = test.start();
+    //cout << testResults.won << endl;
 
     return 0;
 }

@@ -11,6 +11,14 @@ enum skillTargetType {
     TYPE_ENEMY
 };
 
+enum skillReturnType {
+    SKILL_SUCCESS = 0,  //Skill used - go to next turn
+    SKILL_FAIL_COST = 1, //Could not afford to cast
+    SKILL_NOT_UNLOCKED = 2,
+    SKILL_BASE_CLASS_ERROR = 99
+
+};
+
 //============================
 // Skill & subclasses
 //============================
@@ -24,10 +32,14 @@ class Skill {
     skillTargetType targetType;
     Points cost;
 
+protected:
+    bool checkCost(Creature &caster);
+    skillReturnType canCast(Creature &caster);
+
 public:
     const char shortcut;
-    virtual void Use(Creature &caster);
-    virtual void Use(Creature &caster, Creature &target);
+    virtual skillReturnType Use(Creature &caster);
+    virtual skillReturnType Use(Creature &caster, Creature &target);
     std::string getName();
     Points getCost();
 
@@ -46,7 +58,7 @@ class Heal : public Skill {
     Points baseHealPoints;
 
 public:
-    void Use(Creature &caster);
+    skillReturnType Use(Creature &caster);
     Heal();
     Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, Points basePointsToHeal);
 };
@@ -60,7 +72,7 @@ class Melee : public Skill {
 
 public:
 
-    void Use(Creature &caster, Creature &target);
+    skillReturnType Use(Creature &caster, Creature &target);
     Melee();
     Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, Points costPoints, int bDmg, Stats damageFactors );
 };
@@ -74,7 +86,7 @@ class MagicTouch : public Skill {
     Buff *debuff;
 
 public:
-    void Use(Creature &caster, Creature &target);
+    skillReturnType Use(Creature &caster, Creature &target);
     MagicTouch();
     MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, int bDmg, Stats damageFactors, Buff *buff);
 };
