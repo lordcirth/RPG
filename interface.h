@@ -14,7 +14,8 @@ void printMessage(std::string message);
 void printSkillUse(std::string skillName);
 void printSkillUse(std::string skillName, std::string targetName);
 
-void printBuff(int pos, std::string buffName);
+typedef std::pair<std::string,int> buffStackPair;
+void printBuff(int pos, buffStackPair buff);
 void printBuffList(int vert, int hor, std::list<std::string> buffNames);
 void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs);
 

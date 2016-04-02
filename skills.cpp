@@ -181,7 +181,7 @@ skillPtrList createSkillPtrList() {
     Points cost_FlameTouch {0,0,2};
     Stats multipliers_FlameTouch;
         multipliers_FlameTouch.power = 1;
-    static DoT buff_FlameTouch {"Flame Touch burn", true, 3, {1,0,0}};
+    static DoT buff_FlameTouch {"Flame Touch burn", true, 5, {1,0,0}};
     static MagicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", cost_FlameTouch, 2, multipliers_FlameTouch, &buff_FlameTouch};
     skillPtrs.push_back(&FlameTouch);
 

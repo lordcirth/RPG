@@ -69,27 +69,27 @@ void showMenu(PlayerCharacter &player) {
     }
 }
 
-
-void printBuff(int vert, int hor, std::string buffName) {
+void printBuff(int vert, int hor, buffStackPair buff) {
     mvprintw(vert,hor, "                                               ");  //Hacky clear.  TODO fix
-    mvprintw(vert,hor, "%s", buffName.c_str());
+    mvprintw(vert,hor, "%s X%i", buff.first.c_str(), buff.second);
 }
-
-typedef pair<string,int> buffStackPair;
 
 void printBuffList(int startVert, int startHor, list<string> buffNames) {
     buffNames.sort(); //So we can deduplicate, also looks nice
     list<buffStackPair> printList; //Buffs and stack counts
 
+
     list<string>::const_iterator it;
     for (it = buffNames.begin(); it != buffNames.end(); it++) {
-//        cerr << "Debug" << endl;
-        if ( (*(printList.end())).first == *it ) {  //If last loop's buff = this loop's buff, increment stack count instead
-            (*(printList.end())).second++;
-//            cerr << "Stacked buff" << endl;
+//
+
+        if (printList.back().first == *it ) {  //If last loop's buff = this loop's buff
+
+            printList.back().second++; // increment stack count
+
         } else {
-            printList.push_back({*it, 1});          //If it's the first of it's kind, add it.
-//            cerr << "Fresh buff" << endl;
+            printList.push_back({*it, 1});          //Or if it's the first of it's kind, add it.
+            cerr << "Fresh buff" << endl;
         }
     }
 
@@ -98,7 +98,7 @@ void printBuffList(int startVert, int startHor, list<string> buffNames) {
     list<buffStackPair>::const_iterator buffIt;
     for (buffIt = printList.begin(); buffIt != printList.end(); buffIt++) {
 //        cerr << "printing buff:" << endl;
-        printBuff(vert, hor, (*buffIt).first);
+        printBuff(vert, hor, (*buffIt));
         ++vert;
     }
 
@@ -141,7 +141,6 @@ void printSkillUse(string skillName, string targetName) {
     string message = "Player used " + skillName + " on " + targetName + ".";
     printMessage(message);
 }
-
 
 void printSkillFails(Skill *a, skillReturnType error) {
     if (error == SKILL_FAIL_COST) {
