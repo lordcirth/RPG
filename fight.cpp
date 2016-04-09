@@ -78,6 +78,7 @@ fightResults Fight::start() {
         } while (skillSuccess == false); //Don't advance turn until player uses a Skill
 
         if (enemy.isDead()) break;
+        checkExpiry(player.buffs);
 
         //Phase 3: Run enemy buffs/debuffs
         runBuffs(enemy);
@@ -85,6 +86,7 @@ fightResults Fight::start() {
         //Phase 4: Enemy turn
         enemy.attack(player);
         //if (player.isDead()) break;
+        checkExpiry(enemy.buffs);
     }
 
     fightResults results = {false, 0, 0};
