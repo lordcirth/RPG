@@ -6,6 +6,13 @@ int runMultipliers (Stats stats, Stats multipliers);
 bool buffExists (std::list<Buff*> buffList, std::string buffName);
 void checkExpiry (std::list<Buff*> &buffs);
 
+//Used by both Skills and Buffs so it needs to be here
+enum skillDamageType {
+    DMGTYPE_NO_ELEMENT, //Used mostly if it doesn't do damage, or special cases
+    DMGTYPE_PHYSICAL,
+    DMGTYPE_MAGICAL
+};
+
 //============================
 // Buff & general subclasses
 //============================

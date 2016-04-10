@@ -59,8 +59,9 @@ skillTargetType Skill::getTargetType() {
 //
 //}
 
-Skill::Skill(skillTargetType type, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string skillName, Points costPoints) : shortcut(key) {
+Skill::Skill(skillTargetType type, skillDamageType damageType, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string skillName, Points costPoints) : shortcut(key) {
     targetType = type;
+    this->damageType = damageType;
     unlocked = startsUnlocked;
     passive = isPassive;
     parent = parentNode;
@@ -83,12 +84,16 @@ Points Skill::getCost() {
     return cost;
 }
 
+skillDamageType Skill::getDamageType() {
+    return damageType;
+}
+
 //Heal
 Heal::Heal() {
 }
 
 Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, Points pointsToHeal)
-    : Skill(TYPE_SELF, startsUnlocked, false, parentNode, key, name, costPoints) { //Pass through to Skill constructor
+    : Skill(TYPE_SELF, DMGTYPE_NO_ELEMENT, startsUnlocked, false, parentNode, key, name, costPoints) { //Pass through to Skill constructor
     baseHealPoints = pointsToHeal;
 
 }
@@ -108,7 +113,7 @@ Melee::Melee() {
 }
 
 Melee::Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, Points costPoints, int baseDmg, Stats damageFactors )
-    : Skill(TYPE_ENEMY, startsUnlocked, false, parentNode, key, skillName, costPoints) {
+    : Skill(TYPE_ENEMY, DMGTYPE_PHYSICAL, startsUnlocked, false, parentNode, key, skillName, costPoints) {
     baseDamage = baseDmg;
     statDamageFactors = damageFactors;
 
@@ -155,7 +160,7 @@ MagicTouch::MagicTouch() {}
 
 
 MagicTouch::MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, int baseDmg,  Stats damageFactors,  Buff *buff)
-    : Skill(TYPE_ENEMY, startsUnlocked, false, parentNode, key, name, costPoints) {
+    : Skill(TYPE_ENEMY, DMGTYPE_MAGICAL, startsUnlocked, false, parentNode, key, name, costPoints) {
     baseDamage = baseDmg;
     statDamageFactors = damageFactors;
     debuff = buff;
@@ -169,7 +174,7 @@ skillPtrList createSkillPtrList() {
     skillPtrList skillPtrs;
     Points cost_none {0,0,0};
     Stats multipliers_none = {0,0,0,0,0,0};
-    static Skill RootSkill {TYPE_SELF, true, true, nullptr, '#', "RootSkill", cost_none}; //Empty parent node of everything, only time using default ctor
+    static Skill RootSkill {TYPE_SELF, DMGTYPE_NO_ELEMENT, true, true, nullptr, '#', "RootSkill", cost_none}; //Empty parent node of everything, only time using default ctor
     RootSkill.unlock();
     //Not added to skill list
 

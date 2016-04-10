@@ -33,6 +33,19 @@ struct CreaturePoints {
     int MP;
 };
 
+//Modifiers applied by (de)buffs on a given turn
+//Default values are no effect
+struct TurnMultipliers {
+    int allDamageOutput         = 1;
+    int physicalDamageOutput    = 1;
+    int magicalDamageOutput     = 1;
+
+    int allDamageTaken          = 1;
+    int physicalDamageTaken     = 1;
+    int magicalDamageTaken      = 1;
+
+};
+
 
 class Creature {
 private:
@@ -41,11 +54,10 @@ private:
     std::string name = "";
     //Has to be pointers or subclasses get "sliced"
 
-
 public:
     std::list<Skill*> skillPtrs;
     std::list<Buff*> buffs;
-
+    TurnMultipliers turnBuffEffects;
     Stats getStats();
     void setStats(Stats);
     CreaturePoints getPointValues();

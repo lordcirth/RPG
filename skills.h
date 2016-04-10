@@ -19,6 +19,7 @@ enum skillReturnType {
 
 };
 
+
 //============================
 // Skill & subclasses
 //============================
@@ -31,6 +32,7 @@ class Skill {
     bool passive = false;
     skillTargetType targetType;
     Points cost;
+    skillDamageType damageType;
 
 protected:
     bool checkCost(Creature &caster);
@@ -42,6 +44,7 @@ public:
     virtual skillReturnType Use(Creature &caster, Creature &target);
     std::string getName();
     Points getCost();
+    skillDamageType getDamageType();
 
     bool isUnlocked() const;
     bool canUnlock();
@@ -50,7 +53,7 @@ public:
     skillTargetType getTargetType();
 
     Skill() : shortcut('@') {}; //Required by compiler.  If we ever see '@' as a hotkey, something broke!
-    Skill(skillTargetType type, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string name, Points cost);
+    Skill(skillTargetType type, skillDamageType damageType, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string name, Points cost);
 };
 
 class Heal : public Skill {
