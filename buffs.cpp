@@ -9,6 +9,7 @@ int runMultipliers (Stats stats, Stats multipliers) {
     totalEffect += (stats.power * multipliers.power);
     totalEffect += (stats.control * multipliers.control);
     totalEffect += (stats.stability * multipliers.stability);
+    return totalEffect;
 }
 
 
@@ -65,7 +66,9 @@ Buff::Buff(std::string buffName, bool dispel, bool stacks, int baseDur, Stats bu
 
  int Buff::getBaseDuration() {
     return baseDuration;
-
+ }
+ Stats  Buff::getDurationMultipliers() {
+    return durationMultipliers;
  }
 
 std::string Buff::getName() {

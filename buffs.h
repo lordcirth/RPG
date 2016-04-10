@@ -24,6 +24,7 @@ public:
     Buff(); //Not used!
     Buff(std::string buffName, bool dispel, bool stacks, int dur, Stats buffDurationMultipliers);
     int getBaseDuration();
+    Stats getDurationMultipliers();
     std::string getName();
 
     virtual Buff* Clone() = 0; //All subclasses must define this!

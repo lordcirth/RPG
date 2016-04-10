@@ -145,7 +145,7 @@ skillReturnType MagicTouch::Use(Creature &caster, Creature &target) {
         Buff *newBuff = debuff->Clone();
 
         //set buff duration based on stats
-        newBuff->turnsLeft = debuff->getBaseDuration() + runMultipliers(caster.getStats(), statDamageFactors);
+        newBuff->turnsLeft = debuff->getBaseDuration() + runMultipliers(caster.getStats(), debuff->getDurationMultipliers());
         newBuff->apply(target);
     }
     return r;
@@ -188,7 +188,7 @@ skillPtrList createSkillPtrList() {
 
 //Tier 1: First unlockables
     Stats multipliers_buff_FlameTouch;
-        multipliers_buff_FlameTouch.power = 2;
+        multipliers_buff_FlameTouch.power = 2; //2 extra turns per point of Power.  Debug only, not balanced!
     static DoT buff_FlameTouch {"Flame Touch burn", true, false,    4,          multipliers_buff_FlameTouch,   {1,0,0}};
 
     Points cost_FlameTouch {0,0,2};
