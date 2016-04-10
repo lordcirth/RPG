@@ -27,7 +27,7 @@ private:
 
 public:
 
-    skillPtrList skillPtrs;
+
 //    skillSharedPtrList safeSkillList;
 
     void calcAttributes();

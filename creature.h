@@ -2,6 +2,7 @@
 #include <list>
 #include <string>
 
+class Skill;  //Forward declaration
 class Buff;  //Forward declaration
 
 struct Stats {
@@ -42,6 +43,7 @@ private:
 
 
 public:
+    std::list<Skill*> skillPtrs;
     std::list<Buff*> buffs;
 
     Stats getStats();
