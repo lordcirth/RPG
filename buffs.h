@@ -6,12 +6,7 @@ int runMultipliers (Stats stats, Stats multipliers);
 bool buffExists (std::list<Buff*> buffList, std::string buffName);
 void checkExpiry (std::list<Buff*> &buffs);
 
-//Used by both Skills and Buffs so it needs to be here
-enum skillDamageType {
-    DMGTYPE_NO_ELEMENT, //Used mostly if it doesn't do damage, or special cases
-    DMGTYPE_PHYSICAL,
-    DMGTYPE_MAGICAL
-};
+
 
 //============================
 // Buff & general subclasses
@@ -25,6 +20,7 @@ class Buff
     bool stacks;
     int baseDuration;  //Starting duration - set by subclass ctors
     Stats durationMultipliers;
+    skillDamageType damageType;
 
 public:
     int turnsLeft;
@@ -33,6 +29,7 @@ public:
     int getBaseDuration();
     Stats getDurationMultipliers();
     std::string getName();
+    skillDamageType getDamageType();
 
     virtual Buff* Clone() = 0; //All subclasses must define this!
 

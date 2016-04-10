@@ -43,13 +43,26 @@ const  char * Creature::getName_c() {
     return name.c_str();
 }
 
-void Creature::damage(Points dmg) {
+void Creature::rawDamage(Points dmg) { //Deal raw damage.  Should rarely be called directly.
     CreaturePoints c = pointValues;
     //Limit to between 0 and max
     c.HP = max(0, min(c.HP - dmg.HP, c.maxHP));
     c.SP = max(0, min(c.SP - dmg.SP, c.maxSP));
     c.MP = max(0, min(c.MP - dmg.MP, c.maxMP));
     pointValues = c;
+}
+
+void Creature::damage(Points dmg, skillDamageType damageType) {
+    //Currently only HP is affected
+    dmg.HP *= turnBuffEffects.allDamageTaken;
+    if (damageType == DMGTYPE_PHYSICAL) {
+        dmg.HP *= turnBuffEffects.physicalDamageTaken;
+    }
+    if (damageType == DMGTYPE_MAGICAL) {
+        dmg.HP *= turnBuffEffects.magicalDamageTaken;
+    }
+
+    rawDamage(dmg);
 }
 
 void Creature::heal(Points healing) {
@@ -59,6 +72,10 @@ void Creature::heal(Points healing) {
     c.SP = max(0, min(c.SP + healing.SP, c.maxSP));
     c.MP = max(0, min(c.MP + healing.MP, c.maxMP));
     pointValues = c;
+}
+
+void Creature::takeCost(Points cost) {
+    rawDamage(cost);
 }
 
 //void Creature::addBuff(Buff newBuff) {

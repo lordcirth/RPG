@@ -101,7 +101,7 @@ Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, P
 skillReturnType Heal::Use(Creature &caster) {
     skillReturnType r = canCast(caster);
     if (r == SKILL_SUCCESS) {
-        caster.damage(getCost());
+        caster.takeCost(getCost());
         caster.heal(baseHealPoints);
     }
     return r;
@@ -122,14 +122,14 @@ Melee::Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skill
 skillReturnType Melee::Use(Creature &caster, Creature &target) {
 skillReturnType r = canCast(caster);
     if (r == SKILL_SUCCESS) {
-        caster.damage(getCost());
+        caster.takeCost(getCost());
 
         int dmg = baseDamage;
         Stats s = statDamageFactors;
         dmg += s.strength * caster.getStats().strength;
         dmg += s.dexterity * caster.getStats().dexterity;
 
-        target.damage({dmg,0,0});
+        target.damage({dmg,0,0}, getDamageType());
     }
     return r;
 
@@ -142,9 +142,9 @@ skillReturnType MagicTouch::Use(Creature &caster, Creature &target) {
     skillReturnType r = canCast(caster);
 
     if (r == SKILL_SUCCESS) {
-        caster.damage(getCost());
+        caster.takeCost(getCost());
         int dmg = baseDamage + runMultipliers(caster.getStats(), statDamageFactors);
-        target.damage({dmg ,0,0});
+        target.damage({dmg ,0,0}, getDamageType());
 
         //Clone the "master copy" of the buff
         Buff *newBuff = debuff->Clone();

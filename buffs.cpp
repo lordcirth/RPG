@@ -75,6 +75,9 @@ std::string Buff::getName() {
     return name;
 }
 
+skillDamageType Buff::getDamageType() {
+    return damageType;
+}
 
 //Only override if special stacking mechanics - ie doesn't stack with other buff type
 void Buff::apply(Creature &tgt) {
@@ -129,7 +132,7 @@ DoT::DoT(std::string buffName, bool dispel, bool stacks, int baseDur, Stats buff
 }
 
 void DoT::tick(Creature &c) {
-    c.damage(tickDamage);
+    c.damage(tickDamage, getDamageType());
     turnsLeft -= 1;
 }
 

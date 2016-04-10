@@ -5,6 +5,13 @@
 class Skill;  //Forward declaration
 class Buff;  //Forward declaration
 
+//Used by Skills, Buffs, and Creatures so it needs to be here
+enum skillDamageType {
+    DMGTYPE_NO_ELEMENT, //Used mostly if it doesn't do damage, or special cases
+    DMGTYPE_PHYSICAL,
+    DMGTYPE_MAGICAL
+};
+
 struct Stats {
     //Physical
     int strength    = 0;
@@ -53,6 +60,7 @@ private:
     CreaturePoints pointValues;
     std::string name = "";
     //Has to be pointers or subclasses get "sliced"
+    void rawDamage(Points dmg); //Raw damage
 
 public:
     std::list<Skill*> skillPtrs;
@@ -66,9 +74,12 @@ public:
     std::string getName();
     const char * getName_c();
 
+
     void healAll();
-    void damage(Points dmg);
+
+    void damage(Points dmg, skillDamageType damageType);
     void heal(Points healing);
+    void takeCost(Points cost); //Like damage() but for skill costs
 
     bool isDead();
 

@@ -5,8 +5,8 @@ int Monster::getXP() {
     return killXP;
 }
 
-void Monster::attack(Creature &target) {
-    target.damage({attackDamage,0,0});
+void Monster::attack(Creature &target) { //TODO replace with using Hit.Use()
+    target.damage({attackDamage,0,0}, DMGTYPE_PHYSICAL);
 }
 
 //Default, only for other classes
