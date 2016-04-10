@@ -161,11 +161,9 @@ MagicTouch::MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::st
     debuff = buff;
 }
 
-
 //=============================
 // Provide Skill Tree
 //=============================
-
 
 skillPtrList createSkillPtrList() {
     skillPtrList skillPtrs;
@@ -187,19 +185,19 @@ skillPtrList createSkillPtrList() {
     skillPtrs.push_back(&Hit);
 
 //Tier 1: First unlockables
-    Stats multipliers_buff_FlameTouch;
-        multipliers_buff_FlameTouch.power = 2; //2 extra turns per point of Power.  Debug only, not balanced!
-    static DoT buff_FlameTouch {"Flame Touch burn", true, false,    4,          multipliers_buff_FlameTouch,   {1,0,0}};
+
+    //Flame Touch
+    //                          name                dispel, stacks, duration,   duration mults,     damage
+    static DoT buff_FlameTouch {"Flame Touch burn", true, false,    4,          multipliers_none,   {1,0,0}};
 
     Points cost_FlameTouch {0,0,2};
-    Stats multipliers_FlameTouch;
-        multipliers_FlameTouch.power = 1;
-    //                          name                dispel, stacks, duration,   duration mults,     damage
+    Stats multipliers_FlameTouch_damage;
+        multipliers_FlameTouch_damage.power = 1;
 
-    static MagicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", cost_FlameTouch, 2, multipliers_FlameTouch, &buff_FlameTouch};
+    static MagicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", cost_FlameTouch, 2, multipliers_FlameTouch_damage, &buff_FlameTouch};
     skillPtrs.push_back(&FlameTouch);
 
-    FlameTouch.unlock();
+    FlameTouch.unlock(); //Debug
 
     return skillPtrs;
 
