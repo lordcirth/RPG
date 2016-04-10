@@ -138,11 +138,14 @@ skillReturnType MagicTouch::Use(Creature &caster, Creature &target) {
 
     if (r == SKILL_SUCCESS) {
         caster.damage(getCost());
+        int dmg = baseDamage + runMultipliers(caster.getStats(), statDamageFactors);
+        target.damage({dmg ,0,0});
 
-        target.damage({baseDamage,0,0});
+        //Clone the "master copy" of the buff
         Buff *newBuff = debuff->Clone();
-           //set buff duration based on stats
-        newBuff->turnsLeft = debuff->getBaseDuration() + runMultipliers(caster.getStats(), target.getStats());
+
+        //set buff duration based on stats
+        newBuff->turnsLeft = debuff->getBaseDuration() + runMultipliers(caster.getStats(), statDamageFactors);
         newBuff->apply(target);
     }
     return r;
@@ -184,11 +187,15 @@ skillPtrList createSkillPtrList() {
     skillPtrs.push_back(&Hit);
 
 //Tier 1: First unlockables
+    Stats multipliers_buff_FlameTouch;
+        multipliers_buff_FlameTouch.power = 2;
+    static DoT buff_FlameTouch {"Flame Touch burn", true, false,    4,          multipliers_buff_FlameTouch,   {1,0,0}};
+
     Points cost_FlameTouch {0,0,2};
     Stats multipliers_FlameTouch;
         multipliers_FlameTouch.power = 1;
-    //                          name                dispel, stacks, duration, duration mults
-    static DoT buff_FlameTouch {"Flame Touch burn", true, false, 4, multipliers_none, {1,0,0}};
+    //                          name                dispel, stacks, duration,   duration mults,     damage
+
     static MagicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", cost_FlameTouch, 2, multipliers_FlameTouch, &buff_FlameTouch};
     skillPtrs.push_back(&FlameTouch);
 
