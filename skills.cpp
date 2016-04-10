@@ -140,7 +140,10 @@ skillReturnType MagicTouch::Use(Creature &caster, Creature &target) {
         caster.damage(getCost());
 
         target.damage({baseDamage,0,0});
-        debuff->Clone()->apply(target);
+        Buff *newBuff = debuff->Clone();
+           //set buff duration based on stats
+        newBuff->turnsLeft = debuff->getBaseDuration() + runMultipliers(caster.getStats(), target.getStats());
+        newBuff->apply(target);
     }
     return r;
 }
@@ -164,6 +167,7 @@ MagicTouch::MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::st
 skillPtrList createSkillPtrList() {
     skillPtrList skillPtrs;
     Points cost_none {0,0,0};
+    Stats multipliers_none = {0,0,0,0,0,0};
     static Skill RootSkill {TYPE_SELF, true, true, nullptr, '#', "RootSkill", cost_none}; //Empty parent node of everything, only time using default ctor
     RootSkill.unlock();
     //Not added to skill list
@@ -183,7 +187,8 @@ skillPtrList createSkillPtrList() {
     Points cost_FlameTouch {0,0,2};
     Stats multipliers_FlameTouch;
         multipliers_FlameTouch.power = 1;
-    static DoT buff_FlameTouch {"Flame Touch burn", true, false, 4, {1,0,0}};
+    //                          name                dispel, stacks, duration, duration mults
+    static DoT buff_FlameTouch {"Flame Touch burn", true, false, 4, multipliers_none, {1,0,0}};
     static MagicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", cost_FlameTouch, 2, multipliers_FlameTouch, &buff_FlameTouch};
     skillPtrs.push_back(&FlameTouch);
 

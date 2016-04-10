@@ -1,6 +1,17 @@
 #include "buffs.h"
 #include <iostream>
 
+int runMultipliers (Stats stats, Stats multipliers) {
+    int totalEffect = 0;
+    totalEffect += (stats.strength * multipliers.strength);
+    totalEffect += (stats.dexterity * multipliers.dexterity);
+    totalEffect += (stats.endurance * multipliers.endurance);
+    totalEffect += (stats.power * multipliers.power);
+    totalEffect += (stats.control * multipliers.control);
+    totalEffect += (stats.stability * multipliers.stability);
+}
+
+
 bool buffExists (std::list<Buff*> buffList, std::string buffName) {
     std::list<Buff*>::const_iterator it;
     for (it = buffList.begin(); it != buffList.end(); it++) {
@@ -43,14 +54,19 @@ void checkExpiry (std::list<Buff*> &buffs) {
 //============================
 
 Buff::Buff() {};
-Buff::Buff(std::string buffName, bool dispel, bool stacks, int dur) {
+Buff::Buff(std::string buffName, bool dispel, bool stacks, int baseDur, Stats buffDurationMultipliers) {
     name = buffName;
     canDispel = dispel;
     this->stacks = stacks;
-    duration = dur;
-    turnsLeft = duration;
+    baseDuration = baseDur;
+    durationMultipliers = buffDurationMultipliers;
 }
 
+
+ int Buff::getBaseDuration() {
+    return baseDuration;
+
+ }
 
 std::string Buff::getName() {
     return name;
@@ -60,6 +76,8 @@ std::string Buff::getName() {
 //Only override if special stacking mechanics - ie doesn't stack with other buff type
 void Buff::apply(Creature &tgt) {
 
+
+
     if (stacks) {
         tgt.buffs.push_back(this);
 
@@ -67,9 +85,9 @@ void Buff::apply(Creature &tgt) {
         tgt.buffs.push_back(this);
 
     } else {
+        //Since it doesn't stack, there SHOULD be only one to dispel
         findBuffInList(tgt.buffs, name)->dispel(tgt.buffs);
         tgt.buffs.push_back(this);
-        //TODO refresh duration, or wipe others and apply self, or something
     }
 }
 
@@ -102,8 +120,8 @@ void Buff::tick(Creature &c) {
 
 DoT::DoT() {}
 
-DoT::DoT(std::string buffName, bool dispel, bool stacks, int dur, Points dmg)
-    : Buff(buffName, dispel, stacks, dur) {
+DoT::DoT(std::string buffName, bool dispel, bool stacks, int baseDur, Stats buffDurationMultipliers, Points dmg)
+    : Buff(buffName, dispel, stacks, baseDur, buffDurationMultipliers) {
     tickDamage = dmg;
 }
 

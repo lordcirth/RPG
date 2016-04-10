@@ -1,0 +1,12 @@
+# specific to CodeBlocks IDE
+*.cbp
+*.layout
+*.depend
+
+# generated directories
+bin/
+obj/
+
+#Custom
+*.html #Build log
+
