@@ -84,7 +84,7 @@ fightResults Fight::start() {
         runBuffs(enemy);
         if (enemy.isDead()) break;
         //Phase 4: Enemy turn
-        enemy.attack(player);
+        enemy.doTurn(player);
         //if (player.isDead()) break;
         checkExpiry(enemy.buffs);
     }

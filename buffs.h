@@ -2,7 +2,7 @@
 #include "creature.h"
 #include <string>
 
-int runMultipliers (Stats stats, Stats multipliers);
+int runStatMultipliers (Stats stats, Stats multipliers);
 bool buffExists (std::list<Buff*> buffList, std::string buffName);
 void checkExpiry (std::list<Buff*> &buffs);
 

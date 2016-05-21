@@ -5,9 +5,6 @@ int Monster::getXP() {
     return killXP;
 }
 
-void Monster::attack(Creature &target) { //TODO replace with using Hit.Use()
-    target.damage({attackDamage,0,0}, DMGTYPE_PHYSICAL);
-}
 
 //Default, only for other classes
 Monster::Monster()
@@ -15,26 +12,26 @@ Monster::Monster()
 
 }
 
-Monster::Monster(CreaturePoints points, int dmg, int XP)
+Monster::Monster(CreaturePoints points, Stats stats, skillPtrList skills, int XP)
     : Creature(points) {
+    setStats(stats); //TODO fix Creature ctors
     killXP = XP;
-    attackDamage = dmg;
+    skillPtrs = skills;
 }
 
+void Monster::doTurn(Creature player) { //Default Monster AI
+    if (skillPtrs.size() >= 1) {
+        skillPtrs.front()->Use(*this, player);
+    } else {
+        std::cerr << "no skills!" << std::endl;
+    }
+}
+
+skillPtrList skills_default = createMonsterSkillList();
+
+CreaturePoints cpoints_wolf =  {15,0,0,15,0,0};
+Stats          stats_wolf   =   {1,1,1,0,0,0};
 Wolf::Wolf()
-    : Monster( {15,0,0,15,0,0},2,5) {
+    : Monster(cpoints_wolf, stats_wolf, skills_default, 5) {
     setName("Wolf");
 }
-
-
-Wolf::Wolf(std::string mName, int startingHP)
-    : Monster( {15,0,0,startingHP,0,0},2,5) {
-    setName(mName);
-}
-
-//Wolf::Wolf()
-//    : Monster({15,0,0,startingHP,0,0},2,5)
-//{
-//
-//}
-//

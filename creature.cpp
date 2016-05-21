@@ -54,6 +54,7 @@ void Creature::rawDamage(Points dmg) { //Deal raw damage.  Should rarely be call
 
 void Creature::damage(Points dmg, skillDamageType damageType) {
     //Currently only HP is affected
+    //If any multiplier is 0 (ie disarm), damage is 0.  "No change" is 1.
     dmg.HP *= turnBuffEffects.allDamageTaken;
     if (damageType == DMGTYPE_PHYSICAL) {
         dmg.HP *= turnBuffEffects.physicalDamageTaken;
@@ -78,6 +79,17 @@ void Creature::takeCost(Points cost) {
     rawDamage(cost);
 }
 
+Points Creature::runDamageMultipliers (Points dmg,  skillDamageType damageType) {
+    //Only HP is affected right now
+    dmg.HP *= turnBuffEffects.allDamageOutput;
+    if (damageType == DMGTYPE_PHYSICAL) {
+        dmg.HP *= turnBuffEffects.physicalDamageOutput;
+    }
+    if (damageType == DMGTYPE_MAGICAL) {
+        dmg.HP *= turnBuffEffects.magicalDamageOutput;
+    }
+    return dmg;
+}
 //void Creature::addBuff(Buff newBuff) {
 //    buffs.push_back(*newBuff);
 //};

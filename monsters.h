@@ -1,16 +1,16 @@
 #pragma once
-#include "creature.h"
+#include "skills.h"
 
 class Monster : public Creature {
 private:
     int killXP;
-    int attackDamage;
 public:
     int getXP();
-    void attack(Creature &target);
 
-    Monster(); //Only for other classes
-    Monster(CreaturePoints points, int dmg, int XP);
+    Monster();
+    Monster(CreaturePoints points, Stats stats, skillPtrList skills, int XP);
+
+    void doTurn(Creature player); //Default Monster AI
 
 };
 

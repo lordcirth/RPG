@@ -1,7 +1,7 @@
 #include "buffs.h"
 #include <iostream>
 
-int runMultipliers (Stats stats, Stats multipliers) {
+int runStatMultipliers (Stats stats, Stats multipliers) {
     int totalEffect = 0;
     totalEffect += (stats.strength * multipliers.strength);
     totalEffect += (stats.dexterity * multipliers.dexterity);

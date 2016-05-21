@@ -1,5 +1,5 @@
 #pragma once
-//Manage "fights" - ie encounters, their turns, win/loss, etc.
+//Manage "fights" - ie encounters, turns, win/loss, etc.
 #include "player.h"
 #include "monsters.h"
 

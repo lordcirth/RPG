@@ -1,19 +1,17 @@
 #include <string>
 #include <iostream>
-//#include <memory> //unique_ptr
 #include "player.h"
 #include "skills.h"
 #include "fight.h"
 #include "interface.h"
-//#include "buffs.h"
+
 
 using namespace std;
 
 
 int main() {
     PlayerCharacter player("Player");
-
-    //cout << player.skillPtrs.front()->getName() << endl;  //Works!!
+    //player.turnBuffEffects.allDamageOutput = 3; //Triple damage, debug
 
     Wolf testWolf;
 

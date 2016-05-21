@@ -2,12 +2,13 @@
 #include <list>
 #include <string>
 
+
 class Skill;  //Forward declaration
 class Buff;  //Forward declaration
 
 //Used by Skills, Buffs, and Creatures so it needs to be here
 enum skillDamageType {
-    DMGTYPE_NO_ELEMENT, //Used mostly if it doesn't do damage, or special cases
+    DMGTYPE_NONE, //Used mostly if it doesn't do damage, or special cases
     DMGTYPE_PHYSICAL,
     DMGTYPE_MAGICAL
 };
@@ -59,7 +60,7 @@ private:
     Stats stats;
     CreaturePoints pointValues;
     std::string name = "";
-    //Has to be pointers or subclasses get "sliced"
+
     void rawDamage(Points dmg); //Raw damage
 
 public:
@@ -73,13 +74,14 @@ public:
     void setName(std::string);
     std::string getName();
     const char * getName_c();
-
+    Points runDamageMultipliers (Points dmg,  skillDamageType damageType);
 
     void healAll();
 
     void damage(Points dmg, skillDamageType damageType);
     void heal(Points healing);
-    void takeCost(Points cost); //Like damage() but for skill costs
+    //Like damage() but for skill costs, ignores amp/reduction etc
+    void takeCost(Points cost);
 
     bool isDead();
 

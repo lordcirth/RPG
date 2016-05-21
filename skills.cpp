@@ -33,6 +33,8 @@ std::string Skill::getName() {
     return name;
 }
 
+
+
 // Skill::getNameC() {
 //    return name.c_str();
 //}
@@ -93,7 +95,7 @@ Heal::Heal() {
 }
 
 Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, Points pointsToHeal)
-    : Skill(TYPE_SELF, DMGTYPE_NO_ELEMENT, startsUnlocked, false, parentNode, key, name, costPoints) { //Pass through to Skill constructor
+    : Skill(TYPE_SELF, DMGTYPE_NONE, startsUnlocked, false, parentNode, key, name, costPoints) { //Pass through to Skill constructor
     baseHealPoints = pointsToHeal;
 
 }
@@ -124,15 +126,13 @@ skillReturnType r = canCast(caster);
     if (r == SKILL_SUCCESS) {
         caster.takeCost(getCost());
 
-        int dmg = baseDamage;
-        Stats s = statDamageFactors;
-        dmg += s.strength * caster.getStats().strength;
-        dmg += s.dexterity * caster.getStats().dexterity;
+        Points dmg = {0,0,0};
+        dmg.HP = baseDamage + runStatMultipliers(caster.getStats(), statDamageFactors);
+        dmg = caster.runDamageMultipliers(dmg, getDamageType());
 
-        target.damage({dmg,0,0}, getDamageType());
+        target.damage(dmg, getDamageType());
     }
     return r;
-
 
 }
 
@@ -143,14 +143,16 @@ skillReturnType MagicTouch::Use(Creature &caster, Creature &target) {
 
     if (r == SKILL_SUCCESS) {
         caster.takeCost(getCost());
-        int dmg = baseDamage + runMultipliers(caster.getStats(), statDamageFactors);
-        target.damage({dmg ,0,0}, getDamageType());
+        Points dmg = {0,0,0};
+        dmg.HP = baseDamage + runStatMultipliers(caster.getStats(), statDamageFactors);
+        dmg = caster.runDamageMultipliers(dmg, getDamageType());
+        target.damage(dmg, getDamageType());
 
         //Clone the "master copy" of the buff
         Buff *newBuff = debuff->Clone();
 
         //set buff duration based on stats
-        newBuff->turnsLeft = debuff->getBaseDuration() + runMultipliers(caster.getStats(), debuff->getDurationMultipliers());
+        newBuff->turnsLeft = debuff->getBaseDuration() + runStatMultipliers(caster.getStats(), debuff->getDurationMultipliers());
         newBuff->apply(target);
     }
     return r;
@@ -170,44 +172,70 @@ MagicTouch::MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::st
 // Provide Skill Tree
 //=============================
 
+Skill * getSkill_RootSkill() {
+    static Skill RootSkill {TYPE_SELF, DMGTYPE_NONE, true, true, nullptr, '#', "RootSkill", {0,0,0}};
+    RootSkill.unlock();
+    return &RootSkill;
+}
+
 skillPtrList createSkillPtrList() {
     skillPtrList skillPtrs;
     Points cost_none {0,0,0};
     Stats multipliers_none = {0,0,0,0,0,0};
-    static Skill RootSkill {TYPE_SELF, DMGTYPE_NO_ELEMENT, true, true, nullptr, '#', "RootSkill", cost_none}; //Empty parent node of everything, only time using default ctor
-    RootSkill.unlock();
+    Skill RootSkill = *getSkill_RootSkill();
+
+    //Empty parent node of everything, only time using Skill directly
+
     //Not added to skill list
 
 //Tier 0: Unlocked by default
     //Heal::Heal(bool startsUnlocked, Skill* parentNode, char key, std::string name, Points costPoints, Points basePointsToHeal);
-    static Heal Rest {true, &RootSkill, 'r', "Rest", cost_none, {1,1,1}}; //Root of Mage tree
-    skillPtrs.push_back(&Rest);
+    Skill *Rest;
+    Rest = new Heal (true, &RootSkill, 'r', "Rest", cost_none, {1,1,1}); //Root of Mage tree
+    skillPtrs.push_back(Rest);
 
 
     Stats multipliers_Hit;
         multipliers_Hit.strength = 1;                      // 1 + 1*STR damage
-    static Melee Hit {true, &RootSkill, 'h', "Hit", cost_none, 1, multipliers_Hit}; //Root of Warrior tree
-    skillPtrs.push_back(&Hit);
+    Skill *Hit;
+    Hit = new Melee  (true, &RootSkill, 'h', "Hit", cost_none, 1, multipliers_Hit); //Root of Warrior tree
+    skillPtrs.push_back(Hit);
 
 //Tier 1: First unlockables
 
     //Flame Touch
     //                          name                dispel, stacks, duration,   duration mults,     damage
-    static DoT buff_FlameTouch {"Flame Touch burn", true, false,    4,          multipliers_none,   {1,0,0}};
+    Buff * buff_FlameTouch;
+    buff_FlameTouch = new DoT ("Flame Touch burn", true, false,    4,          multipliers_none,   {1,0,0});
 
     Points cost_FlameTouch {0,0,2};
     Stats multipliers_FlameTouch_damage; //Inits with 0's
         multipliers_FlameTouch_damage.power = 1;
 
-    static MagicTouch FlameTouch {false, &Rest, 'f', "Flame Touch", cost_FlameTouch, 1, multipliers_FlameTouch_damage, &buff_FlameTouch};
-    skillPtrs.push_back(&FlameTouch);
+    Skill *FlameTouch;
+    FlameTouch = new MagicTouch (false, Rest, 'f', "Flame Touch", cost_FlameTouch, 1, multipliers_FlameTouch_damage, buff_FlameTouch);
+    skillPtrs.push_back(FlameTouch);
 
-    FlameTouch.unlock(); //Debug
+    FlameTouch->unlock(); //Debug
 
     return skillPtrs;
+}
 
-    //Sample usage
-    //std::cout << skillPtrs.front()->getName();
+Skill * getSkill_Strike() {
+    Stats multipliers_Strike;
+        multipliers_Strike.strength = 1;                                    // 1 + 1*STR damage
+    static Melee Strike {true, getSkill_RootSkill(), '.', "Strike", {0,0,0}, 1, multipliers_Strike}; //Root of Warrior tree
+    return &Strike;
+}
+
+//Default Skill list for monsters
+skillPtrList createMonsterSkillList() {
+    skillPtrList skillPtrs;
+
+    //Default Monster attack - '.' for Monster hotkeys, never used
+    skillPtrs.push_back(getSkill_Strike());
+
+    return skillPtrs;
 }
 
 //Returns nullptr if not a valid skill.  Caller must handle this.

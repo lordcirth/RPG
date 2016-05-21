@@ -98,8 +98,9 @@ public:
 //typedef std::map<std::string,Melee> meleePtrMap;
 
 typedef std::list<Skill*> skillPtrList;
-skillPtrList createSkillPtrList();
-void populateSkillPtrList (skillPtrList& skillPtrs);
+skillPtrList createSkillPtrList(); //Player skill list
+
+skillPtrList createMonsterSkillList();//Default Skill list for monsters
 
 //typedef std::list<std::shared_ptr<Skill>> skillSharedPtrList;
 //skillSharedPtrList createSafeSkillList();
