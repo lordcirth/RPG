@@ -172,7 +172,7 @@ MagicTouch::MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::st
 // Provide Skill Tree
 //=============================
 
-Skill * getSkill_RootSkill() {
+Skill * getSkill_RootSkill() {  //Empty parent node of everything, only time using Skill directly
     Skill *RootSkill;
     RootSkill = new Skill {TYPE_SELF, DMGTYPE_NONE, true, true, nullptr, '#', "RootSkill", {0,0,0}};
     //RootSkill->unlock();
@@ -185,12 +185,12 @@ skillPtrList createSkillPtrList() {
     Stats multipliers_none = {0,0,0,0,0,0};
     Skill RootSkill = *getSkill_RootSkill();
 
-    //Empty parent node of everything, only time using Skill directly
+
 
     //Not added to skill list
 
 //Tier 0: Unlocked by default
-    //Heal::Heal(bool startsUnlocked, Skill* parentNode, char key, std::string name, Points costPoints, Points basePointsToHeal);
+
     Skill *Rest;
     Rest = new Heal (true, &RootSkill, 'r', "Rest", cost_none, {1,1,1}); //Root of Mage tree
     skillPtrs.push_back(Rest);
@@ -225,7 +225,7 @@ skillPtrList createSkillPtrList() {
 Skill * getSkill_Strike() {
     Stats multipliers_Strike;
         multipliers_Strike.strength = 1;
-    Melee *Strike;
+    Skill *Strike;
                                // 1 + 1*STR damage
     Strike = new Melee (true, getSkill_RootSkill(), '.', "Strike", {0,0,0}, 1, multipliers_Strike); //Root of Warrior tree
     return Strike;

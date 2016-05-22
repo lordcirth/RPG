@@ -19,7 +19,7 @@ Monster::Monster(CreaturePoints points, Stats stats, skillPtrList skills, int XP
     skillPtrs = skills;
 }
 
-void Monster::doTurn(Creature player) { //Default Monster AI
+void Monster::doTurn(Creature &player) { //Default Monster AI
     if (skillPtrs.size() >= 1) {
         skillPtrs.front()->Use(*this, player);
     } else {
@@ -33,5 +33,5 @@ CreaturePoints cpoints_wolf =  {15,0,0,15,0,0};
 Stats          stats_wolf   =   {1,1,1,0,0,0};
 Wolf::Wolf()
     : Monster(cpoints_wolf, stats_wolf, skills_default, 5) {
-    setName("Wolf");
+    setName("Wolf"); //Should probably be moved to Creature() at some point
 }
