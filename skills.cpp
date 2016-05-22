@@ -173,9 +173,10 @@ MagicTouch::MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::st
 //=============================
 
 Skill * getSkill_RootSkill() {
-    static Skill RootSkill {TYPE_SELF, DMGTYPE_NONE, true, true, nullptr, '#', "RootSkill", {0,0,0}};
-    RootSkill.unlock();
-    return &RootSkill;
+    Skill *RootSkill;
+    RootSkill = new Skill {TYPE_SELF, DMGTYPE_NONE, true, true, nullptr, '#', "RootSkill", {0,0,0}};
+    //RootSkill->unlock();
+    return RootSkill;
 }
 
 skillPtrList createSkillPtrList() {
@@ -223,9 +224,11 @@ skillPtrList createSkillPtrList() {
 
 Skill * getSkill_Strike() {
     Stats multipliers_Strike;
-        multipliers_Strike.strength = 1;                                    // 1 + 1*STR damage
-    static Melee Strike {true, getSkill_RootSkill(), '.', "Strike", {0,0,0}, 1, multipliers_Strike}; //Root of Warrior tree
-    return &Strike;
+        multipliers_Strike.strength = 1;
+    Melee *Strike;
+                               // 1 + 1*STR damage
+    Strike = new Melee (true, getSkill_RootSkill(), '.', "Strike", {0,0,0}, 1, multipliers_Strike); //Root of Warrior tree
+    return Strike;
 }
 
 //Default Skill list for monsters

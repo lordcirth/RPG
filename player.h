@@ -37,6 +37,7 @@ public:
     PlayerCharacter(int bHP, int bSP, int bMP, Stats bStats, std::string playerName);
     PlayerCharacter(std::string playerName);
     PlayerCharacter();
+    ~PlayerCharacter();
 
 };
 

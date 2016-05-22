@@ -66,6 +66,16 @@ PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, Stats bStats, std::s
 //    skillList skills = createSkillStruct();
 }
 
+//Destructor
+PlayerCharacter::~PlayerCharacter() {
+    //cerr << "Player dcon called!" << endl;
+//    list<Skill*>::const_iterator it = skillPtrs.begin();
+//
+//    while (it != this->skillPtrs.end()) {
+//        delete (*it);  //Causes doublefree?  Why?
+//    }
+}
+
 string displayStats(Stats stats) {
     string output =
         "  STR: " + to_string(stats.strength)  +
