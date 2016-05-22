@@ -118,12 +118,13 @@ void Buff::dispel(std::list<Buff*> &buffs) {
     }
 }
 
-void Buff::tick(Creature &c) {
-    std::cerr << "Buff::tick called on: " << c.getName() << std::endl;
+//Default tick actions if not overridden
+void Buff::Pre_tick(Creature &c) { }
+
+void Buff::Post_tick(Creature &c) {
     turnsLeft -= 1;
     isExpired();
 }
-
 
 //============================
 // DoT
@@ -136,7 +137,7 @@ DoT::DoT(std::string buffName, bool dispel, bool stacks, int baseDur, Stats buff
     tickDamage = dmg;
 }
 
-void DoT::tick(Creature &c) {
+void DoT::Post_tick(Creature &c) {
     c.damage(tickDamage, getDamageType());
     turnsLeft -= 1;
 }
@@ -173,11 +174,20 @@ Buff* DamageMod::Clone() {
 //============================
 
 //Process all buff effects for this turn for a given Creature
-void runBuffs(Creature &c) {
+void runPreBuffs(Creature &c) {
     std::list<Buff*>::const_iterator it;
 
     for (it = c.buffs.begin(); it != c.buffs.end(); it++) {
-        (*it)->tick(c); //Apply this buff's effects
+        (*it)->Pre_tick(c); //Apply this buff's effects
+
+    }
+}
+
+void runPostBuffs(Creature &c) {
+    std::list<Buff*>::const_iterator it;
+
+    for (it = c.buffs.begin(); it != c.buffs.end(); it++) {
+        (*it)->Post_tick(c); //Apply this buff's effects
 
     }
 }

@@ -58,7 +58,8 @@ fightResults Fight::start() {
     //4 phases:
 
         //Phase 1: Run player buffs/debuffs
-        runBuffs(player);
+        runPreBuffs(player);
+        runPostBuffs(player);
         if (player.isDead()) break;
 
         //Phase 2: Player turn
@@ -81,7 +82,8 @@ fightResults Fight::start() {
         checkExpiry(player.buffs);
 
         //Phase 3: Run enemy buffs/debuffs
-        runBuffs(enemy);
+        runPreBuffs(enemy);
+        runPostBuffs(enemy);
         if (enemy.isDead()) break;
         //Phase 4: Enemy turn
         enemy.doTurn(player);
