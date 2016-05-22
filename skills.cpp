@@ -219,6 +219,9 @@ skillPtrList createSkillPtrList() {
 
     FlameTouch->unlock(); //Debug
 
+    Buff * buff_FrostTouch;
+    //buff_FrostTouch = new
+
     return skillPtrs;
 }
 

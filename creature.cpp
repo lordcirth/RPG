@@ -123,3 +123,23 @@ Creature::Creature(Stats startingStats, std::string cName) {
     stats = startingStats;
     pointValues = {0,0,0,0,0,0}; //Initialized by subclass, based on Stats
 }
+
+
+//Extra functions:
+
+
+//Merge two sets of BuffTurnMultipliers
+BuffTurnMultipliers mergeBuffTurnMultipliers (BuffTurnMultipliers original, BuffTurnMultipliers changes) {
+    BuffTurnMultipliers result; // I could merge using *= but I think this is clearer
+
+    //Probably messy but I don't know a better way?
+    result.allDamageOutput      = original.allDamageOutput      * changes.allDamageOutput;
+    result.magicalDamageOutput  = original.magicalDamageOutput  * changes.magicalDamageOutput;
+    result.physicalDamageOutput = original.physicalDamageOutput * changes.physicalDamageOutput;
+
+    result.allDamageTaken       = original.allDamageTaken       * changes.allDamageTaken;
+    result.magicalDamageTaken   = original.magicalDamageTaken   * changes.magicalDamageTaken;
+    result.physicalDamageTaken  = original.physicalDamageTaken  * changes.physicalDamageTaken;
+
+    return result;
+}

@@ -43,7 +43,7 @@ struct CreaturePoints {
 
 //Modifiers applied by (de)buffs on a given turn
 //Default values are no effect
-struct TurnMultipliers {
+struct BuffTurnMultipliers {
     int allDamageOutput         = 1;
     int physicalDamageOutput    = 1;
     int magicalDamageOutput     = 1;
@@ -66,7 +66,7 @@ private:
 public:
     std::list<Skill*> skillPtrs;
     std::list<Buff*> buffs;
-    TurnMultipliers turnBuffEffects;
+    BuffTurnMultipliers turnBuffEffects;
     Stats getStats();
     void setStats(Stats);
     CreaturePoints getPointValues();
@@ -92,3 +92,5 @@ public:
 
 };
 
+//Merge two sets of BuffTurnMultipliers
+BuffTurnMultipliers mergeBuffTurnMultipliers (BuffTurnMultipliers original, BuffTurnMultipliers changes);

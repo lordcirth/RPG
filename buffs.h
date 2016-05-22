@@ -48,6 +48,18 @@ public:
     Buff* Clone();
     DoT();
     DoT(std::string buffName, bool dispel, bool stacks, int dur, Stats buffDurationMultipliers, Points dmg);
+
+    void tick(Creature &c);
+};
+
+class DamageMod : public Buff
+{
+    BuffTurnMultipliers effects;
+public:
+    Buff* Clone();
+    DamageMod();
+    DamageMod(std::string buffName, bool dispel, bool stacks, int dur, Stats buffDurationMultipliers, BuffTurnMultipliers buffEffects);
+
     void tick(Creature &c);
 };
 

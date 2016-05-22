@@ -51,7 +51,7 @@ void checkExpiry (std::list<Buff*> &buffs) {
 }
 
 //============================
-// Buff & subclasses
+// Buff
 //============================
 
 Buff::Buff() {};
@@ -124,6 +124,11 @@ void Buff::tick(Creature &c) {
     isExpired();
 }
 
+
+//============================
+// DoT
+//============================
+
 DoT::DoT() {}
 
 DoT::DoT(std::string buffName, bool dispel, bool stacks, int baseDur, Stats buffDurationMultipliers, Points dmg)
@@ -140,14 +145,38 @@ Buff* DoT::Clone() {
     return new DoT(*this);
 }
 
-void runBuffs(Creature &c) {
-    //Save buffs to remove after running them
-    //Can't remove during iterator or *BOOM*
 
+//============================
+// DamageMod
+//============================
+
+DamageMod::DamageMod() {}
+
+DamageMod::DamageMod(std::string buffName, bool dispel, bool stacks, int baseDur, Stats buffDurationMultipliers, BuffTurnMultipliers buffEffects)
+    : Buff(buffName, dispel, stacks, baseDur, buffDurationMultipliers) {
+    effects = buffEffects;
+}
+
+void DamageMod::tick(Creature &c) {
+
+    turnsLeft -= 1;
+}
+
+Buff* DamageMod::Clone() {
+    return new DamageMod(*this);
+}
+
+
+//============================
+// Extra functions
+//============================
+
+//Process all buff effects for this turn for a given Creature
+void runBuffs(Creature &c) {
     std::list<Buff*>::const_iterator it;
 
     for (it = c.buffs.begin(); it != c.buffs.end(); it++) {
-        (*it)->tick(c); //Exec buff effects
+        (*it)->tick(c); //Apply this buff's effects
 
     }
 }
