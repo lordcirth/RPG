@@ -61,7 +61,7 @@ private:
     CreaturePoints pointValues;
     std::string name = "";
 
-    void rawDamage(Points dmg); //Raw damage
+    void rawDamage(Points dmg); //Raw damage, no modifiers
 
 public:
     std::list<Skill*> skillPtrs;
@@ -82,6 +82,8 @@ public:
     void heal(Points healing);
     //Like damage() but for skill costs, ignores amp/reduction etc
     void takeCost(Points cost);
+    void mergeBuffTurnMultipliers (BuffTurnMultipliers changes);
+    void clearBuffTurnMultipliers();
 
     bool isDead();
 
@@ -90,7 +92,8 @@ public:
     Creature(CreaturePoints points);
     Creature(Stats startingStats, std::string cName);
 
+
 };
 
 //Merge two sets of BuffTurnMultipliers
-BuffTurnMultipliers mergeBuffTurnMultipliers (BuffTurnMultipliers original, BuffTurnMultipliers changes);
+

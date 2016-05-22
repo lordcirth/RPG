@@ -129,17 +129,20 @@ Creature::Creature(Stats startingStats, std::string cName) {
 
 
 //Merge two sets of BuffTurnMultipliers
-BuffTurnMultipliers mergeBuffTurnMultipliers (BuffTurnMultipliers original, BuffTurnMultipliers changes) {
-    BuffTurnMultipliers result; // I could merge using *= but I think this is clearer
+void Creature::mergeBuffTurnMultipliers (BuffTurnMultipliers changes) {
 
     //Probably messy but I don't know a better way?
-    result.allDamageOutput      = original.allDamageOutput      * changes.allDamageOutput;
-    result.magicalDamageOutput  = original.magicalDamageOutput  * changes.magicalDamageOutput;
-    result.physicalDamageOutput = original.physicalDamageOutput * changes.physicalDamageOutput;
+    this->turnBuffEffects.allDamageOutput       *= changes.allDamageOutput;
+    this->turnBuffEffects.magicalDamageOutput   *= changes.magicalDamageOutput;
+    this->turnBuffEffects.physicalDamageOutput  *= changes.physicalDamageOutput;
 
-    result.allDamageTaken       = original.allDamageTaken       * changes.allDamageTaken;
-    result.magicalDamageTaken   = original.magicalDamageTaken   * changes.magicalDamageTaken;
-    result.physicalDamageTaken  = original.physicalDamageTaken  * changes.physicalDamageTaken;
+    this->turnBuffEffects.allDamageTaken        *= changes.allDamageTaken;
+    this->turnBuffEffects.magicalDamageTaken    *= changes.magicalDamageTaken;
+    this->turnBuffEffects.physicalDamageTaken   *= changes.physicalDamageTaken;
 
-    return result;
 }
+
+void Creature::clearBuffTurnMultipliers() {
+    BuffTurnMultipliers defaultMults;
+    this->turnBuffEffects = defaultMults;
+};

@@ -158,7 +158,8 @@ DamageMod::DamageMod(std::string buffName, bool dispel, bool stacks, int baseDur
 }
 
 void DamageMod::tick(Creature &c) {
-
+    //Yes, we want to apply every tick, because these effects are cleared at end of turn.
+    c.mergeBuffTurnMultipliers(effects);
     turnsLeft -= 1;
 }
 
