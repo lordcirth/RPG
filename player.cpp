@@ -109,3 +109,12 @@ void PlayerCharacter::giveXP(int earnedXP) {
         levelUp();
     }
 }
+
+int PlayerCharacter::getFreeStatPoints() {
+    return freeStatPoints;
+}
+
+
+int PlayerCharacter::getFreeSkillPoints() {
+    return freeSkillPoints;
+}

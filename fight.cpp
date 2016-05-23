@@ -52,7 +52,6 @@ fightResults Fight::start() {
     Skill *playerChosenSkill;
     bool skillSuccess;
     initInterface();
-    //initSkillMenu(player);
 
     while ( !player.isDead() && !enemy.isDead()) { //Main fight loop
     //4 phases:
@@ -64,8 +63,7 @@ fightResults Fight::start() {
         if (player.isDead()) break;
 
         //Phase 2: Player turn
-        displayPoints(0,0, player);
-        displayPoints(0,64, enemy);
+        updatePoints(player,enemy);
 
         printAllBuffs(player.buffs, enemy.buffs);
 

@@ -30,6 +30,10 @@ public:
 
     void calcAttributes();
     void giveXP(int earnedXP);
+
+    int getFreeStatPoints();
+    int getFreeSkillPoints();
+
     //Constructors
     PlayerCharacter(int bHP, int bSP, int bMP, Stats bStats);
     PlayerCharacter(int bHP, int bSP, int bMP, Stats bStats, std::string playerName);

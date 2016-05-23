@@ -1,42 +1,52 @@
 #include "interface.h"
-#include "ncurses.h"
 #include <string>
 #include <iostream>
 #include "menu.h"
 
 using namespace std;
+WINDOW *fight_window; //Global - is this bad?
+WINDOW *skill_window; //Skill points / levelup screen
+const int buffPrintLength = 24;
 
 void initInterface() {
     initscr();
     cbreak();
     noecho();
+
+    fight_window = newwin(24,79,0,0);
+    wborder(fight_window, '|', '|', '-', '-', '+', '+', '+', '+');
+    //cerr << "initchar: " <<  wgetch(fight_window) << endl;
+    wrefresh(fight_window);
+    skill_window = newwin(24,79,0,0);
 }
 
 void cleanUpInterface() {
-    endwin();
+    //endwin();
 }
 
 char getPlayerKey() {
-    return getch();
+    return wgetch(fight_window);
 }
 
 void displayPoints(int row, int col, Creature c) {
     CreaturePoints points = c.getPointValues();
     string name = c.getName();
 
-    mvprintw(row, col, "%s: \n", name.c_str());  //Name as Null-terminated string
-    mvprintw(++row, col, "HP: %d / %d \n", points.HP, points.maxHP);
-    mvprintw(++row, col, "SP: %d / %d \n", points.SP, points.maxSP);
-    mvprintw(++row, col, "MP: %d / %d \n", points.MP, points.maxMP);
+    mvwprintw(fight_window, row, col, "%s:", name.c_str());  //Name as Null-terminated string
+
+    mvwprintw(fight_window, ++row, col, "HP: %d / %d", points.HP, points.maxHP);
+    mvwprintw(fight_window, ++row, col, "SP: %d / %d", points.SP, points.maxSP);
+    mvwprintw(fight_window, ++row, col, "MP: %d / %d", points.MP, points.maxMP);
+    //wrefresh(fight_window);
 }
 
 void updatePoints(Creature &player, Creature &enemy) {
-    displayPoints(0,0, player);
-    displayPoints(0,68, enemy);
+    displayPoints(1,1, player);
+    displayPoints(1,64, enemy);
 }
 
 void printSkill(int row, int col, char key, const char *name) {
-    mvprintw(row,col, "%c: %s", key, name);
+    mvwprintw(fight_window, row,col, "%c: %s", key, name);
 }
 
 //Demo menu.h
@@ -72,8 +82,9 @@ void showMenu(PlayerCharacter &player) {
 }
 
 void printBuff(int vert, int hor, Buff* buff) {
-    mvprintw(vert,hor, "                                               ");  //Hacky clear.  TODO fix
-    mvprintw(vert,hor, "%s (%i)", buff->getName().c_str(), buff->turnsLeft);
+    mvwprintw(fight_window, vert,hor, "                ");  //Hacky clear.  TODO fix
+    //string buffString = format()
+    mvwprintw(fight_window, vert,hor, "%s (%i)", buff->getName().c_str(), buff->turnsLeft);
 }
 
 void printBuffList(int startVert, int startHor, std::list<Buff*> buffs) {
@@ -90,25 +101,25 @@ void printBuffList(int startVert, int startHor, std::list<Buff*> buffs) {
     }
 
     //TODO: Proper clear!
-    mvprintw(vert++,hor, "                                       ");
-    mvprintw(vert++,hor, "                                       ");
-    mvprintw(vert++,hor, "                                       ");
+    mvwprintw(fight_window, vert++,hor, "                ");
+    mvwprintw(fight_window, vert++,hor, "                ");
+    mvwprintw(fight_window, vert++,hor, "                ");
 }
 
 
 
 //New buff printing, with duration:
 void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs) {
-    printBuffList(5,0, playerBuffs);
-    printBuffList(5,60, enemyBuffs);
+    printBuffList(5, 1, playerBuffs);
+    printBuffList(5, 79 - buffPrintLength, enemyBuffs);
 }
 
 
 
 //Print string to player's messages.
 void printMessage(string message) { //TODO scrolling!
-    mvprintw(20,1, "                                               "); //TODO fix hacky clear
-    mvprintw(20,1, message.c_str());
+    mvwprintw(fight_window, 20,1, "                                               "); //TODO fix hacky clear
+    mvwprintw(fight_window,20,1, message.c_str());
 }
 
 void printSkillUse(string skillName) {
@@ -125,4 +136,13 @@ void printSkillFails(Skill *a, skillReturnType error) {
     if (error == SKILL_FAIL_COST) {
         printMessage(a->getName() + " requires " + to_string(a->getCost().HP) + "HP, " + to_string(a->getCost().SP) + "SP, " + to_string(a->getCost().MP) + "MP");
     }
+}
+
+void levelUpMenu (PlayerCharacter player) {
+    mvwprintw(skill_window, 1,1, "%s:", "Skill Menu");
+
+    mvwprintw(skill_window, 3,1, "%s:  %i", "Stat points", player.getFreeStatPoints());
+    mvwprintw(skill_window, 4,1, "%s: %i", "Skill points", player.getFreeSkillPoints());
+
+    wgetch(skill_window);
 }

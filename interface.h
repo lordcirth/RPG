@@ -1,5 +1,7 @@
 #pragma once
 #include "player.h"
+#include "ncurses.h"
+
 void initInterface();
 void cleanUpInterface();
 
@@ -21,3 +23,5 @@ void printBuffList(int vert, int hor, std::list<std::string> buffNames);
 void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs);
 
 void printSkillFails(Skill *attemptedSkill, skillReturnType error);
+
+void levelUpMenu (PlayerCharacter player);

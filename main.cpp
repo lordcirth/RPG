@@ -10,13 +10,17 @@ using namespace std;
 
 
 int main() {
+
     PlayerCharacter player("Player");
-    while (true) {
+    fightResults testResults;
+
+    do {
         Wolf testWolf;
 
         Fight test {player, testWolf};
-        fightResults testResults = test.start();
-    }
+        testResults = test.start();
+        levelUpMenu(player);
+    } while (testResults.won);
 
     return 0;
 }
