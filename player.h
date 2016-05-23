@@ -30,6 +30,7 @@ public:
 
     void calcAttributes();
     void giveXP(int earnedXP);
+    std::pair<int,int> getXP();
 
     int getFreeStatPoints();
     int getFreeSkillPoints();

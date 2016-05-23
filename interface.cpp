@@ -101,9 +101,9 @@ void printBuffList(int startVert, int startHor, std::list<Buff*> buffs) {
     }
 
     //TODO: Proper clear!
-    mvwprintw(fight_window, vert++,hor, "                ");
-    mvwprintw(fight_window, vert++,hor, "                ");
-    mvwprintw(fight_window, vert++,hor, "                ");
+    mvwprintw(fight_window, vert++,hor, "                    ");
+    mvwprintw(fight_window, vert++,hor, "                    ");
+    mvwprintw(fight_window, vert++,hor, "                    ");
 }
 
 

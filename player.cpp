@@ -87,14 +87,6 @@ string displayStats(Stats stats) {
     return output;
 }
 
-//string displayPoints(CreaturePoints points) {
-//    string output =
-//        "  HP: " + to_string(points.HP) + " / " + to_string(points.maxHP) + "\n" +
-//        "  SP: " + to_string(points.SP) + " / " + to_string(points.maxSP) + "\n" +
-//        "  MP: " + to_string(points.MP) + " / " + to_string(points.maxMP) + "\n";
-//    return output;
-//}
-
 void PlayerCharacter::levelUp() {
     level++;
     freeStatPoints++;
@@ -103,11 +95,18 @@ void PlayerCharacter::levelUp() {
 
 void PlayerCharacter::giveXP(int earnedXP) {
     XP += earnedXP;
+
     //XP is full
-    if (XP > xpLevelMultiplier*baseXpPerLevel) {
+    if (XP > xpLevelMultiplier*level*baseXpPerLevel) {
         XP -= xpLevelMultiplier*baseXpPerLevel;
         levelUp();
     }
+}
+
+std::pair<int,int> PlayerCharacter::getXP() {
+    int xpNextLevel = xpLevelMultiplier*level*baseXpPerLevel;
+    std::pair<int,int> xpPair = std::make_pair(XP,xpNextLevel);
+    return xpPair;
 }
 
 int PlayerCharacter::getFreeStatPoints() {
