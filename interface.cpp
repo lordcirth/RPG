@@ -44,12 +44,12 @@ void showMenu(PlayerCharacter &player) {
     int startVert = 16;
     int startHor  = 1;
 
-//    int vOffset  = 1;
-    int hOffset  = 10;
+    int vOffset  = 1;
+    int hOffset  = 16;
 
-//    int maxVert = 5;
+    int maxVert = 5;
     int maxHor = 3;
-//    int vertSlot = 1;
+    int vertSlot = 1;
     int horSlot = 1;
 
     int vert = startVert;
@@ -58,81 +58,21 @@ void showMenu(PlayerCharacter &player) {
     list<Skill*>::const_iterator it;
     for (it = player.skillPtrs.begin(); it != player.skillPtrs.end(); it++) {
         printSkill(vert, hor, (**it).shortcut, (*it)->getName().c_str());
-        if (horSlot < maxHor) {
+        if (horSlot < maxHor) { //Move across
             hor += hOffset;
             ++horSlot;
-        } else {
-            ++hor;
-            vert = startVert;
+        } else { //Down one line and reset (like carriage return)
+            hor = startHor;
             horSlot = 1;
+
+            ++vertSlot;
+            vert += vOffset;
         }
     }
 }
 
-//void printBuff(int vert, int hor, buffStackPair buff) {
-//    mvprintw(vert,hor, "                                               ");  //Hacky clear.  TODO fix
-//    if (buff.second <= 1) {
-//        mvprintw(vert,hor, "%s", buff.first.c_str());
-//    } else {
-//        mvprintw(vert,hor, "%s x%i", buff.first.c_str(), buff.second);
-//    }
-//}
-//
-//void printBuffList(int startVert, int startHor, list<string> buffNames) {
-//    buffNames.sort(); //So we can deduplicate, also looks nice
-//    list<buffStackPair> printList; //Buffs and stack counts
-//
-//    list<string>::const_iterator it;
-//    for (it = buffNames.begin(); it != buffNames.end(); it++) {
-////
-//
-//        if (printList.back().first == *it ) {  //If last loop's buff = this loop's buff
-//
-//            printList.back().second++; // increment stack count
-//
-//        } else {
-//            printList.push_back({*it, 1});          //Or if it's the first of it's kind, add it.
-////            cerr << "Fresh buff" << endl;
-//        }
-//    }
-//
-//    int vert = startVert;
-//    int hor  = startHor;
-//    list<buffStackPair>::const_iterator buffIt;
-//    for (buffIt = printList.begin(); buffIt != printList.end(); buffIt++) {
-////        cerr << "printing buff:" << endl;
-//        printBuff(vert, hor, (*buffIt));
-//        ++vert;
-//    }
-//
-//    //TODO: Proper clear!
-//    mvprintw(vert,hor, "                                       ");
-//    mvprintw(vert,hor, "                                       ");
-//    mvprintw(vert,hor, "                                       ");
-//}
-
-//void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs) {
-//    list<string> playerBuffNames;
-//    list<string> enemyBuffNames;
-//
-//    list<Buff*>::const_iterator it;
-//    for (it = playerBuffs.begin(); it != playerBuffs.end(); it++) {
-//       playerBuffNames.push_back((*it)->getName());
-//    }
-//
-//    for (it = enemyBuffs.begin(); it != enemyBuffs.end(); it++) {
-//       enemyBuffNames.push_back((*it)->getName());
-//    }
-//
-//    printBuffList(5,0, playerBuffNames);
-//    printBuffList(5,60, enemyBuffNames);
-//}
-
-
 void printBuff(int vert, int hor, Buff* buff) {
     mvprintw(vert,hor, "                                               ");  //Hacky clear.  TODO fix
-
-
     mvprintw(vert,hor, "%s (%i)", buff->getName().c_str(), buff->turnsLeft);
 }
 

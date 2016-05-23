@@ -11,13 +11,12 @@ using namespace std;
 
 int main() {
     PlayerCharacter player("Player");
-    //player.turnBuffEffects.allDamageOutput = 3; //Triple damage, debug
+    while (true) {
+        Wolf testWolf;
 
-    Wolf testWolf;
-
-    Fight test {player, testWolf};
-    fightResults testResults = test.start();
-    //cout << testResults.won << endl;
+        Fight test {player, testWolf};
+        fightResults testResults = test.start();
+    }
 
     return 0;
 }

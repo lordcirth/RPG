@@ -9,9 +9,7 @@ class PlayerCharacter : public Creature {
 
 private:
     //Stats add to these
-    int baseHP; //Health
-    int baseSP; //Stamina
-    int baseMP; //Mana
+    Points basePoints;// HP,SP,MP
 
     int level = 1;
     int XP = 0;

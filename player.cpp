@@ -12,9 +12,9 @@ void PlayerCharacter::calcAttributes() {
     CreaturePoints points = getPointValues();
     Stats stats = getStats();
 
-    points.maxHP = baseHP + 2*stats.endurance;
-    points.maxSP = baseSP + 1*stats.endurance + 1*stats.dexterity;
-    points.maxMP = baseMP + 2*stats.stability + 1* stats.control;
+    points.maxHP = basePoints.HP + 2*stats.endurance;
+    points.maxSP = basePoints.SP + 1*stats.endurance + 1*stats.dexterity;
+    points.maxMP = basePoints.MP + 2*stats.stability + 1* stats.control;
 
     setPointValues(points);
 }
@@ -24,9 +24,9 @@ void PlayerCharacter::calcAttributes() {
 //Default Constructor
 PlayerCharacter::PlayerCharacter()
     : Creature(Stats {1,1,1,1,1,1}, "Player") {
-    baseHP = 10;
-    baseSP = 0;
-    baseMP = 0;
+    basePoints.HP = 10;
+    basePoints.SP = 0;
+    basePoints.MP = 0;
 
     skillPtrs = createSkillPtrList();
 
@@ -39,12 +39,10 @@ PlayerCharacter::PlayerCharacter()
 PlayerCharacter::PlayerCharacter(std::string playerName)
     : Creature(Stats {1,1,1,1,1,1}, playerName) {
     //cout << "starting player ctor";
-    baseHP = 10;
-    baseSP = 0;
-    baseMP = 0;
+    basePoints.HP = 10;
+    basePoints.SP = 0;
+    basePoints.MP = 0;
 
-    //populateSkillPtrList(skillPtrs);
-    //std::cout << "Player ctor:" << skillPtrs.front()->getName() << std::endl;
     skillPtrs = createSkillPtrList();
 
     setStats({1,1,1,1,1,1});
@@ -56,9 +54,9 @@ PlayerCharacter::PlayerCharacter(std::string playerName)
 
 PlayerCharacter::PlayerCharacter(int bHP, int bSP, int bMP, Stats bStats, std::string playerName)
     : Creature(bStats, playerName) {
-    baseHP = bHP;
-    baseSP = bSP;
-    baseMP = bMP;
+    basePoints.HP = bHP;
+    basePoints.SP = bSP;
+    basePoints.MP = bMP;
 
     calcAttributes();
     healAll();
