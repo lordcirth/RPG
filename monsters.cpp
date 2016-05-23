@@ -32,6 +32,6 @@ skillPtrList skills_default = createMonsterSkillList();
 CreaturePoints cpoints_wolf =  {15,0,0,15,0,0};
 Stats          stats_wolf   =   {1,1,1,0,0,0};
 Wolf::Wolf()
-    : Monster(cpoints_wolf, stats_wolf, skills_default, 5) {
+    : Monster(cpoints_wolf, stats_wolf, skills_default, 10) {
     setName("Wolf"); //Should probably be moved to Creature() at some point
 }

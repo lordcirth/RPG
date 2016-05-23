@@ -3,6 +3,11 @@
 #include <iostream>
 #include "menu.h"
 
+
+//============================
+// General
+//============================
+
 using namespace std;
 WINDOW *fight_window; //Global - is this bad?
 WINDOW *skill_window; //Skill points / levelup screen
@@ -15,8 +20,6 @@ void initInterface() {
 
     fight_window = newwin(24,79,0,0);
     wborder(fight_window, '|', '|', '-', '-', '+', '+', '+', '+');
-    //cerr << "initchar: " <<  wgetch(fight_window) << endl;
-    wrefresh(fight_window);
     skill_window = newwin(24,79,0,0);
 }
 
@@ -24,7 +27,12 @@ void cleanUpInterface() {
     //endwin();
 }
 
-char getPlayerKey() {
+
+//============================
+// Fight Window
+//============================
+
+char getPlayerKeyFight() {
     return wgetch(fight_window);
 }
 
@@ -37,7 +45,7 @@ void displayPoints(int row, int col, Creature c) {
     mvwprintw(fight_window, ++row, col, "HP: %d / %d", points.HP, points.maxHP);
     mvwprintw(fight_window, ++row, col, "SP: %d / %d", points.SP, points.maxSP);
     mvwprintw(fight_window, ++row, col, "MP: %d / %d", points.MP, points.maxMP);
-    //wrefresh(fight_window);
+
 }
 
 void updatePoints(Creature &player, Creature &enemy) {
@@ -51,13 +59,16 @@ void printSkill(int row, int col, char key, const char *name) {
 
 //Demo menu.h
 void showMenu(PlayerCharacter &player) {
+    //wborder(fight_window, '|', '|', '-', '-', '+', '+', '+', '+');
+    wrefresh(fight_window);
+
     int startVert = 16;
     int startHor  = 1;
 
     int vOffset  = 1;
     int hOffset  = 16;
 
-    int maxVert = 5;
+//    int maxVert = 5;
     int maxHor = 3;
     int vertSlot = 1;
     int horSlot = 1;
@@ -138,11 +149,26 @@ void printSkillFails(Skill *a, skillReturnType error) {
     }
 }
 
+
+//============================
+// Skill Menu Window
+//============================
+
+
+char getPlayerKeySkill() {
+    return wgetch(skill_window);
+}
+
 void levelUpMenu (PlayerCharacter player) {
+    char choice;
+
     mvwprintw(skill_window, 1,1, "%s:", "Skill Menu");
 
-    mvwprintw(skill_window, 3,1, "%s:  %i", "Stat points", player.getFreeStatPoints());
-    mvwprintw(skill_window, 4,1, "%s: %i", "Skill points", player.getFreeSkillPoints());
+    mvwprintw(skill_window, 3,1, "%s:  %i", "Level", player.getLevel());
+    mvwprintw(skill_window, 4,1, "%s:  %i / %i", "XP", player.getXP().first, player.getXP().second);
 
-    wgetch(skill_window);
+    mvwprintw(skill_window, 3,50, "%s:  %i", "Stat points", player.getFreeStatPoints());
+    mvwprintw(skill_window, 4,50, "%s: %i", "Skill points", player.getFreeSkillPoints());
+
+    choice = getPlayerKeySkill();
 }

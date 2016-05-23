@@ -5,7 +5,7 @@
 void initInterface();
 void cleanUpInterface();
 
-char getPlayerKey();
+char getPlayerKeyFight();
 void displayPoints(int row, int col, Creature c);
 void updatePoints(Creature &player, Creature &enemy);
 void showMenu(PlayerCharacter &player);

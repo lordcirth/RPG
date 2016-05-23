@@ -13,7 +13,7 @@ Skill * getValidSkillChoice(skillPtrList skillPtrs) {
     Skill *playerChosenSkill;
 
     do {
-        ch = getPlayerKey();
+        ch = getPlayerKeyFight();
         playerChosenSkill = getSkillByHotkey(skillPtrs, ch);
     } while (playerChosenSkill == nullptr);
 

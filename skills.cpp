@@ -61,7 +61,7 @@ skillTargetType Skill::getTargetType() {
 //
 //}
 
-Skill::Skill(skillTargetType type, skillDamageType damageType, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string skillName, Points costPoints) : shortcut(key) {
+Skill::Skill(skillTargetType type, skillDamageType damageType, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string skillName, std::string skillDescription, Points costPoints) : shortcut(key) {
     targetType = type;
     this->damageType = damageType;
     unlocked = startsUnlocked;
@@ -69,6 +69,7 @@ Skill::Skill(skillTargetType type, skillDamageType damageType, bool startsUnlock
     parent = parentNode;
     //shortcut = key;
     name = skillName;
+    description = skillDescription;
     cost = costPoints;
 }
 
@@ -94,8 +95,8 @@ skillDamageType Skill::getDamageType() {
 Heal::Heal() {
 }
 
-Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, Points pointsToHeal)
-    : Skill(TYPE_SELF, DMGTYPE_NONE, startsUnlocked, false, parentNode, key, name, costPoints) { //Pass through to Skill constructor
+Heal::Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, std::string skillDescription, Points costPoints, Points pointsToHeal)
+    : Skill(TYPE_SELF, DMGTYPE_NONE, startsUnlocked, false, parentNode, key, name, skillDescription, costPoints) { //Pass through to Skill constructor
     baseHealPoints = pointsToHeal;
 
 }
@@ -114,8 +115,8 @@ skillReturnType Heal::Use(Creature &caster) {
 Melee::Melee() {
 }
 
-Melee::Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, Points costPoints, int baseDmg, Stats damageFactors )
-    : Skill(TYPE_ENEMY, DMGTYPE_PHYSICAL, startsUnlocked, false, parentNode, key, skillName, costPoints) {
+Melee::Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, std::string skillDescription, Points costPoints, int baseDmg, Stats damageFactors )
+    : Skill(TYPE_ENEMY, DMGTYPE_PHYSICAL, startsUnlocked, false, parentNode, key, skillName, skillDescription, costPoints) {
     baseDamage = baseDmg;
     statDamageFactors = damageFactors;
 
@@ -161,8 +162,8 @@ skillReturnType MagicTouch::Use(Creature &caster, Creature &target) {
 MagicTouch::MagicTouch() {}
 
 
-MagicTouch::MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, int baseDmg,  Stats damageFactors,  Buff *buff)
-    : Skill(TYPE_ENEMY, DMGTYPE_MAGICAL, startsUnlocked, false, parentNode, key, name, costPoints) {
+MagicTouch::MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, std::string skillDescription, Points costPoints, int baseDmg,  Stats damageFactors,  Buff *buff)
+    : Skill(TYPE_ENEMY, DMGTYPE_MAGICAL, startsUnlocked, false, parentNode, key, name, skillDescription, costPoints) {
     baseDamage = baseDmg;
     statDamageFactors = damageFactors;
     debuff = buff;
@@ -174,7 +175,7 @@ MagicTouch::MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::st
 
 Skill * getSkill_RootSkill() {  //Empty parent node of everything, only time using Skill directly
     Skill *RootSkill;
-    RootSkill = new Skill {TYPE_SELF, DMGTYPE_NONE, true, true, nullptr, '#', "RootSkill", {0,0,0}};
+    RootSkill = new Skill {TYPE_SELF, DMGTYPE_NONE, true, true, nullptr, '#', "RootSkill", "RootSkill", {0,0,0}};
     //RootSkill->unlock();
     return RootSkill;
 }
@@ -192,14 +193,14 @@ skillPtrList createSkillPtrList() {
 //Tier 0: Unlocked by default
 
     Skill *skill_Rest;
-    skill_Rest = new Heal (true, &RootSkill, 'r', "Rest", cost_none, {1,1,1}); //Root of Mage tree
+    skill_Rest = new Heal (true, &RootSkill, 'r', "Rest", "Rest a turn", cost_none, {1,1,1}); //Root of Mage tree
     skillPtrs.push_back(skill_Rest);
 
 
     Stats multipliers_Hit;
         multipliers_Hit.strength = 1;                      // 1 + 1*STR damage
     Skill *skill_Hit;
-    skill_Hit = new Melee  (true, &RootSkill, 'h', "Hit", cost_none, 1, multipliers_Hit); //Root of Warrior tree
+    skill_Hit = new Melee  (true, &RootSkill, 'h', "Hit", "Hit an enemy", cost_none, 1, multipliers_Hit); //Root of Warrior tree
     skillPtrs.push_back(skill_Hit);
 
 //Tier 1: First unlockables
@@ -215,7 +216,7 @@ skillPtrList createSkillPtrList() {
         multipliers_FlameTouch_damage.power = 1;
 
     Skill *skill_FlameTouch;
-    skill_FlameTouch = new MagicTouch (false, skill_Rest, 'f', "Flame Touch", cost_FlameTouch, 1, multipliers_FlameTouch_damage, buff_FlameTouch);
+    skill_FlameTouch = new MagicTouch (false, skill_Rest, 'f', "Flame Touch", "Scorch your enemy with your burning hand", cost_FlameTouch, 1, multipliers_FlameTouch_damage, buff_FlameTouch);
     skillPtrs.push_back(skill_FlameTouch);
 
     skill_FlameTouch->unlock(); //Debug
@@ -233,7 +234,7 @@ skillPtrList createSkillPtrList() {
         multipliers_IceTouch_damage.power = 1;
 
     Skill *skill_IceTouch;
-    skill_IceTouch = new MagicTouch (false, skill_Rest, 'i', "Ice Touch", cost_IceTouch, 1, multipliers_IceTouch_damage, buff_IceTouch);
+    skill_IceTouch = new MagicTouch (false, skill_Rest, 'i', "Ice Touch", "Impair your enemy with a freezing touch", cost_IceTouch, 1, multipliers_IceTouch_damage, buff_IceTouch);
     skillPtrs.push_back(skill_IceTouch);
 
     skill_IceTouch->unlock(); //Debug
@@ -245,7 +246,7 @@ Skill * getSkill_Strike() {
         multipliers_Strike.strength = 1;
     Skill *Strike;
                                // 1 + 1*STR damage
-    Strike = new Melee (true, getSkill_RootSkill(), '.', "Strike", {0,0,0}, 1, multipliers_Strike); //Root of Warrior tree
+    Strike = new Melee (true, getSkill_RootSkill(), '.', "Strike", "Strike", {0,0,0}, 1, multipliers_Strike); //Root of Warrior tree
     return Strike;
 }
 

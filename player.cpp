@@ -97,13 +97,15 @@ void PlayerCharacter::giveXP(int earnedXP) {
     XP += earnedXP;
 
     //XP is full
-    if (XP > xpLevelMultiplier*level*baseXpPerLevel) {
+    if (XP >= xpLevelMultiplier*level*baseXpPerLevel) {
         XP -= xpLevelMultiplier*baseXpPerLevel;
         levelUp();
     }
 }
 
+//Return both as pair, since they are often used together, and should never be out of sync
 std::pair<int,int> PlayerCharacter::getXP() {
+    //Total XP required, not remaining!
     int xpNextLevel = xpLevelMultiplier*level*baseXpPerLevel;
     std::pair<int,int> xpPair = std::make_pair(XP,xpNextLevel);
     return xpPair;
@@ -116,4 +118,8 @@ int PlayerCharacter::getFreeStatPoints() {
 
 int PlayerCharacter::getFreeSkillPoints() {
     return freeSkillPoints;
+}
+
+int PlayerCharacter::getLevel() {
+    return level;
 }

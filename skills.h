@@ -29,6 +29,7 @@ class Skill {
     const Skill *parent;
     bool unlocked;
     std::string name;
+    std::string description;
     bool passive = false;
     skillTargetType targetType;
     Points cost;
@@ -53,7 +54,7 @@ public:
     skillTargetType getTargetType();
 
     Skill() : shortcut('@') {}; //Required by compiler.  If we ever see '@' as a hotkey, something broke!
-    Skill(skillTargetType type, skillDamageType damageType, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string name, Points cost);
+    Skill(skillTargetType type, skillDamageType damageType, bool startsUnlocked, bool isPassive, Skill *parentNode, char key, std::string skillName, std::string skillDescription, Points cost);
 };
 
 class Heal : public Skill {
@@ -63,7 +64,7 @@ class Heal : public Skill {
 public:
     skillReturnType Use(Creature &caster);
     Heal();
-    Heal(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, Points basePointsToHeal);
+    Heal(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, std::string skillDescription, Points costPoints, Points basePointsToHeal);
 };
 
 class Melee : public Skill {
@@ -77,7 +78,7 @@ public:
 
     skillReturnType Use(Creature &caster, Creature &target);
     Melee();
-    Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, Points costPoints, int bDmg, Stats damageFactors );
+    Melee(bool startsUnlocked, Skill *parentNode, char key, std::string skillName, std::string skillDescription, Points costPoints, int bDmg, Stats damageFactors );
 };
 
 //Flame touch, ice, necro?, etc
@@ -91,7 +92,7 @@ class MagicTouch : public Skill {
 public:
     skillReturnType Use(Creature &caster, Creature &target);
     MagicTouch();
-    MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, Points costPoints, int bDmg, Stats damageFactors, Buff *buff);
+    MagicTouch(bool startsUnlocked, Skill *parentNode, char key, std::string name, std::string skillDescription, Points costPoints, int bDmg, Stats damageFactors, Buff *buff);
 };
 
 //typedef std::map<std::string,Heal> healPtrMap;

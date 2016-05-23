@@ -34,6 +34,7 @@ public:
 
     int getFreeStatPoints();
     int getFreeSkillPoints();
+    int getLevel();
 
     //Constructors
     PlayerCharacter(int bHP, int bSP, int bMP, Stats bStats);

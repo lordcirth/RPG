@@ -12,15 +12,16 @@ using namespace std;
 int main() {
 
     PlayerCharacter player("Player");
-    fightResults testResults;
+    fightResults results;
 
     do {
         Wolf testWolf;
 
         Fight test {player, testWolf};
-        testResults = test.start();
+        results = test.start();
+        player.giveXP(results.XP);
         levelUpMenu(player);
-    } while (testResults.won);
+    } while (results.won);
 
     return 0;
 }
