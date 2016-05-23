@@ -119,11 +119,12 @@ void Buff::dispel(std::list<Buff*> &buffs) {
 }
 
 //Default tick actions if not overridden
-void Buff::Pre_tick(Creature &c) { }
+void Buff::pre_tick(Creature &c) { }
 
-void Buff::Post_tick(Creature &c) {
+//Anything overriding this should call it at the end
+//  unless it's doing something different with duration
+void Buff::post_tick(Creature &c) {
     turnsLeft -= 1;
-    isExpired();
 }
 
 //============================
@@ -137,8 +138,9 @@ DoT::DoT(std::string buffName, bool dispel, bool stacks, int baseDur, Stats buff
     tickDamage = dmg;
 }
 
-void DoT::Post_tick(Creature &c) {
+void DoT::post_tick(Creature &c) {
     c.damage(tickDamage, getDamageType());
+
     turnsLeft -= 1;
 }
 
@@ -158,16 +160,14 @@ DamageMod::DamageMod(std::string buffName, bool dispel, bool stacks, int baseDur
     effects = buffEffects;
 }
 
-void DamageMod::tick(Creature &c) {
-    //Yes, we want to apply every tick, because these effects are cleared at end of turn.
+void DamageMod::pre_tick(Creature &c) {
+    //Yes, we want to apply every tick, because these effects are cleared every turn.
     c.mergeBuffTurnMultipliers(effects);
-    turnsLeft -= 1;
 }
 
 Buff* DamageMod::Clone() {
     return new DamageMod(*this);
 }
-
 
 //============================
 // Extra functions
@@ -178,7 +178,7 @@ void runPreBuffs(Creature &c) {
     std::list<Buff*>::const_iterator it;
 
     for (it = c.buffs.begin(); it != c.buffs.end(); it++) {
-        (*it)->Pre_tick(c); //Apply this buff's effects
+        (*it)->pre_tick(c); //Apply this buff's effects
 
     }
 }
@@ -187,7 +187,7 @@ void runPostBuffs(Creature &c) {
     std::list<Buff*>::const_iterator it;
 
     for (it = c.buffs.begin(); it != c.buffs.end(); it++) {
-        (*it)->Post_tick(c); //Apply this buff's effects
+        (*it)->post_tick(c); //Apply this buff's effects
 
     }
 }

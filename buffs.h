@@ -33,8 +33,10 @@ public:
 
     virtual Buff* Clone() = 0; //All subclasses must define this!
 
-    virtual void Pre_tick(Creature &c);  //virtual, process buff for this turn
-    virtual void Post_tick(Creature &c);  //virtual, process buff for this turn
+    //Subclasses should override 1 or both.
+    virtual void pre_tick(Creature &c);
+    virtual void post_tick(Creature &c);
+
     void dispel(std::list<Buff*> &buffs); //remove buff (dispel or expiry)
     void apply(Creature &tgt); //Handles stacking rules, etc
     bool isExpired(); //Time to remove buff?
@@ -50,7 +52,7 @@ public:
     DoT();
     DoT(std::string buffName, bool dispel, bool stacks, int dur, Stats buffDurationMultipliers, Points dmg);
 
-    void Post_tick(Creature &c);
+    void post_tick(Creature &c);
 };
 
 class DamageMod : public Buff
@@ -61,9 +63,10 @@ public:
     DamageMod();
     DamageMod(std::string buffName, bool dispel, bool stacks, int dur, Stats buffDurationMultipliers, BuffTurnMultipliers buffEffects);
 
-    void tick(Creature &c);
+    void pre_tick(Creature &c);
+    //Use default Buff::post_tick - expiry, etc
 };
 
 
-void runPreBuffs(Creature &c);
+void runPreBuffs (Creature &c);
 void runPostBuffs(Creature &c);
