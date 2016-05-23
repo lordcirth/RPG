@@ -191,37 +191,52 @@ skillPtrList createSkillPtrList() {
 
 //Tier 0: Unlocked by default
 
-    Skill *Rest;
-    Rest = new Heal (true, &RootSkill, 'r', "Rest", cost_none, {1,1,1}); //Root of Mage tree
-    skillPtrs.push_back(Rest);
+    Skill *skill_Rest;
+    skill_Rest = new Heal (true, &RootSkill, 'r', "Rest", cost_none, {1,1,1}); //Root of Mage tree
+    skillPtrs.push_back(skill_Rest);
 
 
     Stats multipliers_Hit;
         multipliers_Hit.strength = 1;                      // 1 + 1*STR damage
-    Skill *Hit;
-    Hit = new Melee  (true, &RootSkill, 'h', "Hit", cost_none, 1, multipliers_Hit); //Root of Warrior tree
-    skillPtrs.push_back(Hit);
+    Skill *skill_Hit;
+    skill_Hit = new Melee  (true, &RootSkill, 'h', "Hit", cost_none, 1, multipliers_Hit); //Root of Warrior tree
+    skillPtrs.push_back(skill_Hit);
 
 //Tier 1: First unlockables
 
+
     //Flame Touch
-    //                          name                dispel, stacks, duration,   duration mults,     damage
+    //                              name                dispel, stacks, duration,   duration mults,     damage
     Buff * buff_FlameTouch;
-    buff_FlameTouch = new DoT ("Flame Touch burn", true, false,    4,          multipliers_none,   {1,0,0});
+    buff_FlameTouch = new DoT       ("Flame Touch burn", true, false,    4,          multipliers_none,   {1,0,0});
 
     Points cost_FlameTouch {0,0,2};
     Stats multipliers_FlameTouch_damage; //Inits with 0's
         multipliers_FlameTouch_damage.power = 1;
 
-    Skill *FlameTouch;
-    FlameTouch = new MagicTouch (false, Rest, 'f', "Flame Touch", cost_FlameTouch, 1, multipliers_FlameTouch_damage, buff_FlameTouch);
-    skillPtrs.push_back(FlameTouch);
+    Skill *skill_FlameTouch;
+    skill_FlameTouch = new MagicTouch (false, skill_Rest, 'f', "Flame Touch", cost_FlameTouch, 1, multipliers_FlameTouch_damage, buff_FlameTouch);
+    skillPtrs.push_back(skill_FlameTouch);
 
-    FlameTouch->unlock(); //Debug
+    skill_FlameTouch->unlock(); //Debug
 
-    Buff * buff_FrostTouch;
-    //buff_FrostTouch = new
 
+    //Frost Touch
+    BuffTurnMultipliers effects_IceTouch;   //Inits to 1's
+        effects_IceTouch.physicalDamageOutput = 0.5; //Debug, deals no physical dmg
+    Buff * buff_IceTouch;
+    //                              name                dispel, stacks, duration,   duration mults,     damage
+    buff_IceTouch = new DamageMod ("Ice Touch slow", true, false, 4,            multipliers_none, effects_IceTouch);
+    Points cost_IceTouch = {0,0,2};
+
+    Stats multipliers_IceTouch_damage; //Inits with 0's
+        multipliers_IceTouch_damage.power = 1;
+
+    Skill *skill_IceTouch;
+    skill_IceTouch = new MagicTouch (false, skill_Rest, 'i', "Ice Touch", cost_IceTouch, 1, multipliers_IceTouch_damage, buff_IceTouch);
+    skillPtrs.push_back(skill_IceTouch);
+
+    skill_IceTouch->unlock(); //Debug
     return skillPtrs;
 }
 

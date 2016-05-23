@@ -42,15 +42,15 @@ struct CreaturePoints {
 };
 
 //Modifiers applied by (de)buffs on a given turn
-//Default values are no effect
+//Default values are 1, no effect
 struct BuffTurnMultipliers {
-    int allDamageOutput         = 1;
-    int physicalDamageOutput    = 1;
-    int magicalDamageOutput     = 1;
+    float allDamageOutput         = 1;
+    float physicalDamageOutput    = 1;
+    float magicalDamageOutput     = 1;
 
-    int allDamageTaken          = 1;
-    int physicalDamageTaken     = 1;
-    int magicalDamageTaken      = 1;
+    float allDamageTaken          = 1;
+    float physicalDamageTaken     = 1;
+    float magicalDamageTaken      = 1;
 
 };
 
