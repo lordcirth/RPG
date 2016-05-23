@@ -19,9 +19,19 @@ int main() {
 
         Fight test {player, testWolf};
         results = test.start();
-        player.giveXP(results.XP);
-        levelUpMenu(player);
-    } while (results.won);
 
+        if (results.won) {
+
+            player.giveXP(results.XP);
+
+            levelUpMenu(player);
+        } else {
+            void playerLost();
+            break;
+        }
+
+    } while (true);
+
+    cleanUpInterface();
     return 0;
 }

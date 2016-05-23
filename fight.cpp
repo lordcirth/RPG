@@ -93,12 +93,12 @@ fightResults Fight::start() {
 
     fightResults results = {false, 0, 0};
 
-    cleanUpInterface();
+
+
     if (player.isDead()) {
-        cout << "You lose!";
         results = {false, 0, 0};
+
     } else if (enemy.isDead()) {
-        cout << "You win!";
         results = {true, 0, enemy.getXP()};
     }
     return results;

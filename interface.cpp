@@ -11,6 +11,7 @@
 using namespace std;
 WINDOW *fight_window; //Global - is this bad?
 WINDOW *skill_window; //Skill points / levelup screen
+WINDOW *endgame_window;
 const int buffPrintLength = 24;
 
 void initInterface() {
@@ -19,8 +20,10 @@ void initInterface() {
     noecho();
 
     fight_window = newwin(24,79,0,0);
-    wborder(fight_window, '|', '|', '-', '-', '+', '+', '+', '+');
     skill_window = newwin(24,79,0,0);
+    endgame_window = newwin(24,79,0,0);
+
+    wborder(fight_window, '|', '|', '-', '-', '+', '+', '+', '+');
 }
 
 void cleanUpInterface() {
@@ -42,9 +45,9 @@ void displayPoints(int row, int col, Creature c) {
 
     mvwprintw(fight_window, row, col, "%s:", name.c_str());  //Name as Null-terminated string
 
-    mvwprintw(fight_window, ++row, col, "HP: %d / %d", points.HP, points.maxHP);
-    mvwprintw(fight_window, ++row, col, "SP: %d / %d", points.SP, points.maxSP);
-    mvwprintw(fight_window, ++row, col, "MP: %d / %d", points.MP, points.maxMP);
+    mvwprintw(fight_window, ++row, col, "HP: %d / %d  ", points.HP, points.maxHP);
+    mvwprintw(fight_window, ++row, col, "SP: %d / %d  ", points.SP, points.maxSP);
+    mvwprintw(fight_window, ++row, col, "MP: %d / %d  ", points.MP, points.maxMP);
 
 }
 
@@ -171,4 +174,15 @@ void levelUpMenu (PlayerCharacter player) {
     mvwprintw(skill_window, 4,50, "%s: %i", "Skill points", player.getFreeSkillPoints());
 
     choice = getPlayerKeySkill();
+}
+
+
+//============================
+// End of game
+//============================
+void playerLost() {
+    std::string loseText = "You lost!";
+    mvwprintw(endgame_window, (COLS-loseText.length())/2  ,10, "%s", loseText);
+    wrefresh(endgame_window);
+    wgetch(endgame_window);
 }

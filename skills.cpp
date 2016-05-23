@@ -238,6 +238,18 @@ skillPtrList createSkillPtrList() {
     skillPtrs.push_back(skill_IceTouch);
 
     skill_IceTouch->unlock(); //Debug
+
+
+
+    //Smash
+    Stats multipliers_Smash;
+        multipliers_Smash.strength = 2;     // 2 * STR damage
+    Skill *skill_Smash;
+    skill_Smash = new Melee  (false, skill_Hit, 's', "Smash", "A strike depending on sheer strength", {0,2,0}, 0, multipliers_Smash); //Root of Warrior tree
+    skillPtrs.push_back(skill_Smash);
+    skill_Smash->unlock();
+
+
     return skillPtrs;
 }
 

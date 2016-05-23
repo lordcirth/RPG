@@ -25,3 +25,5 @@ void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs);
 void printSkillFails(Skill *attemptedSkill, skillReturnType error);
 
 void levelUpMenu (PlayerCharacter player);
+
+void playerLost();
