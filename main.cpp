@@ -26,7 +26,7 @@ int main() {
 
             levelUpMenu(player);
         } else {
-            void playerLost();
+            playerLost();
             break;
         }
 

@@ -24,6 +24,8 @@ void initInterface() {
     endgame_window = newwin(24,79,0,0);
 
     wborder(fight_window, '|', '|', '-', '-', '+', '+', '+', '+');
+    wborder(skill_window, '|', '|', '-', '-', '*', '*', '*', '*');
+    wborder(endgame_window, '|', '|', '-', '-', '%', '%', '%', '%');
 }
 
 void cleanUpInterface() {
@@ -152,11 +154,9 @@ void printSkillFails(Skill *a, skillReturnType error) {
     }
 }
 
-
 //============================
 // Skill Menu Window
 //============================
-
 
 char getPlayerKeySkill() {
     return wgetch(skill_window);
@@ -165,13 +165,20 @@ char getPlayerKeySkill() {
 void levelUpMenu (PlayerCharacter player) {
     char choice;
 
-    mvwprintw(skill_window, 1,1, "%s:", "Skill Menu");
+    mvwprintw(skill_window, 1,2, "%s:", "Skill Menu");
 
-    mvwprintw(skill_window, 3,1, "%s:  %i", "Level", player.getLevel());
-    mvwprintw(skill_window, 4,1, "%s:  %i / %i", "XP", player.getXP().first, player.getXP().second);
+    mvwprintw(skill_window, 3,2, "%s:  %i", "Level", player.getLevel());
+    mvwprintw(skill_window, 4,2, "%s:  %i / %i", "XP", player.getXP().first, player.getXP().second);
 
     mvwprintw(skill_window, 3,50, "%s:  %i", "Stat points", player.getFreeStatPoints());
     mvwprintw(skill_window, 4,50, "%s: %i", "Skill points", player.getFreeSkillPoints());
+
+    list<Skill*>::iterator it;
+    for (it = player.skillPtrs.begin(); it != player.skillPtrs.end(); ++it) {
+        if ( (**it).isUnlocked() ) {
+            mvwprintw(skill_window, 10, 2, "%s", (**it).getName());
+        }
+    }
 
     choice = getPlayerKeySkill();
 }
@@ -181,8 +188,10 @@ void levelUpMenu (PlayerCharacter player) {
 // End of game
 //============================
 void playerLost() {
+    //cerr << "lost Test" << endl;
     std::string loseText = "You lost!";
-    mvwprintw(endgame_window, (COLS-loseText.length())/2  ,10, "%s", loseText);
+    mvwprintw(endgame_window, LINES/2 ,(COLS-loseText.length())/2, "%s", loseText.c_str());
+
     wrefresh(endgame_window);
-    wgetch(endgame_window);
+    char ch = wgetch(endgame_window);
 }

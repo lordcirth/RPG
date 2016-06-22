@@ -286,3 +286,5 @@ Skill * getSkillByHotkey(skillPtrList &skillPtrs, char key) {
     }
     return chosenSkill;
 }
+
+
