@@ -9,4 +9,5 @@ obj/
 
 #Custom
 *.html #Build log
+*.htm  #Just because?
 

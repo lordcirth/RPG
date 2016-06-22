@@ -11,7 +11,8 @@
 using namespace std;
 WINDOW *fight_window; //Global - is this bad?
 WINDOW *skill_window; //Skill points / levelup screen
-WINDOW *endgame_window;
+WINDOW *endgame_window; //You Lose screen
+
 const int buffPrintLength = 24;
 
 void initInterface() {
@@ -132,11 +133,7 @@ void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs) {
 
 
 
-//Print string to player's messages.
-void printMessage(string message) { //TODO scrolling!
-    mvwprintw(fight_window, 20,1, "                                               "); //TODO fix hacky clear
-    mvwprintw(fight_window,20,1, message.c_str());
-}
+
 
 void printSkillUse(string skillName) {
     string message = "Player used " + skillName + ".";
@@ -152,6 +149,35 @@ void printSkillFails(Skill *a, skillReturnType error) {
     if (error == SKILL_FAIL_COST) {
         printMessage(a->getName() + " requires " + to_string(a->getCost().HP) + "HP, " + to_string(a->getCost().SP) + "SP, " + to_string(a->getCost().MP) + "MP");
     }
+}
+
+
+//============================
+// Messages
+//============================
+
+//Print string to player's messages.
+//void printMessage(string message) { //TODO scrolling!
+//    mvwprintw(fight_window, 20,1, "                                               "); //TODO fix hacky clear
+//    mvwprintw(fight_window,20,1, message.c_str());
+//}
+
+
+
+
+void MessageBuffer::addMessage(std::string message) {
+    buffer.push_front(message);
+    if (buffer.size() > maxLength) {
+        buffer.pop_back(); //Delete oldest message
+    }
+}
+
+std::list<std::string> MessageBuffer::getBuffer() {
+    return buffer;
+}
+
+int MessageBuffer::getBufferLength() {
+    return buffer.size();
 }
 
 //============================
