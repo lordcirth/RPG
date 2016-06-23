@@ -32,10 +32,10 @@ bool Fight::autoTargetSkill(Creature &player, Creature &enemy, Skill *playerChos
         }
 
         if (attempt == SKILL_SUCCESS ) {
-                msgSkillUse(buffer, playerChosenSkill->getName());
+                buffer.addMessage(msgSkillUse(buffer, playerChosenSkill->getName()));
                 return true;
         } else {
-                msgSkillFails(buffer, playerChosenSkill,attempt);
+                buffer.addMessage(msgSkillFails(buffer, playerChosenSkill,attempt));
                 return false;
         }
 
