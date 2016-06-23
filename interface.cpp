@@ -131,23 +131,23 @@ void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs) {
     printBuffList(5, 79 - buffPrintLength, enemyBuffs);
 }
 
-
-
-
-
-void printSkillUse(string skillName) {
+std::string msgSkillUse(MessageBuffer &buffer, string skillName) {
     string message = "Player used " + skillName + ".";
-    printMessage(message);
+    return message;
 }
 
-void printSkillUse(string skillName, string targetName) {
+std::string msgSkillUse(MessageBuffer &buffer, string skillName, string targetName) {
     string message = "Player used " + skillName + " on " + targetName + ".";
-    printMessage(message);
+    return message;
 }
 
-void printSkillFails(Skill *a, skillReturnType error) {
+std::string msgSkillFails(MessageBuffer &buffer, Skill *a, skillReturnType error) {
     if (error == SKILL_FAIL_COST) {
-        printMessage(a->getName() + " requires " + to_string(a->getCost().HP) + "HP, " + to_string(a->getCost().SP) + "SP, " + to_string(a->getCost().MP) + "MP");
+        std::string message = a->getName() + " requires " +
+            to_string(a->getCost().HP) + "HP, " +
+            to_string(a->getCost().SP) + "SP, " +
+            to_string(a->getCost().MP) + "MP";
+       return message;
     }
 }
 

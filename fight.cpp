@@ -22,7 +22,7 @@ Skill * getValidSkillChoice(skillPtrList skillPtrs) {
 
 
 //Self or enemy target skill?
-bool autoTargetSkill(Creature &player, Creature &enemy, Skill *playerChosenSkill) {
+bool Fight::autoTargetSkill(Creature &player, Creature &enemy, Skill *playerChosenSkill) {
     skillReturnType attempt;
 
         if (playerChosenSkill->getTargetType() == TYPE_SELF) {
@@ -32,10 +32,10 @@ bool autoTargetSkill(Creature &player, Creature &enemy, Skill *playerChosenSkill
         }
 
         if (attempt == SKILL_SUCCESS ) {
-                printSkillUse(playerChosenSkill->getName());
+                msgSkillUse(buffer, playerChosenSkill->getName());
                 return true;
         } else {
-                printSkillFails(playerChosenSkill,attempt);
+                msgSkillFails(buffer, playerChosenSkill,attempt);
                 return false;
         }
 
