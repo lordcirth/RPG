@@ -237,7 +237,7 @@ skillPtrList createSkillPtrList() {
     skill_IceTouch = new MagicTouch (false, skill_Rest, 'i', "Ice Touch", "Impair your enemy with a freezing touch", cost_IceTouch, 1, multipliers_IceTouch_damage, buff_IceTouch);
     skillPtrs.push_back(skill_IceTouch);
 
-    skill_IceTouch->unlock(); //Debug
+    //skill_IceTouch->unlock(); //Debug
 
 
 
@@ -247,7 +247,7 @@ skillPtrList createSkillPtrList() {
     Skill *skill_Smash;
     skill_Smash = new Melee  (false, skill_Hit, 's', "Smash", "A strike depending on sheer strength", {0,2,0}, 0, multipliers_Smash); //Root of Warrior tree
     skillPtrs.push_back(skill_Smash);
-    skill_Smash->unlock();
+    //skill_Smash->unlock();
 
 
     return skillPtrs;

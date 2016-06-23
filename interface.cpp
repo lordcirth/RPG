@@ -59,8 +59,8 @@ void updatePoints(Creature &player, Creature &enemy) {
     displayPoints(1,64, enemy);
 }
 
-void printSkill(int row, int col, char key, const char *name) {
-    mvwprintw(fight_window, row,col, "%c: %s", key, name);
+void printSkill(WINDOW *window, int row, int col, char key, const char *name) {
+    mvwprintw(window, row,col, "%c: %s", key, name);
 }
 
 //Demo menu.h
@@ -84,7 +84,7 @@ void showMenu(PlayerCharacter &player) {
 
     list<Skill*>::const_iterator it;
     for (it = player.skillPtrs.begin(); it != player.skillPtrs.end(); it++) {
-        printSkill(vert, hor, (**it).shortcut, (*it)->getName().c_str());
+        printSkill(fight_window, vert, hor, (**it).shortcut, (*it)->getName().c_str());
         if (horSlot < maxHor) { //Move across
             hor += hOffset;
             ++horSlot;
@@ -148,6 +148,8 @@ std::string msgSkillFails(Skill *a, skillReturnType error) {
             to_string(a->getCost().SP) + "SP, " +
             to_string(a->getCost().MP) + "MP";
        return message;
+    } else {
+        return "Unknown Skill Failure Type";
     }
 }
 
@@ -210,10 +212,17 @@ void levelUpMenu (PlayerCharacter player) {
     mvwprintw(skill_window, 3,50, "%s:  %i", "Stat points", player.getFreeStatPoints());
     mvwprintw(skill_window, 4,50, "%s: %i", "Skill points", player.getFreeSkillPoints());
 
+
+
+    //mvwprintw(skill_window, 6, 2, "Choose: 1: STR, 2: DEX 3: END,")
+
     list<Skill*>::iterator it;
+    int line = 10;
+    int row  = 2;
     for (it = player.skillPtrs.begin(); it != player.skillPtrs.end(); ++it) {
-        if ( (**it).isUnlocked() ) {
-            mvwprintw(skill_window, 10, 2, "%s", (**it).getName());
+        if ( !(**it).isUnlocked() ) {
+            printSkill(skill_window, line, row, (*it)->shortcut, (*it)->getName().c_str());
+            line++;
         }
     }
 
