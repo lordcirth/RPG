@@ -32,10 +32,10 @@ bool Fight::autoTargetSkill(Creature &player, Creature &enemy, Skill *playerChos
         }
 
         if (attempt == SKILL_SUCCESS ) {
-                buffer.addMessage(msgSkillUse(buffer, playerChosenSkill->getName()));
+                msgBuffer.addMessage(msgSkillUse(playerChosenSkill->getName()));
                 return true;
         } else {
-                buffer.addMessage(msgSkillFails(buffer, playerChosenSkill,attempt));
+                msgBuffer.addMessage(msgSkillFails(playerChosenSkill,attempt));
                 return false;
         }
 
@@ -66,7 +66,7 @@ fightResults Fight::start() {
         updatePoints(player,enemy);
 
         printAllBuffs(player.buffs, enemy.buffs);
-
+        printMessageBuffer(msgBuffer.getBuffer());
         showMenu(player);
 
         do {

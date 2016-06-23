@@ -4,7 +4,8 @@
 
 class MessageBuffer {
     std::list<std::string> buffer;
-    int maxLength;
+    int maxLines = 6;   //List length
+    int maxRows  = 40;  //String length
 public:
     void addMessage(std::string message);
     std::list<std::string> getBuffer();
@@ -21,9 +22,11 @@ void showMenu(PlayerCharacter &player);
 
 void printMessage(std::string message);
 
-std::string msgSkillUse(MessageBuffer &buffer, std::string skillName);
-std::string msgSkillUse(MessageBuffer &buffer, std::string skillName, std::string targetName);
-std::string msgSkillFails(MessageBuffer &buffer, Skill *attemptedSkill, skillReturnType error);
+std::string msgSkillUse(std::string skillName);
+std::string msgSkillUse(std::string skillName, std::string targetName);
+std::string msgSkillFails(Skill *attemptedSkill, skillReturnType error);
+
+void printMessageBuffer(std::list<std::string> buffer);
 
 typedef std::pair<std::string,int> buffStackPair;
 

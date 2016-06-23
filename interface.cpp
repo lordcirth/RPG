@@ -68,7 +68,7 @@ void showMenu(PlayerCharacter &player) {
     //wborder(fight_window, '|', '|', '-', '-', '+', '+', '+', '+');
     wrefresh(fight_window);
 
-    int startVert = 16;
+    int startVert = 12;
     int startHor  = 1;
 
     int vOffset  = 1;
@@ -131,17 +131,17 @@ void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs) {
     printBuffList(5, 79 - buffPrintLength, enemyBuffs);
 }
 
-std::string msgSkillUse(MessageBuffer &buffer, string skillName) {
+std::string msgSkillUse(string skillName) {
     string message = "Player used " + skillName + ".";
     return message;
 }
 
-std::string msgSkillUse(MessageBuffer &buffer, string skillName, string targetName) {
+std::string msgSkillUse(string skillName, string targetName) {
     string message = "Player used " + skillName + " on " + targetName + ".";
     return message;
 }
 
-std::string msgSkillFails(MessageBuffer &buffer, Skill *a, skillReturnType error) {
+std::string msgSkillFails(Skill *a, skillReturnType error) {
     if (error == SKILL_FAIL_COST) {
         std::string message = a->getName() + " requires " +
             to_string(a->getCost().HP) + "HP, " +
@@ -156,19 +156,16 @@ std::string msgSkillFails(MessageBuffer &buffer, Skill *a, skillReturnType error
 // Messages
 //============================
 
-//Print string to player's messages.
-//void printMessage(string message) { //TODO scrolling!
-//    mvwprintw(fight_window, 20,1, "                                               "); //TODO fix hacky clear
-//    mvwprintw(fight_window,20,1, message.c_str());
-//}
-
-
-
-
 void MessageBuffer::addMessage(std::string message) {
-    buffer.push_front(message);
-    if (buffer.size() > maxLength) {
-        buffer.pop_back(); //Delete oldest message
+    if (message.length() <= maxRows) {
+        buffer.push_back(message);
+    } else {
+        buffer.push_back(message.substr(0, maxRows)); //Save first maxRows characters
+        addMessage(message.substr(maxRows, string::npos)); //Recurse on remainder
+    }
+
+    if (buffer.size() > maxLines) {
+        buffer.pop_front(); //Delete oldest message
     }
 }
 
@@ -178,6 +175,20 @@ std::list<std::string> MessageBuffer::getBuffer() {
 
 int MessageBuffer::getBufferLength() {
     return buffer.size();
+}
+
+void printMessageBuffer(list<string> buffer) {
+    int startLine = 16;
+    int startRow  = 2;
+
+//We trust the buffer to have sane message sizes.
+
+    int line = startLine;
+    list<string>::const_iterator it;
+    for (it = buffer.begin(); it != buffer.end(); it++) {
+        mvwprintw( fight_window, line, startRow, (*it).c_str() );
+        ++line;
+    }
 }
 
 //============================

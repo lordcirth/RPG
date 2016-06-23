@@ -18,5 +18,5 @@ private:
 public:
     Fight(PlayerCharacter &player, Monster &enemy);
     fightResults start(); //Run the whole fight to its end, return results
-    MessageBuffer buffer;
+    MessageBuffer msgBuffer;
 };
