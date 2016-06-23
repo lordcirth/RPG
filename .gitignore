@@ -7,7 +7,6 @@
 bin/
 obj/
 
-#Custom
-*.html #Build log
-*.htm  #Just because?
-
+# Custom
+*.html #Build log - DOESNT WORK?!
+RPG_build_log.html
