@@ -219,7 +219,7 @@ skillPtrList createSkillPtrList() {
     skill_FlameTouch = new MagicTouch (false, skill_Rest, 'f', "Flame Touch", "Scorch your enemy with your burning hand", cost_FlameTouch, 1, multipliers_FlameTouch_damage, buff_FlameTouch);
     skillPtrs.push_back(skill_FlameTouch);
 
-    skill_FlameTouch->unlock(); //Debug
+    //skill_FlameTouch->unlock(); //Debug
 
 
     //Frost Touch

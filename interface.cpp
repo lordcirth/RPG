@@ -34,13 +34,30 @@ void cleanUpInterface() {
 }
 
 
+Skill * getValidSkillChoice(WINDOW *window, skillPtrList skillPtrs) {
+    char ch;
+    Skill *playerChosenSkill;
+
+    do {
+        ch = wgetch(window);
+        playerChosenSkill = getSkillByHotkey(skillPtrs, ch);
+    } while (playerChosenSkill == nullptr);
+
+    return playerChosenSkill;
+}
+
+Skill * getSkill_fight(skillPtrList skillPtrs) {
+    return getValidSkillChoice(fight_window, skillPtrs);
+}
+
+Skill * getSkill_skills(skillPtrList skillPtrs) {
+    return getValidSkillChoice(skill_window, skillPtrs);
+}
+
 //============================
 // Fight Window
 //============================
 
-char getPlayerKeyFight() {
-    return wgetch(fight_window);
-}
 
 void displayPoints(int row, int col, Creature c) {
     CreaturePoints points = c.getPointValues();
@@ -65,7 +82,6 @@ void printSkill(WINDOW *window, int row, int col, char key, const char *name) {
 
 //Demo menu.h
 void showMenu(PlayerCharacter &player) {
-    //wborder(fight_window, '|', '|', '-', '-', '+', '+', '+', '+');
     wrefresh(fight_window);
 
     int startVert = 12;
@@ -84,18 +100,21 @@ void showMenu(PlayerCharacter &player) {
 
     list<Skill*>::const_iterator it;
     for (it = player.skillPtrs.begin(); it != player.skillPtrs.end(); it++) {
-        printSkill(fight_window, vert, hor, (**it).shortcut, (*it)->getName().c_str());
-        if (horSlot < maxHor) { //Move across
-            hor += hOffset;
-            ++horSlot;
-        } else { //Down one line and reset (like carriage return)
-            hor = startHor;
-            horSlot = 1;
 
-            ++vertSlot;
-            vert += vOffset;
-        }
-    }
+        if ((*it)->isUnlocked()) {
+            printSkill(fight_window, vert, hor, (**it).shortcut, (*it)->getName().c_str());
+            if (horSlot < maxHor) { //Move across
+                hor += hOffset;
+                ++horSlot;
+            } else { //Down one line and reset (like carriage return)
+                hor = startHor;
+                horSlot = 1;
+
+                ++vertSlot;
+                vert += vOffset;
+            }
+        } //end unlocked
+    }//End for
 }
 
 void printBuff(int vert, int hor, Buff* buff) {
@@ -155,7 +174,7 @@ std::string msgSkillFails(Skill *a, skillReturnType error) {
 
 
 //============================
-// Messages
+// Messages (In fight_window)
 //============================
 
 void MessageBuffer::addMessage(std::string message) {
@@ -201,7 +220,7 @@ char getPlayerKeySkill() {
     return wgetch(skill_window);
 }
 
-void levelUpMenu (PlayerCharacter player) {
+void levelUpMenu (PlayerCharacter &player) {
     char choice;
 
     mvwprintw(skill_window, 1,2, "%s:", "Skill Menu");
@@ -226,7 +245,23 @@ void levelUpMenu (PlayerCharacter player) {
         }
     }
 
-    choice = getPlayerKeySkill();
+    //statChoice = getPlayerKeySkill();
+
+    //Get a player skill that exists
+    Skill *chosenSkill;
+    do {
+        chosenSkill = getSkill_skills(player.skillPtrs);
+        if (chosenSkill->isUnlocked()) {
+            //Already unlocked
+        } else if (!chosenSkill->canUnlock()) {
+            //Requires parent - print parent
+        } else {
+            break;
+        }
+    } while (true);
+
+    chosenSkill->unlock();
+    player.changeFreeSkillPointsBy(-1);
 }
 
 

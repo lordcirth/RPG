@@ -37,6 +37,10 @@ void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs);
 
 
 
-void levelUpMenu (PlayerCharacter player);
+void levelUpMenu (PlayerCharacter &player);
 
 void playerLost();
+
+Skill * getValidSkillChoice(WINDOW *window, skillPtrList skillPtrs);
+Skill * getSkill_fight(skillPtrList skillPtrs);
+Skill * getSkill_skills(skillPtrList skillPtrs);

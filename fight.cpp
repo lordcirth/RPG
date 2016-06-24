@@ -4,19 +4,6 @@
 
 using namespace std;
 
-Skill * getValidSkillChoice(skillPtrList skillPtrs) {
-    char ch;
-    Skill *playerChosenSkill;
-
-    do {
-        ch = getPlayerKeyFight();
-        playerChosenSkill = getSkillByHotkey(skillPtrs, ch);
-    } while (playerChosenSkill == nullptr);
-
-    return playerChosenSkill;
-}
-
-
 //Self or enemy target skill?
 bool Fight::autoTargetSkill(Creature &player, Creature &enemy, Skill *playerChosenSkill) {
     skillReturnType attempt;
@@ -67,7 +54,7 @@ fightResults Fight::start() {
 
         do {
             //Get key, loop until valid
-            playerChosenSkill = getValidSkillChoice(player.skillPtrs);
+            playerChosenSkill = getSkill_fight(player.skillPtrs);
             //Self or enemy target skill?
             skillSuccess = autoTargetSkill(player, enemy, playerChosenSkill);
 

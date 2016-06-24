@@ -27,6 +27,8 @@ public:
 
     int getFreeStatPoints();
     int getFreeSkillPoints();
+    int changeFreeStatPointsBy(int change);
+    int changeFreeSkillPointsBy(int change);
     int getLevel();
 
     //Constructors

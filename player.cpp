@@ -95,6 +95,14 @@ int PlayerCharacter::getFreeSkillPoints() {
     return freeSkillPoints;
 }
 
+int PlayerCharacter::changeFreeStatPointsBy(int change) {
+    freeStatPoints += change;
+}
+
+int PlayerCharacter::changeFreeSkillPointsBy(int change)  {
+    freeSkillPoints += change;
+}
+
 int PlayerCharacter::getLevel() {
     return level;
 }
