@@ -212,7 +212,7 @@ skillPtrList createSkillPtrList() {
     buff_FlameTouch = new DoT       ("Flame Touch burn", true, false,    4,          multipliers_none,   {1,0,0});
 
     Points cost_FlameTouch {0,0,2};
-    Stats multipliers_FlameTouch_damage; //Inits with 0's
+    Stats multipliers_FlameTouch_damage  = allStats(0); //Inits with 0's
         multipliers_FlameTouch_damage["power"] = 1;
 
     Skill *skill_FlameTouch;
@@ -230,7 +230,7 @@ skillPtrList createSkillPtrList() {
     buff_IceTouch = new DamageMod ("Ice Touch slow", true, false, 4,            multipliers_none, effects_IceTouch);
     Points cost_IceTouch = {0,0,2};
 
-    Stats multipliers_IceTouch_damage; //Inits with 0's
+    Stats multipliers_IceTouch_damage  = allStats(0);
         multipliers_IceTouch_damage["power"] = 1;
 
     Skill *skill_IceTouch;
@@ -242,7 +242,7 @@ skillPtrList createSkillPtrList() {
 
 
     //Smash
-    Stats multipliers_Smash;
+    Stats multipliers_Smash  = allStats(0);
         multipliers_Smash["strength"] = 2;     // 2 * STR damage
     Skill *skill_Smash;
     skill_Smash = new Melee  (false, skill_Hit, 's', "Smash", "A strike depending on sheer strength", {0,2,0}, 0, multipliers_Smash); //Root of Warrior tree
@@ -254,7 +254,7 @@ skillPtrList createSkillPtrList() {
 }
 
 Skill * getSkill_Strike() {
-    Stats multipliers_Strike;
+    Stats multipliers_Strike = allStats(0);
         multipliers_Strike["strength"] = 1;
     Skill *Strike;
                                // 1 + 1*STR damage
