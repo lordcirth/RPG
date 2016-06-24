@@ -8,7 +8,7 @@ public:
     int getXP();
 
     Monster();
-    Monster(CreaturePoints points, Stats stats, skillPtrList skills, int XP);
+    Monster(Points basePoints, Stats stats, std::string name, skillPtrList skills, int XP);
 
     void doTurn(Creature &player); //Default Monster AI
 

@@ -12,8 +12,8 @@ Monster::Monster()
 
 }
 
-Monster::Monster(CreaturePoints points, Stats stats, skillPtrList skills, int XP)
-    : Creature(points) {
+Monster::Monster(Points basePoints, Stats stats, std::string name, skillPtrList skills, int XP)
+    : Creature(basePoints, stats, name) {
     setStats(stats); //TODO fix Creature ctors
     killXP = XP;
     skillPtrs = skills;
@@ -29,9 +29,17 @@ void Monster::doTurn(Creature &player) { //Default Monster AI
 
 skillPtrList skills_default = createMonsterSkillList();
 
-CreaturePoints cpoints_wolf =  {15,0,0,15,0,0};
-Stats          stats_wolf   =   {1,1,1,0,0,0};
+Points basePoints_wolf =  {8,0,0};
+Stats wolf_stats() {
+    Stats            stats_wolf = allStats(0);
+    stats_wolf["strength"]      =  1;
+    stats_wolf["dexterity"]     =  1;
+    stats_wolf["endurance"]     =  2;
+    return stats_wolf;
+}
+
+
 Wolf::Wolf()
-    : Monster(cpoints_wolf, stats_wolf, skills_default, 10) {
-    setName("Wolf"); //Should probably be moved to Creature() at some point
+    : Monster(basePoints_wolf, wolf_stats(), "Wolf", skills_default, 10) {
+
 }

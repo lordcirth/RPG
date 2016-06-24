@@ -1,9 +1,9 @@
 #include <string>
 #include <iostream>
-#include "player.h"
-#include "skills.h"
+//#include "player.h" //From fight
+//#include "skills.h"
 #include "fight.h"
-#include "interface.h"
+//#include "interface.h"
 
 
 using namespace std;

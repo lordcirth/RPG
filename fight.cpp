@@ -1,8 +1,4 @@
 #include "fight.h"
-#include "player.h"
-#include "monsters.h"
-#include "interface.h"
-#include "skills.h"
 #include <iostream>
 #include <sstream>
 

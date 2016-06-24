@@ -183,7 +183,7 @@ Skill * getSkill_RootSkill() {  //Empty parent node of everything, only time usi
 skillPtrList createSkillPtrList() {
     skillPtrList skillPtrs;
     Points cost_none {0,0,0};
-    Stats multipliers_none = {0,0,0,0,0,0};
+    Stats multipliers_none = allStats(0);
     Skill RootSkill = *getSkill_RootSkill();
 
 
@@ -197,8 +197,8 @@ skillPtrList createSkillPtrList() {
     skillPtrs.push_back(skill_Rest);
 
 
-    Stats multipliers_Hit;
-        multipliers_Hit.strength = 1;                      // 1 + 1*STR damage
+    Stats multipliers_Hit = allStats(0);
+        multipliers_Hit["strength"] = 1;                      // 1 + 1*STR damage
     Skill *skill_Hit;
     skill_Hit = new Melee  (true, &RootSkill, 'h', "Hit", "Hit an enemy", cost_none, 1, multipliers_Hit); //Root of Warrior tree
     skillPtrs.push_back(skill_Hit);
@@ -213,7 +213,7 @@ skillPtrList createSkillPtrList() {
 
     Points cost_FlameTouch {0,0,2};
     Stats multipliers_FlameTouch_damage; //Inits with 0's
-        multipliers_FlameTouch_damage.power = 1;
+        multipliers_FlameTouch_damage["power"] = 1;
 
     Skill *skill_FlameTouch;
     skill_FlameTouch = new MagicTouch (false, skill_Rest, 'f', "Flame Touch", "Scorch your enemy with your burning hand", cost_FlameTouch, 1, multipliers_FlameTouch_damage, buff_FlameTouch);
@@ -231,7 +231,7 @@ skillPtrList createSkillPtrList() {
     Points cost_IceTouch = {0,0,2};
 
     Stats multipliers_IceTouch_damage; //Inits with 0's
-        multipliers_IceTouch_damage.power = 1;
+        multipliers_IceTouch_damage["power"] = 1;
 
     Skill *skill_IceTouch;
     skill_IceTouch = new MagicTouch (false, skill_Rest, 'i', "Ice Touch", "Impair your enemy with a freezing touch", cost_IceTouch, 1, multipliers_IceTouch_damage, buff_IceTouch);
@@ -243,7 +243,7 @@ skillPtrList createSkillPtrList() {
 
     //Smash
     Stats multipliers_Smash;
-        multipliers_Smash.strength = 2;     // 2 * STR damage
+        multipliers_Smash["strength"] = 2;     // 2 * STR damage
     Skill *skill_Smash;
     skill_Smash = new Melee  (false, skill_Hit, 's', "Smash", "A strike depending on sheer strength", {0,2,0}, 0, multipliers_Smash); //Root of Warrior tree
     skillPtrs.push_back(skill_Smash);
@@ -255,7 +255,7 @@ skillPtrList createSkillPtrList() {
 
 Skill * getSkill_Strike() {
     Stats multipliers_Strike;
-        multipliers_Strike.strength = 1;
+        multipliers_Strike["strength"] = 1;
     Skill *Strike;
                                // 1 + 1*STR damage
     Strike = new Melee (true, getSkill_RootSkill(), '.', "Strike", "Strike", {0,0,0}, 1, multipliers_Strike); //Root of Warrior tree

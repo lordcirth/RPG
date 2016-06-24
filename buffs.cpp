@@ -1,14 +1,25 @@
 #include "buffs.h"
 #include <iostream>
 
+//Multiply elements of *identical* maps together
+Stats mergeStatMaps(Stats mapA, Stats mapB) {
+    Stats::const_iterator itA, itB;
+    itB = mapB.begin();
+    Stats result;
+
+    for (itA = mapA.begin(); itA != mapA.end(); itA++) {
+        //Take key from A, and multiply values from A and B.
+        result.emplace((*itA).first, (*itA).second * (*itB).second );
+
+        itB++;
+    }
+    return result;
+};
+
 int runStatMultipliers (Stats stats, Stats multipliers) {
     int totalEffect = 0;
-    totalEffect += (stats.strength * multipliers.strength);
-    totalEffect += (stats.dexterity * multipliers.dexterity);
-    totalEffect += (stats.endurance * multipliers.endurance);
-    totalEffect += (stats.power * multipliers.power);
-    totalEffect += (stats.control * multipliers.control);
-    totalEffect += (stats.stability * multipliers.stability);
+    Stats statEffects = mergeStatMaps(stats, multipliers);
+    //Sum values in statEffects map
     return totalEffect;
 }
 

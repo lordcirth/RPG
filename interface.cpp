@@ -220,7 +220,7 @@ void levelUpMenu (PlayerCharacter player) {
     int line = 10;
     int row  = 2;
     for (it = player.skillPtrs.begin(); it != player.skillPtrs.end(); ++it) {
-        if ( !(**it).isUnlocked() ) {
+        if ( !(**it).isUnlocked() ) { //TODO: && unlockable - not relevant yet.
             printSkill(skill_window, line, row, (*it)->shortcut, (*it)->getName().c_str());
             line++;
         }

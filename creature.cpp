@@ -5,6 +5,34 @@
 
 using namespace std;
 
+//Calculate & set total attributes
+void Creature::calcAttributes() {
+    //All subject to change
+    CreaturePoints points = getPointValues();
+    Stats stats = getStats();
+
+    points.maxHP = basePoints.HP + 2*stats["endurance"];
+    points.maxSP = basePoints.SP + 1*stats["endurance"] + 1*stats["dexterity"];
+    points.maxMP = basePoints.MP + 2*stats["stability"] + 1* stats["control"];
+
+    setPointValues(points);
+}
+
+Stats allStats(int s) { //Generate stats all the same (0 for starting, 1 for player, etc)
+Stats stats;
+
+    //Physical
+    stats.emplace("strength"  , s);
+    stats.emplace("dexterity" , s);
+    stats.emplace("endurance" , s);
+
+    //Magical
+    stats.emplace("power"     , s);
+    stats.emplace("control"   , s);
+    stats.emplace("stability" , s);
+return stats;
+};
+
 Stats Creature::getStats() {
     return stats;
 }
@@ -106,22 +134,13 @@ bool Creature::isDead() {
 //Constructors
 Creature::Creature() {
 }
-//Creature::Creature(Stats startingStats) {
-//    name = "Unnamed Creature";
-//    stats = startingStats;
-//    //Calculated from stats by subclass
-//    pointValues = {0,0,0,0,0,0};
-//}
 
-Creature::Creature(CreaturePoints points) {
-    stats = {0,0,0,0,0,0};
-    pointValues = points;
-}
-
-Creature::Creature(Stats startingStats, std::string cName) {
+Creature::Creature(Points basePoints, Stats startingStats, std::string cName) {
     name = cName;
+    this->basePoints = basePoints;
     stats = startingStats;
-    pointValues = {0,0,0,0,0,0}; //Initialized by subclass, based on Stats
+    calcAttributes();
+    healAll();
 }
 
 
@@ -131,7 +150,7 @@ Creature::Creature(Stats startingStats, std::string cName) {
 //Merge two sets of BuffTurnMultipliers
 void Creature::mergeBuffTurnMultipliers (BuffTurnMultipliers changes) {
 
-    //Probably messy but I don't know a better way?
+    //TODO: Move to std::map like Stats
     this->turnBuffEffects.allDamageOutput       *= changes.allDamageOutput;
     this->turnBuffEffects.magicalDamageOutput   *= changes.magicalDamageOutput;
     this->turnBuffEffects.physicalDamageOutput  *= changes.physicalDamageOutput;

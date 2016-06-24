@@ -2,6 +2,7 @@
 #include "creature.h"
 #include <string>
 
+Stats mergeStatMaps(Stats mapA, Stats mapB);
 int runStatMultipliers (Stats stats, Stats multipliers);
 bool buffExists (std::list<Buff*> buffList, std::string buffName);
 void checkExpiry (std::list<Buff*> &buffs);

@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
 #include <string>
-
+#include <map>
 
 class Skill;  //Forward declaration
 class Buff;  //Forward declaration
@@ -13,17 +13,9 @@ enum skillDamageType {
     DMGTYPE_MAGICAL
 };
 
-struct Stats {
-    //Physical
-    int strength    = 0;
-    int dexterity   = 0;
-    int endurance   = 0;
-    //Magical
-    int power       = 0;
-    int control     = 0;
-    int stability   = 0;
+typedef std::map<std::string,int> Stats;
 
-};
+Stats allStats(int s);
 
 struct Points {
     int HP;
@@ -57,7 +49,11 @@ struct BuffTurnMultipliers {
 
 class Creature {
 private:
+
+    //Stats add to these
+    Points basePoints;// HP,SP,MP
     Stats stats;
+
     CreaturePoints pointValues;
     std::string name = "";
 
@@ -76,6 +72,7 @@ public:
     const char * getName_c();
     Points runDamageMultipliers (Points dmg,  skillDamageType damageType);
 
+    void calcAttributes();
     void healAll();
 
     void damage(Points dmg, skillDamageType damageType);
@@ -88,9 +85,9 @@ public:
     bool isDead();
 
     Creature();
-    Creature(Stats startingStats);
-    Creature(CreaturePoints points);
-    Creature(Stats startingStats, std::string cName);
+    //Creature(Stats startingStats);
+    //Creature(CreaturePoints points);
+    Creature(Points basePoints, Stats startingStats, std::string cName);
 
 
 };

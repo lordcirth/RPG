@@ -1,6 +1,7 @@
 #pragma once
 #include "player.h"
 #include "ncurses.h"
+#include "skills.h"
 
 class MessageBuffer {
     std::list<std::string> buffer;

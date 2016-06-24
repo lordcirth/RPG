@@ -1,16 +1,13 @@
 #pragma once
 
 #include <string>
-#include "monsters.h"
-#include "skills.h"
+#include "creature.h"
+
 
 //typedef std::map<std::string,Heal> healPtrMap;
 class PlayerCharacter : public Creature {
 
 private:
-    //Stats add to these
-    Points basePoints;// HP,SP,MP
-
     int level = 1;
     int XP = 0;
 
@@ -25,10 +22,6 @@ private:
 
 public:
 
-
-//    skillSharedPtrList safeSkillList;
-
-    void calcAttributes();
     void giveXP(int earnedXP);
     std::pair<int,int> getXP();
 
@@ -41,7 +34,7 @@ public:
     PlayerCharacter(int bHP, int bSP, int bMP, Stats bStats, std::string playerName);
     PlayerCharacter(std::string playerName);
     PlayerCharacter();
-    ~PlayerCharacter();
+    //~PlayerCharacter();
 
 };
 
