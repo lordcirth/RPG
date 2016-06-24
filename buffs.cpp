@@ -20,6 +20,11 @@ int runStatMultipliers (Stats stats, Stats multipliers) {
     int totalEffect = 0;
     Stats statEffects = mergeStatMaps(stats, multipliers);
     //Sum values in statEffects map
+    Stats::const_iterator it;
+    for (it = statEffects.begin(); it != statEffects.end(); it++) {
+        totalEffect += (*it).second;
+    }
+
     return totalEffect;
 }
 
