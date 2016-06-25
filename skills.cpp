@@ -34,6 +34,9 @@ std::string Skill::getName() {
 }
 
 
+std::string Skill::getDesc() {
+    return description;
+}
 
 // Skill::getNameC() {
 //    return name.c_str();
@@ -243,9 +246,9 @@ skillPtrList createSkillPtrList() {
 
     //Smash
     Stats multipliers_Smash  = allStats(0);
-        multipliers_Smash["strength"] = 2;     // 2 * STR damage
+        multipliers_Smash["strength"] = 2;     // 1 + 2 * STR damage
     Skill *skill_Smash;
-    skill_Smash = new Melee  (false, skill_Hit, 's', "Smash", "A strike depending on sheer strength", {0,2,0}, 0, multipliers_Smash); //Root of Warrior tree
+    skill_Smash = new Melee  (false, skill_Hit, 's', "Smash", "A strike depending on sheer strength", {0,2,0}, 1, multipliers_Smash); //Root of Warrior tree
     skillPtrs.push_back(skill_Smash);
     //skill_Smash->unlock();
 

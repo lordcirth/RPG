@@ -37,7 +37,7 @@ void printAllBuffs(std::list<Buff*> playerBuffs, std::list<Buff*> enemyBuffs);
 
 
 
-void levelUpMenu (PlayerCharacter &player);
+void skillMenu (PlayerCharacter &player);
 
 void playerLost();
 

@@ -73,7 +73,7 @@ void PlayerCharacter::giveXP(int earnedXP) {
 
     //XP is full
     if (XP >= xpLevelMultiplier*level*baseXpPerLevel) {
-        XP -= xpLevelMultiplier*baseXpPerLevel;
+        XP -= xpLevelMultiplier*level*baseXpPerLevel;
         levelUp();
     }
 }

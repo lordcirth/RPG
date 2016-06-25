@@ -80,6 +80,12 @@ void printSkill(WINDOW *window, int row, int col, char key, const char *name) {
     mvwprintw(window, row,col, "%c: %s", key, name);
 }
 
+
+void printSkillwDescription(WINDOW *window, int row, int col, char key, const char *name, const char *desc) {
+    mvwprintw(window, row,col, "%c: %s, %s", key, name, desc);
+}
+
+
 //Demo menu.h
 void showMenu(PlayerCharacter &player) {
     wrefresh(fight_window);
@@ -220,18 +226,26 @@ char getPlayerKeySkill() {
     return wgetch(skill_window);
 }
 
-void levelUpMenu (PlayerCharacter &player) {
-    char choice;
+void showFreePoints(PlayerCharacter player) {
+    mvwprintw(skill_window, 3,50, "%s:  %i ", "Stat points", player.getFreeStatPoints());
+    mvwprintw(skill_window, 4,50, "%s: %i ", "Skill points", player.getFreeSkillPoints());
+}
 
+void printStats() {
+
+}
+
+void skillMenu (PlayerCharacter &player) {
+
+
+    //mvwprintw(skill_window, 1,2, "%s: %s", "Skill Menu", "Press Space to proceed to next fight");
     mvwprintw(skill_window, 1,2, "%s:", "Skill Menu");
+
 
     mvwprintw(skill_window, 3,2, "%s:  %i", "Level", player.getLevel());
     mvwprintw(skill_window, 4,2, "%s:  %i / %i", "XP", player.getXP().first, player.getXP().second);
 
-    mvwprintw(skill_window, 3,50, "%s:  %i", "Stat points", player.getFreeStatPoints());
-    mvwprintw(skill_window, 4,50, "%s: %i", "Skill points", player.getFreeSkillPoints());
-
-
+    showFreePoints(player);
 
     //mvwprintw(skill_window, 6, 2, "Choose: 1: STR, 2: DEX 3: END,")
 
@@ -240,28 +254,70 @@ void levelUpMenu (PlayerCharacter &player) {
     int row  = 2;
     for (it = player.skillPtrs.begin(); it != player.skillPtrs.end(); ++it) {
         if ( !(**it).isUnlocked() ) { //TODO: && unlockable - not relevant yet.
-            printSkill(skill_window, line, row, (*it)->shortcut, (*it)->getName().c_str());
+            printSkillwDescription(skill_window, line, row, (*it)->shortcut, (*it)->getName().c_str(), (*it)->getDesc().c_str());
             line++;
         }
     }
 
-    //statChoice = getPlayerKeySkill();
-
-    //Get a player skill that exists
-    Skill *chosenSkill;
-    do {
-        chosenSkill = getSkill_skills(player.skillPtrs);
-        if (chosenSkill->isUnlocked()) {
-            //Already unlocked
-        } else if (!chosenSkill->canUnlock()) {
-            //Requires parent - print parent
-        } else {
-            break;
+    char statChoice;
+    while (player.getFreeStatPoints() > 0) {
+        mvwprintw(skill_window, 6,2, "%s", "Choose a stat to increase:              ");
+        statChoice = wgetch(skill_window);
+        switch (statChoice) {
+            case 's':
+                player.increaseStat("strength", 1);
+                player.changeFreeStatPointsBy(-1);
+                break;
+            case 'd':
+                player.increaseStat("dexterity", 1);
+                player.changeFreeStatPointsBy(-1);
+                break;
+            case 'e':
+                player.increaseStat("endurance", 1);
+                player.changeFreeStatPointsBy(-1);
+                break;
+            case 'p':
+                player.increaseStat("power", 1);
+                player.changeFreeStatPointsBy(-1);
+                break;
+            case 'c':
+                player.increaseStat("control", 1);
+                player.changeFreeStatPointsBy(-1);
+                break;
+            case 't':
+                player.increaseStat("stability", 1);
+                player.changeFreeStatPointsBy(-1);
+                break;
+            default:
+                break; //While () will loop
         }
-    } while (true);
+        showFreePoints(player);
+    }
 
-    chosenSkill->unlock();
-    player.changeFreeSkillPointsBy(-1);
+    //Update max points to new stats
+    player.calcAttributes();
+
+    //statChoice = getPlayerKeySkill();
+    if (player.getFreeSkillPoints() > 0) {
+
+        mvwprintw(skill_window, 6,2, "%s", "Choose a skill to learn:              ");
+        //Get a player skill that exists
+        Skill *chosenSkill;
+        do {
+            chosenSkill = getSkill_skills(player.skillPtrs);
+            if (chosenSkill->isUnlocked()) {
+                //Already unlocked
+            } else if (!chosenSkill->canUnlock()) {
+                //Requires parent - print parent
+            } else {
+                break;
+            }
+        } while (true);
+        chosenSkill->unlock();
+        player.changeFreeSkillPointsBy(-1);
+    }
+
+
 }
 
 

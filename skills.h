@@ -19,7 +19,6 @@ enum skillReturnType {
 
 };
 
-
 //============================
 // Skill & subclasses
 //============================
@@ -44,6 +43,7 @@ public:
     virtual skillReturnType Use(Creature &caster);
     virtual skillReturnType Use(Creature &caster, Creature &target);
     std::string getName();
+    std::string getDesc();
     Points getCost();
     skillDamageType getDamageType();
 

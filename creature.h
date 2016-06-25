@@ -65,6 +65,8 @@ public:
     BuffTurnMultipliers turnBuffEffects;
     Stats getStats();
     void setStats(Stats);
+    void increaseStat(std::string stat, int amount);
+
     CreaturePoints getPointValues();
     void setPointValues(CreaturePoints);
     void setName(std::string);

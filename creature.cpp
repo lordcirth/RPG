@@ -42,6 +42,10 @@ void Creature::setStats(Stats newStats) {
     //calcAttributes(); //New maxHP, etc
 }
 
+void Creature::increaseStat(std::string stat, int amount) {
+    stats.at(stat) += amount;
+}
+
 CreaturePoints Creature::getPointValues() {
     return pointValues;
 }

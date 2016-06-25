@@ -15,6 +15,7 @@ int main() {
     fightResults results;
 
     do {
+        player.healAll();
         Wolf testWolf;
 
         Fight test {player, testWolf};
@@ -24,7 +25,7 @@ int main() {
 
             player.giveXP(results.XP);
 
-            levelUpMenu(player);
+            skillMenu(player);
         } else {
             playerLost();
             break;
